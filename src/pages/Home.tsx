@@ -13,14 +13,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40 z-10"></div>
           {/* Video Placeholder Background */}
           <div className="absolute inset-0 z-0">
-            <img className="w-full h-full object-cover" alt="Premium electric golf cart on a lush green fairway of a world-class golf course" src="https://placeholder.pics/svg/300" />
+            <img className="w-full h-full object-cover" alt="Premium electric golf cart on a lush green fairway of a world-class golf course" src="/images/hero.png" />
           </div>
           <div className="relative z-20 text-center px-6 max-w-5xl">
             <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight mb-6">
-              SOLARIS: La Mobilità Elettrica Premium Incontra la Bellezza della Sardegna.
+              SOLARIS: L'Eccellenza della Mobilità Elettrica nell'Incanto della Sardegna.
             </h1>
             <p className="text-lg md:text-2xl text-white/90 font-light mb-10 max-w-3xl mx-auto">
-              Scopri la nostra flotta di veicoli elettrici per il lavoro, il tempo libero e il trasporto in un territorio straordinario.
+              Soluzioni di mobilità sostenibile e di alto profilo per i campi da golf più prestigiosi, i resort d'élite e il vivere esclusivo.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/flotta" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-lg text-lg font-bold hover:scale-105 transition-transform">
@@ -39,34 +39,35 @@ export default function Home() {
         {/* Featured Fleet Section */}
         <section className="py-24 px-6 max-w-7xl mx-auto">
           <div className="mb-16">
-            <span className="text-primary font-bold tracking-widest uppercase text-xs">Esclusività Elettrica</span>
+            <span className="text-primary font-bold tracking-widest uppercase text-xs">Esperienza Elettrica Superiore</span>
             <h2 className="text-4xl font-bold mt-2">La Nostra Flotta</h2>
-            <div className="h-1 w-20 bg-primary mt-4"></div>
+            <div className="h-0.5 w-16 bg-primary mt-4"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
-            <div className="md:col-span-7 relative group overflow-hidden rounded-xl bg-slate-200">
-              <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Sophisticated electric vehicle parked in front of an elegant Mediterranean-style clubhouse" src="https://placeholder.pics/svg/300" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-7 relative group overflow-hidden rounded-3xl bg-slate-200 min-h-[400px] md:min-h-[600px]">
+              <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Sophisticated electric vehicle parked in front of an elegant Mediterranean-style clubhouse" src="/images/golf_luxury.png" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black/90 to-transparent">
                 <h3 className="text-3xl font-bold text-white mb-2">Golf</h3>
-                <p className="text-white/80 max-w-md">L'eleganza silenziosa per i green più prestigiosi e il resort living di lusso.</p>
+                <p className="text-white/80 max-w-md italic">L'eleganza silenziosa per i green più prestigiosi e il vivere di lusso.</p>
                 <Link className="mt-4 flex items-center gap-2 text-white font-bold hover:gap-4 transition-all" to="/flotta">
-                  Scopri di più <span className="material-symbols-outlined">arrow_right_alt</span>
+                  Esplora i modelli <span className="material-symbols-outlined">arrow_right_alt</span>
                 </Link>
               </div>
             </div>
-            <div className="md:col-span-5 grid grid-rows-2 gap-6">
-              <div className="relative group overflow-hidden rounded-xl bg-slate-200">
-                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Industrial electric utility vehicle carrying maintenance supplies" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9A1NPdaR5ducU-jIPCgQfD6JIH-6ZiNT9piR87vh6aGUDTS8na7wRIaZ8mLKj2IHH_vF965D-rhiI7ykDbb9PwqQwBOM_MakdJGSoVlNcc6wAUts_shZZBbJbIu_Z2wqFl8Cy0H08hjGGIB0NSj_hbgges9krrMRquFyT3fPItk8I6ly8pjPfK2KKJOul_nzSZbi7lJwwqg2y5YGNG5wMfKMKkdRllfOTavRcBDiYlTr8puQx8Alg6s_dpHfxlwJgKTvKdIEXork" />
+            <div className="md:col-span-5 grid grid-rows-2 gap-8">
+              <div className="relative group overflow-hidden rounded-3xl bg-slate-200 min-h-[250px] md:min-h-0">
+                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Industrial electric utility vehicle carrying maintenance supplies" src="/images/utility.png" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
-                  <h3 className="text-2xl font-bold text-white mb-1">Utility</h3>
-                  <p className="text-sm text-white/80">Potenza e versatilità per ogni esigenza operativa.</p>
+                  <h3 className="text-2xl font-bold text-white mb-1">Veicoli Utility</h3>
+                  <p className="text-sm text-white/80">Affidabilità e efficienza per ogni esigenza logistica.</p>
                 </div>
               </div>
-              <div className="relative group overflow-hidden rounded-xl bg-slate-200">
-                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Multi-passenger electric shuttle waiting for guests" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3-Ii6vBobvd80WXq-8Sx_QQVJiUNUVO9rn4IN5TVxJnl1zkXORgbXaf-QMukJ23Do8t4-CRJtXzk4xwYUDJk4thxGu5vE10mGj-pLX-Eu1f1_LThSU8k3goEkkr5gtWKtP3LIAaITAfWHA4a0ftNgzzCSHJMn9YAB0pdRf53gyDHVnDG35qxxxpMkAu7YRqJXTQ1lXwYDGauA8OI83znzsPLHzR6d1w42WIFuI0tFNyLPa7GWD1_wes-SgR3j2SNfbeEM-8n-rbg" />
+              <div className="relative group overflow-hidden rounded-3xl bg-slate-200 min-h-[250px] md:min-h-0">
+                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Multi-passenger electric shuttle waiting for guests" src="/images/people_mover.png" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
-                  <h3 className="text-2xl font-bold text-white mb-1">People Mover</h3>
-                  <p className="text-sm text-white/80">Trasporto ospiti con il massimo comfort e zero emissioni.</p>
+                  <h3 className="text-2xl font-bold text-white mb-1">Trasporto Ospiti</h3>
+                  <p className="text-sm text-white/80">Accoglienza di classe con il massimo comfort acustico.</p>
                 </div>
               </div>
             </div>
@@ -81,24 +82,28 @@ export default function Home() {
               <p className="text-slate-600 dark:text-slate-400">Dalla vendita al noleggio a breve e lungo termine.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              <div className="relative h-[400px] group rounded-2xl overflow-hidden">
-                <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Modern high-end vehicle showroom interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARZurqNV0MjzMNtgZDw3tBLzRPxYgJFTrpGXvBtnS16KZ7nxt7gNq8PJTwjVzoqOm-4Y8EfWYZwwlvWvGhLbcYHOJBAw-6XCLJ8MpASUAkrR-FlVzMmEiy2Zku8rkvF2kUNZknhS4R9cDrBqo40n4LpGk4iDMj_2FyL6e5hi6pj5pMIGaj3Ti4njWlr-TVFzR_znWL_u8Ge2kdeZB2qWsE6jb9oT3blMqz9JAHa5jp5SR9Ct6-7yuJXwCiSVcmm1tZJwLryKcxUe4" />
-                <div className="absolute inset-0 bg-primary/40 group-hover:bg-primary/50 transition-colors"></div>
-                <div className="relative h-full flex flex-col items-center justify-center text-center p-10 text-white">
-                  <span className="material-symbols-outlined text-5xl mb-4">storefront</span>
-                  <h3 className="text-3xl font-bold mb-4">Vendita</h3>
-                  <p className="max-w-xs mb-8">Personalizza il tuo veicolo elettrico secondo i tuoi gusti e necessità tecniche.</p>
-                  <Link to="/contatti" className="bg-white text-primary px-8 py-3 rounded-lg font-bold hover:shadow-xl transition-all">Consulenza Gratuita</Link>
+              <div className="relative min-h-[500px] md:h-auto md:aspect-[4/5] group rounded-3xl overflow-hidden shadow-lg shadow-black/5">
+                <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Modern high-end vehicle showroom interior" src="/images/showroom.png" />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
+                <div className="relative h-full flex flex-col items-start justify-end p-12 text-white">
+                  <span className="material-symbols-outlined text-4xl mb-4 bg-white/20 p-3 rounded-full backdrop-blur-md">storefront</span>
+                  <h3 className="text-3xl font-bold mb-4">Vendita & Personalizzazione</h3>
+                  <p className="max-w-md mb-8 text-white/90 leading-relaxed">
+                    Configuriamo il tuo veicolo ideale con dotazioni su misura, garantendo un'estetica impeccabile e prestazioni ottimali.
+                  </p>
+                  <Link to="/contatti" className="bg-white text-slate-900 px-8 py-3 rounded-full font-bold hover:shadow-xl hover:-translate-y-1 transition-all">Richiedi Consulenza</Link>
                 </div>
               </div>
-              <div className="relative h-[400px] group rounded-2xl overflow-hidden">
-                <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Professional fleet management paperwork on a desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5HnouPrHVQK9q90a0MH5N6HmZmmvds2e7r3Q7gY4vZ5epxJW-l50t8jdxR8kAr8ol1Mf0YZg7UwnMy6vBdYsBrWz94WU1YPDFoSFtAf0FrAQNfwOnCxytSwLLmGRqpSUKFyWQXOkUrgdtSFP8cNLIx5cUGDu7P8vcv-VfY0bljVAO23QM6LgPeEi8XgHWtV6LfVMWpDjm00S9ytCwxI9SXOvmyuSrkFLFRIRQSzr7djT6OjH5MA4Jwg8r4BNsik9hkugRDjGTpwY" />
-                <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/50 transition-colors"></div>
-                <div className="relative h-full flex flex-col items-center justify-center text-center p-10 text-white">
-                  <span className="material-symbols-outlined text-5xl mb-4">key</span>
-                  <h3 className="text-3xl font-bold mb-4">Noleggio</h3>
-                  <p className="max-w-xs mb-8">Soluzioni flessibili per hotel, resort e privati durante la stagione sarda.</p>
-                  <Link to="/noleggio" className="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:shadow-xl transition-all">Verifica Disponibilità</Link>
+              <div className="relative min-h-[500px] md:h-auto md:aspect-[4/5] group rounded-3xl overflow-hidden shadow-lg shadow-black/5">
+                <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Professional fleet management paperwork on a desk" src="/images/rental_management.png" />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
+                <div className="relative h-full flex flex-col items-start justify-end p-12 text-white">
+                  <span className="material-symbols-outlined text-4xl mb-4 bg-white/20 p-3 rounded-full backdrop-blur-md">key</span>
+                  <h3 className="text-3xl font-bold mb-4">Noleggio & Gestione Flotte</h3>
+                  <p className="max-w-md mb-8 text-white/90 leading-relaxed">
+                    Soluzioni di noleggio flessibili e assistite per resort di prestigio, garantendo ai tuoi ospiti un'esperienza di mobilità senza pari.
+                  </p>
+                  <Link to="/noleggio" className="bg-primary text-white px-8 py-3 rounded-full font-bold hover:shadow-xl hover:-translate-y-1 transition-all">Servizi di Noleggio</Link>
                 </div>
               </div>
             </div>
@@ -113,21 +118,21 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div>
-                <span className="text-primary font-bold tracking-widest uppercase text-xs">Il Nostro Impegno</span>
-                <h2 className="text-5xl font-bold mt-4 mb-8 leading-tight">Sostenibilità &amp; Design Italiano.</h2>
-                <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
-                  Crediamo che il futuro della Sardegna debba essere preservato. Ogni nostro veicolo è selezionato per garantire il minimo impatto ambientale senza rinunciare allo stile iconico del design italiano.
+                <span className="text-primary font-bold tracking-widest uppercase text-xs">I Nostri Valori</span>
+                <h2 className="text-5xl font-bold mt-4 mb-8 leading-tight">Sostenibilità & Design d'Autore.</h2>
+                <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed italic">
+                  Preservare l'incanto naturale della Sardegna è la nostra missione. Selezioniamo esclusivamente veicoli che coniugano il minimo impatto ambientale con l'eleganza senza tempo del design d'eccellenza.
                 </p>
                 <div className="grid grid-cols-2 gap-8">
                   <div className="flex flex-col gap-2">
                     <span className="material-symbols-outlined text-primary text-4xl">eco</span>
-                    <h4 className="font-bold text-lg">Zero Emissioni</h4>
-                    <p className="text-sm text-slate-500">Rispetto totale per la natura sarda.</p>
+                    <h4 className="font-bold text-lg">Efficienza Silenziosa</h4>
+                    <p className="text-sm text-slate-500">Rispetto assoluto per i panorami sardi.</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="material-symbols-outlined text-primary text-4xl">verified</span>
-                    <h4 className="font-bold text-lg">Qualità Premium</h4>
-                    <p className="text-sm text-slate-500">Solo i migliori brand internazionali.</p>
+                    <h4 className="font-bold text-lg">Standard Premium</h4>
+                    <p className="text-sm text-slate-500">Solo brand di riferimento globale.</p>
                   </div>
                 </div>
               </div>
@@ -144,11 +149,11 @@ export default function Home() {
             <span className="material-symbols-outlined text-primary text-6xl mb-8">format_quote</span>
             <div className="mb-12">
               <p className="text-2xl md:text-3xl font-medium leading-relaxed italic mb-8">
-                "Solaris ha trasformato il modo in cui i nostri ospiti si muovono all'interno del resort. Il servizio di assistenza è impeccabile e i veicoli sono all'altezza dell'esclusività che offriamo."
+                "Solaris ha ridefinito gli standard di mobilità per i nostri ospiti. La versatilità e l'eleganza dei veicoli, unite a un'assistenza impeccabile, riflettono perfettamente l'esclusività del nostro resort."
               </p>
               <div>
                 <h5 className="font-bold text-lg">Marco Rossi</h5>
-                <p className="text-slate-500 text-sm">Direttore Operations, Luxury Resort Costa Smeralda</p>
+                <p className="text-slate-500 text-sm">Responsabile Operations, Luxury Resort Costa Smeralda</p>
               </div>
             </div>
             <div className="flex justify-center gap-2">
@@ -166,11 +171,11 @@ export default function Home() {
         <section className="py-20 bg-primary">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
             <div className="text-white">
-              <h2 className="text-4xl font-bold mb-4">Pronto a Guidare il Futuro?</h2>
-              <p className="text-white/80 text-lg">Contattaci oggi per una prova gratuita o un preventivo personalizzato.</p>
+              <h2 className="text-4xl font-bold mb-4">Pronti a Elevare la Vostra Mobilità?</h2>
+              <p className="text-white/80 text-lg">Contattateci per una consulenza dedicata o per un preventivo personalizzato.</p>
             </div>
             <div className="flex gap-4">
-              <Link to="/contatti" className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-2xl transition-all">Parla con un Esperto</Link>
+              <Link to="/contatti" className="px-8 py-4 bg-white text-primary font-bold rounded-full hover:shadow-2xl transition-all shadow-lg shadow-black/20">Parla con un Nostro Esperto</Link>
             </div>
           </div>
         </section>

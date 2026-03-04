@@ -10,13 +10,13 @@ export default function Rental() {
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-slate-900 text-white py-24 px-6 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-30">
-             <img className="w-full h-full object-cover" alt="Fleet of electric vehicles lined up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5HnouPrHVQK9q90a0MH5N6HmZmmvds2e7r3Q7gY4vZ5epxJW-l50t8jdxR8kAr8ol1Mf0YZg7UwnMy6vBdYsBrWz94WU1YPDFoSFtAf0FrAQNfwOnCxytSwLLmGRqpSUKFyWQXOkUrgdtSFP8cNLIx5cUGDu7P8vcv-VfY0bljVAO23QM6LgPeEi8XgHWtV6LfVMWpDjm00S9ytCwxI9SXOvmyuSrkFLFRIRQSzr7djT6OjH5MA4Jwg8r4BNsik9hkugRDjGTpwY" />
+          <div className="absolute inset-0 opacity-40">
+            <img className="w-full h-full object-cover" alt="Fleet of electric vehicles lined up" src="/images/rental_management.png" />
           </div>
           <div className="max-w-7xl mx-auto relative z-10 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Noleggio Flessibile per Ogni Esigenza.</h1>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-10">
-              Scegli la durata e il tipo di veicolo. Dal breve termine per eventi esclusivi al lungo termine per strutture ricettive.
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Noleggio Sartoriale di Alto Livello.</h1>
+            <p className="text-xl text-slate-100 max-w-3xl mx-auto mb-10 leading-relaxed">
+              Dalle soluzioni a breve termine per eventi esclusivi, alle gestioni stagionali per le strutture ricettive d'élite: mobilità silenziosa, ovunque in Sardegna.
             </p>
           </div>
         </section>
@@ -117,9 +117,9 @@ export default function Rental() {
         <section className="py-24 px-6 max-w-5xl mx-auto">
           <div className="bg-primary rounded-3xl p-10 md:p-16 text-white flex flex-col md:flex-row gap-16 shadow-2xl">
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold mb-6">Richiedi Informazioni</h2>
+              <h2 className="text-3xl font-bold mb-6">Consulenza Personalizzata</h2>
               <p className="text-white/80 mb-8">
-                Compila il modulo per ricevere un preventivo personalizzato entro 24 ore.
+                I nostri esperti sono a vostra disposizione per definire la soluzione più adatta alle vostre necessità operative o di rappresentanza.
               </p>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -145,18 +145,18 @@ export default function Rental() {
             <div className="md:w-1/2 bg-white text-slate-900 rounded-2xl p-8">
               <form className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Nome Completo</label>
+                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Nominativo / Referente</label>
                   <input type="text" className="w-full bg-slate-100 border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary" placeholder="Mario Rossi" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Email</label>
+                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Indirizzo Email</label>
                   <input type="email" className="w-full bg-slate-100 border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary" placeholder="mario@email.com" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Messaggio</label>
-                  <textarea className="w-full bg-slate-100 border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary h-32" placeholder="Vorrei noleggiare..."></textarea>
+                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Dettagli della Richiesta</label>
+                  <textarea className="w-full bg-slate-100 border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary h-32" placeholder="Desidero ricevere informazioni su..."></textarea>
                 </div>
-                <button className="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-primary/90 transition-all">Invia Richiesta</button>
+                <button className="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20">Invia Richiesta</button>
               </form>
             </div>
           </div>

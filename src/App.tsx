@@ -9,10 +9,12 @@ import Rental from './pages/Rental';
 import Fleet from './pages/Fleet';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/noleggio" element={<Rental />} />
