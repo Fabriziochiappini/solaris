@@ -2,6 +2,7 @@ import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
 import { db, isFirebaseConfigured } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
 import ShowroomCarousel from '@/components/ShowroomCarousel';
+import Link from 'next/link';
 
 // Dati di fallback (mostrati se Firestore è vuoto o non raggiungibile)
 const VEICOLI_FALLBACK: Veicolo[] = [
@@ -156,11 +157,11 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-8 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Pronto a Configurare il Tuo Solaris Personalizzato?</h2>
+            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Pronto a Scegliere il Tuo Veicolo?</h2>
             <p className="text-on-primary-container text-lg mb-12 font-light">Vivi la perfetta sintesi tra stile mediterraneo e prestazioni elettriche all&apos;avanguardia. I nostri consulenti sono pronti a costruire una flotta su misura per le tue esigenze.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <button className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all">Configura il Tuo Veicolo</button>
-              <button className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all">Scarica il Catalogo</button>
+              <Link href="/flotta" className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all inline-block">Scopri tutti i veicoli</Link>
+              <Link href="/contatti" className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all inline-block">Richiedi Informazioni</Link>
             </div>
           </div>
         </div>
