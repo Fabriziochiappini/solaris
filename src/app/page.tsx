@@ -1,46 +1,34 @@
 export default function Home() {
   return (
-    <main className="pt-24">
-      {/* Hero Section: The Coastal Club Split Layout */}
-      <section className="relative min-h-[921px] flex items-center overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="z-10 order-2 lg:order-1">
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.2em] uppercase bg-secondary-container text-on-secondary-container">The Coastal Club</span>
-            <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-primary leading-[1.05] tracking-tighter mb-8">
-              Elevate Your <br />
-              <span className="text-secondary italic">Fairway</span> Presence.
+    <main>
+      {/* Hero Section: The Grand Fairway — Full-screen cinematic */}
+      <header className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <img
+          className="absolute inset-0 w-full h-full object-cover"
+          alt="high-end white luxury golf car parked on a perfectly manicured green fairway of a Sardinian golf resort at sunrise, soft golden light reflecting off polished surfaces"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEG4yCcX-Qja9CH_Q63o2XGahbG_96AdVoxsme_SXdM9R0AB5UGrTAGR_lJbuIJZ9iog2Np9tnIn_0JCL4K8wczO0fYjqLrlDSu8EUtCWwrOeDVRvL6ShWH0oLTutas5nUpJ5u1G3D3vBJI4kq3p8OuUyEGCEAWbi5Jtr7tyIajmwJJGfQFaYW0ssrPChDkh6IrLeHjG5cL3k5cgzAWE6Qq72glZOrfHiJa7iCt4zRWjISFK_DzE1anc1XtYyKURNzGybmUuBCzSU"
+        />
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-primary/20 bg-gradient-to-b from-primary/10 to-primary/40"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
+          <div className="max-w-3xl">
+            <h1 className="text-white font-montserrat text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 uppercase">
+              The Grand <br /> Fairway.
             </h1>
-            <p className="text-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed font-light">
-              Engineered for the discerning enthusiast. Solaris Personal Transportation Vehicles blend Sardinian elegance with silent, high-performance electric mobility.
+            <p className="text-white/90 font-lato text-xl md:text-2xl max-w-xl mb-12 leading-relaxed">
+              Elevate your transit with bespoke personal transportation vehicles designed for the Sardinian elite. Silent, sustainable, and purely luxurious.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-primary text-on-primary px-8 py-4 font-montserrat font-bold uppercase tracking-widest flex items-center gap-3 hover:shadow-xl transition-all">
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-primary px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-primary-container transition-colors shadow-xl">
                 Explore the Fleet
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </button>
-              <button className="bg-tertiary-fixed text-on-tertiary-fixed-variant px-8 py-4 font-montserrat font-bold uppercase tracking-widest hover:bg-tertiary-fixed-dim transition-all">
-                Book a Test Drive
+              <button className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-white/20 transition-colors">
+                View Showroom
               </button>
-            </div>
-          </div>
-          <div className="relative h-[500px] lg:h-[700px] order-1 lg:order-2">
-            <div className="absolute inset-0 bg-surface-container-high translate-x-8 translate-y-8 -z-10"></div>
-            <img 
-              className="w-full h-full object-cover shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700" 
-              alt="high-end luxury white golf car parked on a lush green lawn overlooking the turquoise Mediterranean sea at sunset" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYFUsvKWdSYlnjAta_o2vONsFMdGoZXNE7yFDIHqNoEFguKPG1V0pyjVqmLnkEJpW9Ge0wgYGtPOiBgZCZ0BNLFYLwVQsLNzRfiA3UsDwZI7hoRnTZuLJZeSdTkDOfxjRxpZvQZJGn9ZNLSWSaRNKyUHS9OfT8eJumnOIfzsDlHT7ypOcgvK6r2h2-QFWcuLUmgPykTIKFndNaj04W64Gz8Rx6Km0PycdHzvYXmSLxsAIvyuiN4_1ZpUe8V6PK0_kz1wXDgODycic"
-            />
-            <div className="absolute -bottom-10 -left-10 bg-white p-8 shadow-lg hidden md:block">
-              <div className="flex items-center gap-4">
-                <span className="text-4xl font-bold text-primary">0%</span>
-                <div className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant leading-tight">
-                  Emissions<br />Impact
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* The Showroom: Horizontal Scrollable Carousel */}
       <section className="py-32 bg-surface">
