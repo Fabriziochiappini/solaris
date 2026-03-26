@@ -1,7 +1,7 @@
 import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
-import VehicleCard from '@/components/VehicleCard';
+import ShowroomCarousel from '@/components/ShowroomCarousel';
 
 // Dati di fallback (mostrati se Firestore è vuoto o non raggiungibile)
 const VEICOLI_FALLBACK: Veicolo[] = [
@@ -75,19 +75,13 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Lo Showroom — dinamico da Firestore */}
-      <section className="py-32 bg-surface">
-        <div className="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
-          <div>
-            <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">Lo Showroom</h2>
-            <div className="h-1 w-24 bg-secondary"></div>
-          </div>
+      {/* Lo Showroom — carosello 3D coverflow */}
+      <section className="py-32 bg-surface overflow-hidden">
+        <div className="max-w-7xl mx-auto px-8 mb-16">
+          <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">Lo Showroom</h2>
+          <div className="h-1 w-24 bg-secondary"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {veicoli.map((v) => (
-            <VehicleCard key={v.id} veicolo={v} />
-          ))}
-        </div>
+        <ShowroomCarousel veicoli={veicoli} />
       </section>
 
       {/* The Sardinia Connection */}
