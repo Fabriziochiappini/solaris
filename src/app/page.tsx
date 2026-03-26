@@ -42,9 +42,9 @@ export default function Home() {
             <button className="p-3 border border-outline-variant hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined">chevron_right</span></button>
           </div>
         </div>
-        <div className="flex overflow-x-auto no-scrollbar gap-8 px-8 md:px-[calc((100vw-80rem)/2+2rem)] snap-x snap-mandatory">
+        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Vehicle Card 1 */}
-          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+          <div className="bg-surface-container-lowest shadow-sm group">
             <div className="aspect-[4/3] overflow-hidden">
               <img 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
@@ -79,7 +79,7 @@ export default function Home() {
           </div>
 
           {/* Vehicle Card 2 */}
-          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+          <div className="bg-surface-container-lowest shadow-sm group">
             <div className="aspect-[4/3] overflow-hidden">
               <img 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
@@ -114,7 +114,7 @@ export default function Home() {
           </div>
 
           {/* Vehicle Card 3 */}
-          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+          <div className="bg-surface-container-lowest shadow-sm group">
             <div className="aspect-[4/3] overflow-hidden">
               <img 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
