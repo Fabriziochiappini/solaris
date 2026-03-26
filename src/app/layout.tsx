@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'SOLARIS | Noleggio Golf Car Esclusivo',
-  description: 'Elevate Your Fairway Presence.',
+  title: 'SOLARIS | Veicoli Elettrici di Lusso',
+  description: 'Veicoli di trasporto personale premium ispirati alla Costa Smeralda. Silenziosi, sostenibili e puramente lussuosi.',
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="it" className="light">
       <head>
         {/* Font richiesti dal design del cliente */}
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@300;400;700&family=Plus+Jakarta+Sans:wght@400;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />

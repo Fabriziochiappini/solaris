@@ -13,17 +13,17 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
           <div className="max-w-3xl">
             <h1 className="text-white font-montserrat text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 uppercase">
-              The Grand <br /> Fairway.
+              Il Grande <br /> Fairway.
             </h1>
             <p className="text-white/90 font-lato text-xl md:text-2xl max-w-xl mb-12 leading-relaxed">
-              Elevate your transit with bespoke personal transportation vehicles designed for the Sardinian elite. Silent, sustainable, and purely luxurious.
+              Elevate il vostro stile con veicoli di trasporto personale su misura, progettati per l&apos;élite sarda. Silenziosi, sostenibili e puramente lussuosi.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="bg-primary px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-primary-container transition-colors shadow-xl">
-                Explore the Fleet
+                Scopri la Flotta
               </button>
               <button className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-white/20 transition-colors">
-                View Showroom
+                Visita lo Showroom
               </button>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default function Home() {
       <section className="py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
           <div>
-            <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">The Showroom</h2>
+            <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">Lo Showroom</h2>
             <div className="h-1 w-24 bg-secondary"></div>
           </div>
           <div className="hidden md:flex gap-4">
@@ -55,26 +55,26 @@ export default function Home() {
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Porto Cervo Edition</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Luxury Touring</p>
+                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Edizione Porto Cervo</h3>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Touring di Lusso</p>
                 </div>
-                <span className="text-xl font-montserrat font-bold text-primary">$24,500</span>
+                <span className="text-xl font-montserrat font-bold text-primary">€24.500</span>
               </div>
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Range</span>
-                  <span className="font-bold text-primary">85 Miles</span>
+                  <span className="text-on-surface-variant font-medium">Autonomia</span>
+                  <span className="font-bold text-primary">135 km</span>
                 </div>
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Capacity</span>
-                  <span className="font-bold text-primary">4 Adults</span>
+                  <span className="text-on-surface-variant font-medium">Capienza</span>
+                  <span className="font-bold text-primary">4 Adulti</span>
                 </div>
                 <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Drive System</span>
+                  <span className="text-on-surface-variant font-medium">Sistema di Guida</span>
                   <span className="font-bold text-primary">72V AC Drive</span>
                 </div>
               </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
             </div>
           </div>
 
@@ -91,25 +91,25 @@ export default function Home() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Maremma Rugged</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Estate Utility</p>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Utilità per Tenute</p>
                 </div>
-                <span className="text-xl font-montserrat font-bold text-primary">$19,800</span>
+                <span className="text-xl font-montserrat font-bold text-primary">€19.800</span>
               </div>
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Load Capacity</span>
+                  <span className="text-on-surface-variant font-medium">Portata</span>
                   <span className="font-bold text-primary">408 kg</span>
                 </div>
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Suspension</span>
-                  <span className="font-bold text-primary">Off-road Tuned</span>
+                  <span className="text-on-surface-variant font-medium">Sospensioni</span>
+                  <span className="font-bold text-primary">Fuoristrada</span>
                 </div>
                 <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Tires</span>
+                  <span className="text-on-surface-variant font-medium">Pneumatici</span>
                   <span className="font-bold text-primary">All-Terrain</span>
                 </div>
               </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
             </div>
           </div>
 
@@ -126,25 +126,25 @@ export default function Home() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Costa Smeralda</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Personal Cruiser</p>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Crociera Personale</p>
                 </div>
-                <span className="text-xl font-montserrat font-bold text-primary">$16,200</span>
+                <span className="text-xl font-montserrat font-bold text-primary">€16.200</span>
               </div>
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Seating</span>
-                  <span className="font-bold text-primary">2 Passenger</span>
+                  <span className="text-on-surface-variant font-medium">Posti</span>
+                  <span className="font-bold text-primary">2 Persone</span>
                 </div>
                 <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Wheel Type</span>
-                  <span className="font-bold text-primary">Chrome 14&quot;</span>
+                  <span className="text-on-surface-variant font-medium">Cerchi</span>
+                  <span className="font-bold text-primary">Cromati 14&quot;</span>
                 </div>
                 <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Warranty</span>
-                  <span className="font-bold text-primary">5 Year Ltd</span>
+                  <span className="text-on-surface-variant font-medium">Garanzia</span>
+                  <span className="font-bold text-primary">5 Anni Ltd</span>
                 </div>
               </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
             </div>
           </div>
         </div>
@@ -156,22 +156,22 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <h2 className="font-montserrat font-extrabold text-4xl text-primary mb-8 leading-tight">
-                Heritage of the<br />
-                <span className="text-secondary italic">Sardinian Coast</span>
+                Il Patrimonio della<br />
+                <span className="text-secondary italic">Costa Sarda</span>
               </h2>
               <div className="space-y-6 text-on-surface-variant leading-relaxed">
-                <p>Founded in the heart of the Costa Smeralda, Solaris began with a simple mission: to navigate the most beautiful landscapes on earth without disturbing their peace.</p>
-                <p>Our design language is informed by the natural architecture of Sardinia—the rugged granite cliffs, the crystalline sapphire waters, and the aromatic maquis shrubland.</p>
+                <p>Nati nel cuore della Costa Smeralda, Solaris nasce con una missione semplice: attraversare i paesaggi più belli della terra senza turbarne la pace.</p>
+                <p>Il nostro linguaggio di design è ispirato dall&apos;architettura naturale della Sardegna — le scogliere granitiche frastagliate, le acque cristalline color zaffiro e la profumata macchia mediterranea.</p>
               </div>
               <div className="mt-12 flex items-center gap-8">
                 <div>
                   <div className="text-3xl font-bold text-primary">25+</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Years Crafting</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Anni di Maestria</div>
                 </div>
                 <div className="h-10 w-px bg-outline-variant"></div>
                 <div>
                   <div className="text-3xl font-bold text-primary">100%</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Hand Finished</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Rifinito a Mano</div>
                 </div>
               </div>
             </div>
@@ -221,11 +221,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Ready to Configure Your Custom Solaris?</h2>
-            <p className="text-on-primary-container text-lg mb-12 font-light">Experience the perfect synthesis of Mediterranean style and cutting-edge electric performance. Our consultants are ready to tailor a fleet to your exact specifications.</p>
+            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Pronto a Configurare il Tuo Solaris Personalizzato?</h2>
+            <p className="text-on-primary-container text-lg mb-12 font-light">Vivi la perfetta sintesi tra stile mediterraneo e prestazioni elettriche all&apos;avanguardia. I nostri consulenti sono pronti a costruire una flotta su misura per le tue esigenze.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <button className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all">Start Custom Build</button>
-              <button className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all">Download Catalog</button>
+              <button className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all">Configura il Tuo Veicolo</button>
+              <button className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all">Scarica il Catalogo</button>
             </div>
           </div>
         </div>
