@@ -20,9 +20,9 @@ export default function Footer() {
             <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Esplora</h4>
             <ul className="space-y-4 font-lato text-sm">
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Sostenibilità</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Tecnologia</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Heritage Sarda</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/noleggio">Noleggio</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/chi-siamo">Chi Siamo</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a></li>
             </ul>
           </div>
           <div>
@@ -46,8 +46,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-8 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="font-lato text-sm tracking-normal text-slate-600">© 2024 Sardinya golf car By Solaris. Tutti i diritti riservati.</p>
         <div className="flex gap-8">
+          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/">Home</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="#">Sostenibilità</a>
+          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/noleggio">Noleggio</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a>
         </div>
       </div>
