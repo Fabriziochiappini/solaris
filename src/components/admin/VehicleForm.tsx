@@ -10,11 +10,9 @@ import PhotoUploader, { LocalPhoto } from './PhotoUploader';
 import PhotoGallery, { GalleryPhoto } from './PhotoGallery';
 
 const CATEGORIE = [
-  'Touring di Lusso',
-  'Utilità per Tenute',
-  'Crociera Personale',
-  'Off-Road',
-  'Bespoke / Su Misura',
+  'GOLF',
+  'TEMPO LIBERO',
+  'LAVORO',
 ];
 
 export interface VehicleData {

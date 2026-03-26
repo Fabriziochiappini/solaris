@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { Veicolo } from '@/lib/types';
 
@@ -44,6 +45,7 @@ function getCardStyle(offset: number): CardStyle | null {
 interface Props { veicoli: Veicolo[] }
 
 export default function ShowroomCarousel({ veicoli }: Props) {
+  const router = useRouter();
   const [active, setActive] = useState(0);
   const [viewer, setViewer] = useState<{ open: boolean; foto: string[]; idx: number }>({
     open: false, foto: [], idx: 0,
@@ -154,7 +156,7 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (foto.length) openViewer(foto);
+                      router.push(`/veicoli/${v.id}`);
                     }}
                     className="flex-1 py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors"
                   >

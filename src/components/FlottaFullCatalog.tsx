@@ -12,10 +12,7 @@ interface Props {
 export default function FlottaFullCatalog({ veicoli }: Props) {
   const [activeTab, setActiveTab] = useState('TUTTE');
 
-  const categorie = useMemo(() => {
-    const cats = new Set(veicoli.map(v => v.categoria).filter(Boolean));
-    return ['TUTTE', ...Array.from(cats)];
-  }, [veicoli]);
+  const categorie = ['TUTTE', 'GOLF', 'TEMPO LIBERO', 'LAVORO'];
 
   const filtered = useMemo(() => {
     if (activeTab === 'TUTTE') return veicoli;
