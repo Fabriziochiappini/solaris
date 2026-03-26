@@ -1,4 +1,49 @@
-export default function Home() {
+import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { Veicolo } from '@/lib/types';
+import VehicleCard from '@/components/VehicleCard';
+
+// Dati di fallback (mostrati se Firestore è vuoto o non raggiungibile)
+const VEICOLI_FALLBACK: Veicolo[] = [
+  {
+    id: 'fallback-1',
+    nome: 'Edizione Porto Cervo',
+    categoria: 'Touring di Lusso',
+    prezzo: 24500,
+    specs: { Autonomia: '135 km', Capienza: '4 Adulti', 'Sistema di Guida': '72V AC Drive' },
+    foto: ['https://lh3.googleusercontent.com/aida-public/AB6AXuBhJEJRrhyTOhMsCK0pumZwXOIeDD0im9Lte-RWCFmXBz4IfESPd1bTXPJkZnpCT3i6EH5-VzoIyImKLACFiWM-e436JAoRxstB2HVMUNeGmb44ObaZz6iUxbtHQWzsOteFNk3GXvCu5aiQCD-BdzZGWLiMs7Jr9N3qzsdEYTaTbvVaIYzUyqIEke43Zp6oh8fJKyWwob7ZgaIie7cSiGOvo2sB8bD_pwJyFlMRdG5KwsrKQwVpDre6l2BWSbvC3bGcerovvddJdYE'],
+  },
+  {
+    id: 'fallback-2',
+    nome: 'Maremma Rugged',
+    categoria: 'Utilità per Tenute',
+    prezzo: 19800,
+    specs: { Portata: '408 kg', Sospensioni: 'Fuoristrada', Pneumatici: 'All-Terrain' },
+    foto: ['https://lh3.googleusercontent.com/aida-public/AB6AXuCSZsm7RbUNMr1rVhJNwQZ54ZlkiFzhiaDi6TZnqmD4DrdhYdhRU6J-T17qlWGKVPQBwPKZ6cYa03oziKrY8ARPjEQZtVPVUWW4SxwjUug_5CbmMvgl4q4PsIgsFeVVqmcqsbMmHa66vmJsuKa6lRlfDuBExKovQWRdASRUlUQHNMKVjs8LJP_0b2N2ozy_opIWqqyfQsyXYJSbkUndZFBqyFFjrPMa5mDQ65UwcRJw7VA6Ogx_bwrfZq3p2RBF9fmvjQP6AV7uQfE'],
+  },
+  {
+    id: 'fallback-3',
+    nome: 'Costa Smeralda',
+    categoria: 'Crociera Personale',
+    prezzo: 16200,
+    specs: { Posti: '2 Persone', Cerchi: 'Cromati 14"', Garanzia: '5 Anni Ltd' },
+    foto: ['https://lh3.googleusercontent.com/aida-public/AB6AXuAkmnJMKgcjBvM1Gl0FXnx2PRmC6v5JAluHq6V9iq_fd38TdQOum4Hg1sMUwoVzZz9i97E-x6emuUeLyKWWnx2HymLLP73KXcDm3bj4H37Pb037wUbd9wheEI1dlxmYillZ68JkeC4JLy75WmiNIWIdOqEFeWA8KaTPoZGuQBCuwB6gfDVpWiQgCx359dXTyy9Gkqu5JJMZ4SYeXHK4TJaWw2bCCWzpnpnFvU5YPF9WYVqUNx9Wc8hoEx7ytc23PTFxxgQwjQlzOrs'],
+  },
+];
+
+async function getVeicoli(): Promise<Veicolo[]> {
+  try {
+    const q = query(collection(db, 'veicoli'), orderBy('ordine', 'asc'), limit(6));
+    const snap = await getDocs(q);
+    if (snap.empty) return VEICOLI_FALLBACK;
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() } as Veicolo));
+  } catch {
+    return VEICOLI_FALLBACK;
+  }
+}
+
+export default async function Home() {
+  const veicoli = await getVeicoli();
   return (
     <main>
       {/* Hero Section: The Grand Fairway — Full-screen cinematic */}
@@ -30,123 +75,18 @@ export default function Home() {
         </div>
       </header>
 
-      {/* The Showroom: Horizontal Scrollable Carousel */}
+      {/* Lo Showroom — dinamico da Firestore */}
       <section className="py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
           <div>
             <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">Lo Showroom</h2>
             <div className="h-1 w-24 bg-secondary"></div>
           </div>
-          <div className="hidden md:flex gap-4">
-            <button className="p-3 border border-outline-variant hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined">chevron_left</span></button>
-            <button className="p-3 border border-outline-variant hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined">chevron_right</span></button>
-          </div>
         </div>
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Vehicle Card 1 */}
-          <div className="bg-surface-container-lowest shadow-sm group">
-            <div className="aspect-[4/3] overflow-hidden">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                alt="sleek sapphire blue golf car with tan leather seats on a professional golf course" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJEJRrhyTOhMsCK0pumZwXOIeDD0im9Lte-RWCFmXBz4IfESPd1bTXPJkZnpCT3i6EH5-VzoIyImKLACFiWM-e436JAoRxstB2HVMUNeGmb44ObaZz6iUxbtHQWzsOteFNk3GXvCu5aiQCD-BdzZGWLiMs7Jr9N3qzsdEYTaTbvVaIYzUyqIEke43Zp6oh8fJKyWwob7ZgaIie7cSiGOvo2sB8bD_pwJyFlMRdG5KwsrKQwVpDre6l2BWSbvC3bGcerovvddJdYE"
-              />
-            </div>
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Edizione Porto Cervo</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Touring di Lusso</p>
-                </div>
-                <span className="text-xl font-montserrat font-bold text-primary">€24.500</span>
-              </div>
-              <div className="space-y-4 mb-8">
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Autonomia</span>
-                  <span className="font-bold text-primary">135 km</span>
-                </div>
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Capienza</span>
-                  <span className="font-bold text-primary">4 Adulti</span>
-                </div>
-                <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Sistema di Guida</span>
-                  <span className="font-bold text-primary">72V AC Drive</span>
-                </div>
-              </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
-            </div>
-          </div>
-
-          {/* Vehicle Card 2 */}
-          <div className="bg-surface-container-lowest shadow-sm group">
-            <div className="aspect-[4/3] overflow-hidden">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                alt="olive green utility electric vehicle parked near a Mediterranean villa garden" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSZsm7RbUNMr1rVhJNwQZ54ZlkiFzhiaDi6TZnqmD4DrdhYdhRU6J-T17qlWGKVPQBwPKZ6cYa03oziKrY8ARPjEQZtVPVUWW4SxwjUug_5CbmMvgl4q4PsIgsFeVVqmcqsbMmHa66vmJsuKa6lRlfDuBExKovQWRdASRUlUQHNMKVjs8LJP_0b2N2ozy_opIWqqyfQsyXYJSbkUndZFBqyFFjrPMa5mDQ65UwcRJw7VA6Ogx_bwrfZq3p2RBF9fmvjQP6AV7uQfE"
-              />
-            </div>
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Maremma Rugged</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Utilità per Tenute</p>
-                </div>
-                <span className="text-xl font-montserrat font-bold text-primary">€19.800</span>
-              </div>
-              <div className="space-y-4 mb-8">
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Portata</span>
-                  <span className="font-bold text-primary">408 kg</span>
-                </div>
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Sospensioni</span>
-                  <span className="font-bold text-primary">Fuoristrada</span>
-                </div>
-                <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Pneumatici</span>
-                  <span className="font-bold text-primary">All-Terrain</span>
-                </div>
-              </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
-            </div>
-          </div>
-
-          {/* Vehicle Card 3 */}
-          <div className="bg-surface-container-lowest shadow-sm group">
-            <div className="aspect-[4/3] overflow-hidden">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                alt="compact white two-seater electric golf car in a modern architectural setting" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkmnJMKgcjBvM1Gl0FXnx2PRmC6v5JAluHq6V9iq_fd38TdQOum4Hg1sMUwoVzZz9i97E-x6emuUeLyKWWnx2HymLLP73KXcDm3bj4H37Pb037wUbd9wheEI1dlxmYillZ68JkeC4JLy75WmiNIWIdOqEFeWA8KaTPoZGuQBCuwB6gfDVpWiQgCx359dXTyy9Gkqu5JJMZ4SYeXHK4TJaWw2bCCWzpnpnFvU5YPF9WYVqUNx9Wc8hoEx7ytc23PTFxxgQwjQlzOrs"
-              />
-            </div>
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Costa Smeralda</h3>
-                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Crociera Personale</p>
-                </div>
-                <span className="text-xl font-montserrat font-bold text-primary">€16.200</span>
-              </div>
-              <div className="space-y-4 mb-8">
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Posti</span>
-                  <span className="font-bold text-primary">2 Persone</span>
-                </div>
-                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
-                  <span className="text-on-surface-variant font-medium">Cerchi</span>
-                  <span className="font-bold text-primary">Cromati 14&quot;</span>
-                </div>
-                <div className="flex justify-between text-sm py-2">
-                  <span className="text-on-surface-variant font-medium">Garanzia</span>
-                  <span className="font-bold text-primary">5 Anni Ltd</span>
-                </div>
-              </div>
-              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">Vedi Dettagli</button>
-            </div>
-          </div>
+          {veicoli.map((v) => (
+            <VehicleCard key={v.id} veicolo={v} />
+          ))}
         </div>
       </section>
 
