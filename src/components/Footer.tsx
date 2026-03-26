@@ -30,6 +30,7 @@ export default function Footer() {
             <ul className="space-y-4 font-lato text-sm">
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/privacy-policy">Privacy Policy</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/termini">Termini di Servizio</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors italic" href="/admin">Area Riservata</a></li>
               <li className="text-slate-500 mt-2">P.IVA: 02659430900<br/>REA: SS 193996</li>
             </ul>
           </div>
