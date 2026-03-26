@@ -3,9 +3,11 @@ export default function Footer() {
     <footer className="w-full mt-20 pt-16 pb-8 bg-slate-100">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8">
         <div className="space-y-6">
-          <div className="text-xl font-bold text-sky-900 uppercase">SOLARIS</div>
+          <div className="text-xl font-bold text-sky-900 uppercase">Sardinya golf car</div>
           <p className="font-lato text-sm tracking-normal text-slate-600 max-w-xs">
-            Creiamo soluzioni di trasporto elettrico premium ispirate alla bellezza senza tempo della costa sarda.
+            By Solaris • Assistenza ufficiale club car<br />
+            Vendita, noleggio, assistenza<br />
+            Olbia - Aglientu
           </p>
           <div className="flex gap-4">
             <a className="text-sky-900 hover:opacity-100 opacity-80 duration-200" href="#"><span className="material-symbols-outlined">public</span></a>
@@ -26,9 +28,9 @@ export default function Footer() {
           <div>
             <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Legale</h4>
             <ul className="space-y-4 font-lato text-sm">
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Privacy Policy</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Termini di Servizio</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="#">Conformità</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/privacy-policy">Privacy Policy</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/termini">Termini di Servizio</a></li>
+              <li className="text-slate-500 mt-2">P.IVA: 02659430900<br/>REA: SS 193996</li>
             </ul>
           </div>
         </div>
@@ -42,7 +44,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-8 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="font-lato text-sm tracking-normal text-slate-600">© 2024 SOLARIS Premium PTV. Ispirato dalla Costa Sarda.</p>
+        <p className="font-lato text-sm tracking-normal text-slate-600">© 2024 Sardinya golf car By Solaris. Tutti i diritti riservati.</p>
         <div className="flex gap-8">
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="#">Sostenibilità</a>

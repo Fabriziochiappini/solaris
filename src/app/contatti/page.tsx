@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 
 export default function ContattiPage() {
   const contactInfo = [
-    { icon: 'location_on', label: 'Sede Principale', value: 'Porto Cervo, Sardegna, Italia', link: 'https://maps.google.com' },
+    { icon: 'location_on', label: 'Sede Principale', value: 'Olbia / Aglientu, Sardegna', link: 'https://maps.google.com' },
     { icon: 'phone', label: 'Telefono', value: '+39 333 123 4567', link: 'tel:+393331234567' },
     { icon: 'mail', label: 'Email', value: 'info@solarisgolfcar.it', link: 'mailto:info@solarisgolfcar.it' },
     { icon: 'schedule', label: 'Orari', value: 'Lun - Sab: 09:00 - 19:00', link: null },
+    { icon: 'business_center', label: 'Dati Aziendali', value: 'Sardinya golf car By Solaris • P.IVA 02659430900 • REA SS 193996', link: null },
   ];
 
   return (
@@ -21,7 +22,7 @@ export default function ContattiPage() {
           className="mb-16"
         >
           <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
-            Contattaci
+            <h2 className="font-montserrat font-bold text-xl text-secondary mt-2">Assistenza ufficiale Club Car</h2>
           </h1>
           <div className="h-1.5 w-32 bg-secondary"></div>
         </motion.div>
@@ -96,8 +97,8 @@ export default function ContattiPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
             <div className="absolute bottom-8 left-8 z-20">
-              <p className="text-white font-montserrat font-bold text-2xl mb-1 shadow-sm">Solaris Golf Car</p>
-              <p className="text-white/80 text-xs uppercase tracking-widest">Sardegna, Italia</p>
+              <p className="text-white font-montserrat font-bold text-2xl mb-1 shadow-sm">Sardinya golf car</p>
+              <p className="text-white/80 text-xs uppercase tracking-widest">By Solaris • Vendita, Noleggio, Assistenza</p>
             </div>
             {/* Link reale a Maps sovrapposto */}
             <a 
