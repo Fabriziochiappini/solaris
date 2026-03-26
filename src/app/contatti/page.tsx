@@ -83,31 +83,24 @@ export default function ContattiPage() {
             transition={{ delay: 0.3 }}
             className="relative h-[600px] bg-surface-container-low shadow-2xl overflow-hidden group"
           >
-            <div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px] z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center p-8 pointer-events-none">
-              <div className="bg-white p-6 shadow-2xl text-center scale-90 group-hover:scale-100 transition-transform duration-700">
-                <span className="material-symbols-outlined text-4xl text-primary mb-2">map</span>
-                <p className="font-bold text-primary uppercase text-xs tracking-widest">Apri in Google Maps</p>
-              </div>
-            </div>
-            {/* Immagine di fallback per la mappa, un'estetica premium della Sardegna */}
-            <img 
-              src="https://images.unsplash.com/photo-1606733907663-04286121f00b?auto=format&fit=crop&q=80&w=1200" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-110"
-              alt="Località Solaris Sardegna"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-            <div className="absolute bottom-8 left-8 z-20">
+            {/* Google Maps Iframe */}
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193309.52467575454!2d9.359265146747976!3d40.92055620956488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d94b05a6396865%3A0xd62f1c84cb1f41e0!2sOlbia%20SS!5e0!3m2!1sit!2sit!4v1711465200000!5m2!1sit!2sit" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={false}
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 z-0"
+              title="Mappa Sardinya Golf Car Olbia"
+            ></iframe>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent pointer-events-none z-10" />
+            <div className="absolute bottom-8 left-8 z-20 pointer-events-none">
               <p className="text-white font-montserrat font-bold text-2xl mb-1 shadow-sm">Sardinya golf car</p>
-              <p className="text-white/80 text-xs uppercase tracking-widest">By Solaris • Vendita, Noleggio, Assistenza</p>
+              <p className="text-white/90 text-xs uppercase tracking-widest font-bold drop-shadow-md">By Solaris • Vendita, Noleggio, Assistenza</p>
             </div>
-            {/* Link reale a Maps sovrapposto */}
-            <a 
-              href="https://www.google.com/maps/search/Porto+Cervo+Sardegna" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="absolute inset-0 z-30"
-              aria-label="Google Maps"
-            />
           </motion.div>
 
         </div>
