@@ -1,5 +1,5 @@
 import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db, isFirebaseConfigured } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
 import ShowroomCarousel from '@/components/ShowroomCarousel';
 
@@ -32,6 +32,7 @@ const VEICOLI_FALLBACK: Veicolo[] = [
 ];
 
 async function getVeicoli(): Promise<Veicolo[]> {
+  if (!isFirebaseConfigured) return VEICOLI_FALLBACK;
   try {
     const q = query(collection(db, 'veicoli'), orderBy('ordine', 'asc'), limit(6));
     const snap = await getDocs(q);
