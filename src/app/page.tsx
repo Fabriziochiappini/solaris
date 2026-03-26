@@ -1,166 +1,247 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { ArrowRight, ChevronRight, ShieldCheck, Zap, Battery, Briefcase } from 'lucide-react';
-import Image from 'next/image';
-
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative w-full h-[90vh] flex items-center justify-center bg-slate-900 overflow-hidden">
-        {/* Background Gradient/Overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-slate-900/90 mix-blend-multiply" />
-          {/* Abstract blobs */}
-          <motion.div 
-            animate={{ scale: [1, 1.05, 1], rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-500/20 blur-3xl"
-          />
-          <motion.div 
-            animate={{ scale: [1, 1.1, 1], rotate: [0, -10, 10, 0] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/20 blur-3xl"
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-full">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <h1 className="text-5xl md:text-7xl font-outfit font-black text-white leading-tight mb-6">
-                 Eleva i tuoi <span className="text-blue-400">spostamenti</span> con pura classe.
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mb-12">
-                Noleggio di Golf Car esclusivi, totalmente elettrici, ideali per resort luxury, green, eventi aziendali e privati.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#flotta" className="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-lg transition-all shadow-lg flex items-center justify-center group">
-                  Scopri la Flotta
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a href="#contatti" className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-semibold text-lg transition-all flex items-center justify-center">
-                  Richiedi un Preventivo
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Value Prop */}
-      <section id="servizi" className="py-24 bg-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-sm uppercase tracking-widest font-bold text-blue-600 mb-2">Perché Solaris?</h2>
-            <h3 className="text-3xl md:text-5xl font-outfit font-extrabold text-slate-900 text-balance">
-              Pensati per durare, progettati per stupire
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((item, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -8 }}
-                className="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 cursor-default"
-              >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-md text-white">
-                  {item.icon}
-                </div>
-                <h4 className="text-xl font-bold font-outfit text-slate-900 mb-3">{item.title}</h4>
-                <p className="text-slate-600 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Teaser Flotta */}
-      <section id="flotta" className="py-24 bg-slate-900 text-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-6xl font-outfit font-black mb-4">
-               Esplora i nostri <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">modelli</span>
-              </h2>
-              <p className="text-slate-400 text-lg">
-                La flotta è costantemente aggiornata con i migliori mezzi sul mercato per garantirti silenziosità ed emissioni zero.
-              </p>
+    <main className="pt-24">
+      {/* Hero Section: The Coastal Club Split Layout */}
+      <section className="relative min-h-[921px] flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="z-10 order-2 lg:order-1">
+            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.2em] uppercase bg-secondary-container text-on-secondary-container">The Coastal Club</span>
+            <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-primary leading-[1.05] tracking-tighter mb-8">
+              Elevate Your <br />
+              <span className="text-secondary italic">Fairway</span> Presence.
+            </h1>
+            <p className="text-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed font-light">
+              Engineered for the discerning enthusiast. Solaris Personal Transportation Vehicles blend Sardinian elegance with silent, high-performance electric mobility.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="bg-primary text-on-primary px-8 py-4 font-montserrat font-bold uppercase tracking-widest flex items-center gap-3 hover:shadow-xl transition-all">
+                Explore the Fleet
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+              <button className="bg-tertiary-fixed text-on-tertiary-fixed-variant px-8 py-4 font-montserrat font-bold uppercase tracking-widest hover:bg-tertiary-fixed-dim transition-all">
+                Book a Test Drive
+              </button>
             </div>
-            <a href="/flotta" className="mt-8 md:mt-0 flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors group">
-              Vedi tutto il parco auto
-              <ChevronRight className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </a>
+          </div>
+          <div className="relative h-[500px] lg:h-[700px] order-1 lg:order-2">
+            <div className="absolute inset-0 bg-surface-container-high translate-x-8 translate-y-8 -z-10"></div>
+            <img 
+              className="w-full h-full object-cover shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700" 
+              alt="high-end luxury white golf car parked on a lush green lawn overlooking the turquoise Mediterranean sea at sunset" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYFUsvKWdSYlnjAta_o2vONsFMdGoZXNE7yFDIHqNoEFguKPG1V0pyjVqmLnkEJpW9Ge0wgYGtPOiBgZCZ0BNLFYLwVQsLNzRfiA3UsDwZI7hoRnTZuLJZeSdTkDOfxjRxpZvQZJGn9ZNLSWSaRNKyUHS9OfT8eJumnOIfzsDlHT7ypOcgvK6r2h2-QFWcuLUmgPykTIKFndNaj04W64Gz8Rx6Km0PycdHzvYXmSLxsAIvyuiN4_1ZpUe8V6PK0_kz1wXDgODycic"
+            />
+            <div className="absolute -bottom-10 -left-10 bg-white p-8 shadow-lg hidden md:block">
+              <div className="flex items-center gap-4">
+                <span className="text-4xl font-bold text-primary">0%</span>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant leading-tight">
+                  Emissions<br />Impact
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Showroom: Horizontal Scrollable Carousel */}
+      <section className="py-32 bg-surface">
+        <div className="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
+          <div>
+            <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">The Showroom</h2>
+            <div className="h-1 w-24 bg-secondary"></div>
+          </div>
+          <div className="hidden md:flex gap-4">
+            <button className="p-3 border border-outline-variant hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined">chevron_left</span></button>
+            <button className="p-3 border border-outline-variant hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined">chevron_right</span></button>
+          </div>
+        </div>
+        <div className="flex overflow-x-auto no-scrollbar gap-8 px-8 md:px-[calc((100vw-80rem)/2+2rem)] snap-x snap-mandatory">
+          {/* Vehicle Card 1 */}
+          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+            <div className="aspect-[4/3] overflow-hidden">
+              <img 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                alt="sleek sapphire blue golf car with tan leather seats on a professional golf course" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJEJRrhyTOhMsCK0pumZwXOIeDD0im9Lte-RWCFmXBz4IfESPd1bTXPJkZnpCT3i6EH5-VzoIyImKLACFiWM-e436JAoRxstB2HVMUNeGmb44ObaZz6iUxbtHQWzsOteFNk3GXvCu5aiQCD-BdzZGWLiMs7Jr9N3qzsdEYTaTbvVaIYzUyqIEke43Zp6oh8fJKyWwob7ZgaIie7cSiGOvo2sB8bD_pwJyFlMRdG5KwsrKQwVpDre6l2BWSbvC3bGcerovvddJdYE"
+              />
+            </div>
+            <div className="p-8">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Porto Cervo Edition</h3>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Luxury Touring</p>
+                </div>
+                <span className="text-xl font-montserrat font-bold text-primary">$24,500</span>
+              </div>
+              <div className="space-y-4 mb-8">
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Range</span>
+                  <span className="font-bold text-primary">85 Miles</span>
+                </div>
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Capacity</span>
+                  <span className="font-bold text-primary">4 Adults</span>
+                </div>
+                <div className="flex justify-between text-sm py-2">
+                  <span className="text-on-surface-variant font-medium">Drive System</span>
+                  <span className="font-bold text-primary">72V AC Drive</span>
+                </div>
+              </div>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-             {/* Esempio Mock. Successivamente lo legheremo a Firebase! */}
-             {[1, 2, 3].map((_, i) => (
-                <div key={i} className="group bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
-                  <div className="relative h-64 bg-slate-700 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10" />
-                    {/* Placeholder per l'immagine */}
-                    <div className="absolute inset-0 flex items-center justify-center text-slate-500 font-medium group-hover:scale-105 transition-transform duration-500">
-                      [Foto Veicolo Premium]
-                    </div>
-                    <div className="absolute bottom-4 left-4 z-20">
-                      <span className="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">Disponibile</span>
-                    </div>
+          {/* Vehicle Card 2 */}
+          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+            <div className="aspect-[4/3] overflow-hidden">
+              <img 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                alt="olive green utility electric vehicle parked near a Mediterranean villa garden" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSZsm7RbUNMr1rVhJNwQZ54ZlkiFzhiaDi6TZnqmD4DrdhYdhRU6J-T17qlWGKVPQBwPKZ6cYa03oziKrY8ARPjEQZtVPVUWW4SxwjUug_5CbmMvgl4q4PsIgsFeVVqmcqsbMmHa66vmJsuKa6lRlfDuBExKovQWRdASRUlUQHNMKVjs8LJP_0b2N2ozy_opIWqqyfQsyXYJSbkUndZFBqyFFjrPMa5mDQ65UwcRJw7VA6Ogx_bwrfZq3p2RBF9fmvjQP6AV7uQfE"
+              />
+            </div>
+            <div className="p-8">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Maremma Rugged</h3>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Estate Utility</p>
+                </div>
+                <span className="text-xl font-montserrat font-bold text-primary">$19,800</span>
+              </div>
+              <div className="space-y-4 mb-8">
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Load Capacity</span>
+                  <span className="font-bold text-primary">408 kg</span>
+                </div>
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Suspension</span>
+                  <span className="font-bold text-primary">Off-road Tuned</span>
+                </div>
+                <div className="flex justify-between text-sm py-2">
+                  <span className="text-on-surface-variant font-medium">Tires</span>
+                  <span className="font-bold text-primary">All-Terrain</span>
+                </div>
+              </div>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+            </div>
+          </div>
+
+          {/* Vehicle Card 3 */}
+          <div className="flex-none w-80 md:w-[450px] snap-start bg-surface-container-lowest shadow-sm group">
+            <div className="aspect-[4/3] overflow-hidden">
+              <img 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                alt="compact white two-seater electric golf car in a modern architectural setting" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkmnJMKgcjBvM1Gl0FXnx2PRmC6v5JAluHq6V9iq_fd38TdQOum4Hg1sMUwoVzZz9i97E-x6emuUeLyKWWnx2HymLLP73KXcDm3bj4H37Pb037wUbd9wheEI1dlxmYillZ68JkeC4JLy75WmiNIWIdOqEFeWA8KaTPoZGuQBCuwB6gfDVpWiQgCx359dXTyy9Gkqu5JJMZ4SYeXHK4TJaWw2bCCWzpnpnFvU5YPF9WYVqUNx9Wc8hoEx7ytc23PTFxxgQwjQlzOrs"
+              />
+            </div>
+            <div className="p-8">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="font-montserrat font-bold text-2xl text-primary mb-1">Costa Smeralda</h3>
+                  <p className="text-xs uppercase tracking-widest text-secondary font-bold">Personal Cruiser</p>
+                </div>
+                <span className="text-xl font-montserrat font-bold text-primary">$16,200</span>
+              </div>
+              <div className="space-y-4 mb-8">
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Seating</span>
+                  <span className="font-bold text-primary">2 Passenger</span>
+                </div>
+                <div className="flex justify-between text-sm py-2 border-b border-outline-variant/10">
+                  <span className="text-on-surface-variant font-medium">Wheel Type</span>
+                  <span className="font-bold text-primary">Chrome 14&quot;</span>
+                </div>
+                <div className="flex justify-between text-sm py-2">
+                  <span className="text-on-surface-variant font-medium">Warranty</span>
+                  <span className="font-bold text-primary">5 Year Ltd</span>
+                </div>
+              </div>
+              <button className="w-full py-4 text-xs font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-colors">View Details</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Sardinia Connection */}
+      <section className="py-32 bg-surface-container-low">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-5">
+              <h2 className="font-montserrat font-extrabold text-4xl text-primary mb-8 leading-tight">
+                Heritage of the<br />
+                <span className="text-secondary italic">Sardinian Coast</span>
+              </h2>
+              <div className="space-y-6 text-on-surface-variant leading-relaxed">
+                <p>Founded in the heart of the Costa Smeralda, Solaris began with a simple mission: to navigate the most beautiful landscapes on earth without disturbing their peace.</p>
+                <p>Our design language is informed by the natural architecture of Sardinia—the rugged granite cliffs, the crystalline sapphire waters, and the aromatic maquis shrubland.</p>
+              </div>
+              <div className="mt-12 flex items-center gap-8">
+                <div>
+                  <div className="text-3xl font-bold text-primary">25+</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Years Crafting</div>
+                </div>
+                <div className="h-10 w-px bg-outline-variant"></div>
+                <div>
+                  <div className="text-3xl font-bold text-primary">100%</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Hand Finished</div>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-7 relative">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="h-64 bg-slate-300 overflow-hidden shadow-lg">
+                    <img 
+                      className="w-full h-full object-cover" 
+                      alt="scenic aerial view of turquoise mediterranean coastline with yachts and rocky outcrops" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXUaNv5zBzWjLfCqMcCGZ5MN6CNANU97e_IxZj7R8DgOMzhU752EfHPmYPZgNBfrVGHMo_sX25m1pkKckOerDT4-bFGv8MazDjzV7EX5WP4fBQ2Tl0covkr9CuIoroTQJkoAE5AIJzoe5K0_oFndf0wgua2vvtkWmMC8VcMGu254v_O2KBFReLxNLyX8mwCXMWYflB7oWTj_ZBobS64vQNQGX7rP3J901XNh5tC2QB2lD2_4VFtcWa7Gn5iIt7-KkWylmda6jeH24" 
+                    />
                   </div>
-                  <div className="p-6">
-                    <h4 className="text-2xl font-bold font-outfit mb-2">Modello {i === 0 ? "Executive" : i === 1 ? "Golf-Pro" : "Resort Mover"}</h4>
-                    <p className="text-slate-400 mb-6 line-clamp-2">Una vettura elegante e silenziosa a 4 posti, interni in eco-pelle, perfetta per spostamenti nei parchi o sul green.</p>
-                    <div className="flex justify-between items-center pt-4 border-t border-slate-700">
-                      <div>
-                        <span className="block text-sm text-slate-500 uppercase tracking-wider">A partire da</span>
-                        <span className="text-xl font-bold text-blue-400">€60<span className="text-sm font-normal text-slate-500">/giorno</span></span>
-                      </div>
-                      <button className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-                        <ArrowRight className="w-5 h-5 text-white" />
-                      </button>
-                    </div>
+                  <div className="h-80 bg-slate-400 overflow-hidden shadow-lg">
+                    <img 
+                      className="w-full h-full object-cover" 
+                      alt="traditional Sardinian stone architecture with flowering bougainvillea under a bright blue sky" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT9S7lwGuHySZl0qwcK1FW_7LV7PmHI0YNJUS6an_gyhqe8_7_hQNZWmNCqrnMjml7-4y-Oys0nmAJGbzijHGv8P4Cj9-5kT10XlD4NLTVpPoDiltR2kSCISX9cmksVExWQFYu2mXD2P5aI_xgXJBfJTLPGwdPdyjBEot13xpnlhyk_6RH2USgtj9Pz-G-Mm7jOdAwr6FsdvswC5fQGiiSWNcmvqULwGyskhrKtLfIV5sYQvtxVXbwoMJjij3i7RxJWUCDp6GB2lo" 
+                    />
                   </div>
                 </div>
-             ))}
+                <div className="pt-12 space-y-4">
+                  <div className="h-80 bg-slate-500 overflow-hidden shadow-lg">
+                    <img 
+                      className="w-full h-full object-cover" 
+                      alt="pristine white sand beach with gentle waves and clear blue water" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYpxMCAcURg99-da_cNLK0VGKv6gspR8b-sC5QNfMFEUCxky7Fkwlpt2FPjGNVXZh1O6vYv4FXB-pU0PzjX6tIiz_Rk-Hx-vOtGwYoO2WBQex0Tshj3i4E5jdIOooKigGXh8EV6kQVQagiffwqCA-WWMJPrpYpfCSyNbNHfrGmm6iHLhC9SKYQxHz4e2wtdJuYWwmITVI-t2ZA3Os5ChjDLf4t7RSXcCQXvK7iTXMSFyYN-Zr2xvs7yRFxSnElqATCN2QswagCBS8" 
+                    />
+                  </div>
+                  <div className="h-64 bg-slate-600 overflow-hidden shadow-lg">
+                    <img 
+                      className="w-full h-full object-cover" 
+                      alt="close up of premium leather upholstery work on a luxury vehicle seat" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUBFHSatZQI0EV3z93u_sYoQu4qgmYUL4L1EQHf_x_FpmEX3o7Ar8WPBDFt1WJaWaz_WeB1bA5h-vyPIIEFPpbJG5XYRiJd0ZV2HYHXDRckk97Cbdn9M3AJjIFsVE_Lcp_xvBfymyB-kRCFHzaEUXl9RXj2gcscjkEsDAfKbZQmzOnz_qWc2yjhJ_pekFtB7TX9aRIGxrtmZ2NCZRtZpJVgpmSnYGiNjW8pvZC2e-RcKrN721aDHlmlaAiq5Xy_1YkP2LQ0ZaLW3w" 
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -top-10 -right-10 w-48 h-48 border-[20px] border-secondary/10 -z-10"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-blue-600 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-50" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-outfit font-black text-white mb-6">Pronto per muoverti con stile?</h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            Richiedi la disponibilità per il tuo evento o per un noleggio stagionale. Il nostro team ti risponderà in poche ore.
-          </p>
-          <a href="#contatti" className="inline-block px-10 py-4 bg-white text-blue-600 hover:bg-slate-50 font-bold rounded-full shadow-lg transition-transform hover:-translate-y-1">
-            Contattaci subito
-          </a>
+      {/* Asymmetric CTA Section */}
+      <section className="py-32 bg-primary">
+        <div className="max-w-7xl mx-auto px-8 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Ready to Configure Your Custom Solaris?</h2>
+            <p className="text-on-primary-container text-lg mb-12 font-light">Experience the perfect synthesis of Mediterranean style and cutting-edge electric performance. Our consultants are ready to tailor a fleet to your exact specifications.</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <button className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all">Start Custom Build</button>
+              <button className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all">Download Catalog</button>
+            </div>
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
-
-const features = [
-  {
-    icon: <Battery className="w-6 h-6" />,
-    title: "100% Elettrici",
-    desc: "Nessun rumore, nessuna emissione. Rispetta la natura del tuo resort o del tuo campo da golf godendo di un'autonomia eccellente."
-  },
-  {
-    icon: <Briefcase className="w-6 h-6" />,
-    title: "Supporto B2B",
-    desc: "Pianifichiamo consegne per eventi e fiere, fornendo flotte multiple e personalizzate con il tuo logo o colorazione preferita."
-  },
-  {
-    icon: <ShieldCheck className="w-6 h-6" />,
-    title: "Assistenza Sicura",
-    desc: "Il noleggio comprende manutenzione rapida e totale supporto 7 giorni su 7 in caso di necessità."
-  }
-];
