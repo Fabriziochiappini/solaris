@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Veicolo } from '@/lib/types';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import SimilarVehicles from '@/components/SimilarVehicles';
 
 const PhotoViewer = dynamic(() => import('@/components/PhotoViewer'), { ssr: false });
 
@@ -601,6 +602,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ===== VEICOLI SIMILI ===== */}
+      <SimilarVehicles currentId={veicolo.id} />
 
       {/* Lightbox */}
       {isViewerOpen && foto.length > 0 && (
