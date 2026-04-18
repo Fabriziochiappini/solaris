@@ -172,7 +172,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       {/* ========== MACRO TAB BAR ========== */}
       <div className="sticky top-16 z-30 bg-white border-b-2 border-outline-variant/20 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex">
+          <div className="flex justify-center">
             <button
               onClick={() => setActiveTab('landing')}
               className={`relative px-8 py-5 font-montserrat font-bold text-sm uppercase tracking-widest transition-all ${
