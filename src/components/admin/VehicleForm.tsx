@@ -9,7 +9,7 @@ import SpecEditor from './SpecEditor';
 import PhotoUploader, { LocalPhoto } from './PhotoUploader';
 import PhotoGallery, { GalleryPhoto } from './PhotoGallery';
 import SinglePhotoUploader from './SinglePhotoUploader';
-import { VeicoloLanding, VeicoloAccessorio } from '@/lib/types';
+import { VeicoloLanding, VeicoloAccessorio, FotoGalleria } from '@/lib/types';
 
 const CATEGORIE = [
   'GOLF',
@@ -69,6 +69,21 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
   const [accessori, setAccessori] = useState<AccessoryFormType[]>(
     initialLanding?.accessori?.map(a => ({ ...a })) || []
   );
+
+  // Galleria metadati (titolo / sottotitolo per foto)
+  const [galleriaFoto, setGalleriaFoto] = useState<FotoGalleria[]>(
+    initialLanding?.galleriaFoto || []
+  );
+
+  const updateGalleriaFotoMeta = (index: number, field: 'titolo' | 'sottotitolo', value: string) => {
+    setGalleriaFoto(prev => {
+      const copy = [...prev];
+      // Garantiamo che l'array abbia abbastanza slot
+      while (copy.length <= index) copy.push({ url: '' });
+      copy[index] = { ...copy[index], [field]: value };
+      return copy;
+    });
+  };
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -169,6 +184,13 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
       const specsObj: Record<string, string> = {};
       specs.forEach((s) => { if (s.chiave) specsObj[s.chiave] = s.valore; });
 
+      // Costruiamo galleriaFoto finale con URL aggiornati
+      const finalGalleriaFoto: FotoGalleria[] = finalFotoUrls.map((url, i) => ({
+        url,
+        titolo: galleriaFoto[i]?.titolo || '',
+        sottotitolo: galleriaFoto[i]?.sottotitolo || '',
+      }));
+
       const payload = {
         nome,
         categoria,
@@ -182,6 +204,7 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
           citazione: landingCitazione,
           specificheHtml: landingSpecificheHtml,
           accessori: finalAccessori,
+          galleriaFoto: finalGalleriaFoto,
         },
         updatedAt: serverTimestamp(),
       };
@@ -283,11 +306,37 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
           <input value={landingCitazione} onChange={(e) => setLandingCitazione(e.target.value)} className="w-full border border-outline-variant bg-surface px-4 py-3 text-sm font-medium text-center focus:outline-none focus:ring-1 focus:ring-primary text-xl" placeholder='"Lussuoso, silenzioso, inarrestabile."' />
         </div>
         <div className="mt-8">
-          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-2">Galleria Fotografica Carosello Pieno (2 per view desktop)</label>
+          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-2">Galleria Fotografica Carosello (2 per view desktop)</label>
           <PhotoUploader onFilesReady={handleNewPhotos} />
           {allGalleryPhotos.length > 0 && (
-            <div className="mt-4">
+            <div className="mt-4 space-y-3">
               <PhotoGallery photos={allGalleryPhotos} onChange={handleGalleryChange} />
+              {/* Titolo / Sottotitolo per ogni foto */}
+              <div className="pt-4 border-t border-outline-variant/10">
+                <p className="text-[10px] font-montserrat font-bold uppercase text-on-surface-variant mb-3">Etichette per ogni foto (opzionale — sovrimpresse in basso a sinistra)</p>
+                <div className="space-y-3">
+                  {allGalleryPhotos.map((photo, index) => (
+                    <div key={photo.id} className="flex gap-3 items-start p-3 bg-surface-container-low border border-outline-variant/20">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={photo.url || photo.preview} alt="" className="w-16 h-12 object-cover flex-none" />
+                      <div className="flex-1 grid grid-cols-2 gap-2">
+                        <input
+                          value={galleriaFoto[index]?.titolo || ''}
+                          onChange={(e) => updateGalleriaFotoMeta(index, 'titolo', e.target.value)}
+                          placeholder={`Titolo foto ${index + 1} (es. "Wherever Your Path Leads")`}
+                          className="w-full border border-outline-variant bg-white px-3 py-2 text-xs font-bold focus:outline-none focus:border-primary"
+                        />
+                        <input
+                          value={galleriaFoto[index]?.sottotitolo || ''}
+                          onChange={(e) => updateGalleriaFotoMeta(index, 'sottotitolo', e.target.value)}
+                          placeholder="Sottotitolo (es. "Guida rilassante, ogni giorno.")"
+                          className="w-full border border-outline-variant bg-white px-3 py-2 text-xs focus:outline-none focus:border-primary"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
         </div>

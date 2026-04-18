@@ -5,6 +5,12 @@ export interface VeicoloAccessorio {
   foto: string;
 }
 
+export interface FotoGalleria {
+  url: string;
+  titolo?: string;
+  sottotitolo?: string;
+}
+
 export interface VeicoloLanding {
   heroTitolo: string;
   heroDescrizione: string;
@@ -12,6 +18,7 @@ export interface VeicoloLanding {
   citazione: string;
   specificheHtml: string;
   accessori: VeicoloAccessorio[];
+  galleriaFoto?: FotoGalleria[]; // metadati per galleria con titolo/sottotitolo
 }
 
 // Tipo Veicolo condiviso in tutto il progetto

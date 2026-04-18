@@ -261,18 +261,43 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                  {foto.map((f, i) => (
-                    <div
-                      key={i}
-                      onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
-                      className="flex-none w-[85vw] md:w-[calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img snap-start relative shadow-lg"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={f} alt={`${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
-                      <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md">Ingrandisci</div>
-                    </div>
-                  ))}
+                  {foto.map((f, i) => {
+                    const meta = landing?.galleriaFoto?.[i];
+                    const hasMeta = meta?.titolo || meta?.sottotitolo;
+                    return (
+                      <div
+                        key={i}
+                        onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
+                        className="flex-none w-[85vw] md:w-[calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img snap-start relative shadow-lg"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={f} alt={meta?.titolo || `${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
+
+                        {/* Gradiente sempre visibile se c'è testo, altrimenti solo su hover */}
+                        <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity ${hasMeta ? 'opacity-100' : 'opacity-0 group-hover/img:opacity-60'}`} />
+
+                        {/* Overlay titolo/sottotitolo — stile Club Car, bottom-left */}
+                        {hasMeta && (
+                          <div className="absolute bottom-0 left-0 p-6 z-10">
+                            {meta.titolo && (
+                              <p className="font-montserrat font-bold text-white text-lg leading-tight drop-shadow-sm">
+                                {meta.titolo}
+                              </p>
+                            )}
+                            {meta.sottotitolo && (
+                              <p className="text-white/85 text-sm leading-snug mt-1 max-w-xs drop-shadow-sm">
+                                {meta.sottotitolo}
+                              </p>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Badge ingrandisci */}
+                        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md z-10">Ingrandisci</div>
+                      </div>
+                    );
+                  })}
+
                 </div>
               </div>
             </section>
