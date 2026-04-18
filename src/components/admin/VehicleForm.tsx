@@ -32,6 +32,14 @@ export interface AccessoryFormType extends VeicoloAccessorio {
   compressing?: boolean;
 }
 
+export interface FeatureFormType {
+  id: string;
+  titolo: string;
+  sottotitolo: string;
+  url: string;
+  localPhoto?: LocalPhoto | null;
+}
+
 interface VehicleFormProps {
   initialData?: VehicleData;
 }
@@ -78,12 +86,26 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
   const updateGalleriaFotoMeta = (index: number, field: 'titolo' | 'sottotitolo', value: string) => {
     setGalleriaFoto(prev => {
       const copy = [...prev];
-      // Garantiamo che l'array abbia abbastanza slot
       while (copy.length <= index) copy.push({ url: '' });
       copy[index] = { ...copy[index], [field]: value };
       return copy;
     });
   };
+
+  // Scheda tecnica visiva
+  const [schedaTecnicaDettagli, setSchedaTecnicaDettagli] = useState(initialLanding?.schedaTecnicaDettagli || '');
+  const [schedaSavedUrl] = useState<string>(initialLanding?.schedaTecnicaFoto || '');
+  const [schedaLocalPhoto, setSchedaLocalPhoto] = useState<LocalPhoto | null>(null);
+
+  // Features carousel ("Discover NomeAuto")
+  const [features, setFeatures] = useState<FeatureFormType[]>(
+    initialLanding?.features?.map(f => ({ id: crypto.randomUUID(), titolo: f.titolo || '', sottotitolo: f.sottotitolo || '', url: f.url })) || []
+  );
+
+  const addFeature = () => setFeatures(prev => [...prev, { id: crypto.randomUUID(), titolo: '', sottotitolo: '', url: '' }]);
+  const removeFeature = (id: string) => setFeatures(prev => prev.filter(f => f.id !== id));
+  const updateFeature = (id: string, updates: Partial<FeatureFormType>) =>
+    setFeatures(prev => prev.map(f => f.id === id ? { ...f, ...updates } : f));
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -172,12 +194,29 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
           await uploadBytes(storageRef, a.localPhoto.file);
           finalAccUrl = await getDownloadURL(storageRef);
         }
-        finalAccessori.push({
-          id: a.id,
-          titolo: a.titolo,
-          descrizione: a.descrizione,
-          foto: finalAccUrl,
-        });
+        finalAccessori.push({ id: a.id, titolo: a.titolo, descrizione: a.descrizione, foto: finalAccUrl });
+      }
+
+      // 4. CARICA SCHEDA TECNICA FOTO
+      let finalSchedaUrl = schedaSavedUrl;
+      if (schedaLocalPhoto && !schedaLocalPhoto.compressing) {
+        const path = `veicoli/${vehicleId}/scheda-${schedaLocalPhoto.id}.webp`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, schedaLocalPhoto.file);
+        finalSchedaUrl = await getDownloadURL(storageRef);
+      }
+
+      // 5. CARICA FEATURES FOTO
+      const finalFeatures: FotoGalleria[] = [];
+      for (const feat of features) {
+        let finalFeatUrl = feat.url;
+        if (feat.localPhoto && !feat.localPhoto.compressing) {
+          const path = `veicoli/${vehicleId}/feat-${feat.localPhoto.id}.webp`;
+          const storageRef = ref(storage, path);
+          await uploadBytes(storageRef, feat.localPhoto.file);
+          finalFeatUrl = await getDownloadURL(storageRef);
+        }
+        finalFeatures.push({ url: finalFeatUrl, titolo: feat.titolo, sottotitolo: feat.sottotitolo });
       }
 
       // 4. Salva Firestore
@@ -205,6 +244,9 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
           specificheHtml: landingSpecificheHtml,
           accessori: finalAccessori,
           galleriaFoto: finalGalleriaFoto,
+          schedaTecnicaDettagli,
+          schedaTecnicaFoto: finalSchedaUrl,
+          features: finalFeatures,
         },
         updatedAt: serverTimestamp(),
       };
@@ -329,7 +371,7 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
                         <input
                           value={galleriaFoto[index]?.sottotitolo || ''}
                           onChange={(e) => updateGalleriaFotoMeta(index, 'sottotitolo', e.target.value)}
-                          placeholder="Sottotitolo (es. "Guida rilassante, ogni giorno.")"
+                          placeholder={`Sottotitolo (es. Guida rilassante, ogni giorno.)`}
                           className="w-full border border-outline-variant bg-white px-3 py-2 text-xs focus:outline-none focus:border-primary"
                         />
                       </div>
@@ -342,18 +384,81 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
         </div>
       </section>
 
-      {/* SEZIONE 4 E 5: SPECIFICHE & ACCESSORI */}
+      {/* SEZIONE SCHEDA TECNICA VISIVA */}
       <section className="space-y-4 bg-white p-6 shadow-sm border border-outline-variant/10 border-l-4 border-l-secondary">
-        <h2 className="text-xs font-montserrat font-bold uppercase tracking-widest text-primary border-b border-outline-variant/20 pb-2">4. Specifiche Tabulari & Accessori</h2>
+        <h2 className="text-xs font-montserrat font-bold uppercase tracking-widest text-primary border-b border-outline-variant/20 pb-2">4. Scheda Tecnica Visiva (Colonna sinistra dettagli + foto destra)</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-1">Dettagli Auto — una riga per voce</label>
+            <p className="text-[10px] text-on-surface-variant/70 mb-2 leading-relaxed">
+              Usa <code className="bg-surface-container px-1 font-mono text-primary"># Titolo</code> per un titolo grassetto, <code className="bg-surface-container px-1 font-mono text-primary">- voce</code> per bullet con spunta, riga vuota per spaziatura. Puoi fare copia-incolla diretto.
+            </p>
+            <textarea
+              value={schedaTecnicaDettagli}
+              onChange={(e) => setSchedaTecnicaDettagli(e.target.value)}
+              rows={14}
+              className="w-full border-2 border-dashed border-outline-variant bg-surface px-4 py-3 text-sm font-mono leading-relaxed focus:outline-none focus:border-primary resize-y"
+              placeholder={"# Non-Lifted Suspension\n- Pneumatici 10\" o 12\"\n- Entrata ribassata\n- Approvato a 24 km/h\n\n# Powertrain\n- Litio\n- Benzina EFI\n\nVelocità massima\n19 mph (30.5 km/h)"}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-1">Foto Scheda (colonna destra)</label>
+            <SinglePhotoUploader onFileReady={setSchedaLocalPhoto} label="Carica Immagine" />
+            {(schedaLocalPhoto?.preview || schedaSavedUrl) && (
+              <div className="mt-2 aspect-[4/3] bg-surface-container border border-outline-variant relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={schedaLocalPhoto?.preview || schedaSavedUrl} alt="Scheda" className="absolute inset-0 w-full h-full object-contain" />
+                {schedaLocalPhoto?.compressing && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs font-bold">Compressione...</div>}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* SEZIONE FEATURES CAROUSEL */}
+      <section className="space-y-4 bg-white p-6 shadow-sm border border-outline-variant/10 border-l-4 border-l-secondary">
+        <h2 className="text-xs font-montserrat font-bold uppercase tracking-widest text-primary border-b border-outline-variant/20 pb-2">5. Features Carousel — &quot;Discover {nome || 'Nome Auto'}&quot;</h2>
+        <p className="text-[10px] text-on-surface-variant/70">Foto + titolo + descrizione per ogni caratteristica chiave. Layout come accessori ma nella sezione &quot;Features That Stand Out&quot;.</p>
+        <div className="space-y-6">
+          {features.map((feat, index) => (
+            <div key={feat.id} className="p-4 border border-outline-variant/30 flex gap-4 bg-surface relative group">
+              <button type="button" onClick={() => removeFeature(feat.id)} className="absolute top-2 right-2 text-error hover:bg-error/10 p-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="material-symbols-outlined text-sm">delete</span>
+              </button>
+              <div className="w-1/3">
+                <SinglePhotoUploader onFileReady={(photo) => updateFeature(feat.id, { localPhoto: photo })} label="Foto" />
+                {(feat.localPhoto?.preview || feat.url) && (
+                  <div className="mt-2 aspect-video relative bg-surface-container-high border border-outline-variant/20">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={feat.localPhoto?.preview || feat.url} alt="Feature" className="absolute inset-0 w-full h-full object-cover" />
+                    {feat.localPhoto?.compressing && <div className="absolute inset-0 bg-black/50 text-white text-[10px] flex items-center justify-center">Elab...</div>}
+                  </div>
+                )}
+              </div>
+              <div className="w-2/3 space-y-3">
+                <input value={feat.titolo} onChange={(e) => updateFeature(feat.id, { titolo: e.target.value })} placeholder={`Feature ${index + 1} — es. "Exclusive Tyres and Wheels"`} className="w-full border-b border-outline-variant bg-transparent px-0 py-2 text-sm focus:outline-none focus:border-primary font-bold" />
+                <textarea value={feat.sottotitolo} onChange={(e) => updateFeature(feat.id, { sottotitolo: e.target.value })} placeholder="Breve descrizione della caratteristica..." rows={3} className="w-full border border-outline-variant bg-white px-3 py-2 text-sm focus:outline-none focus:border-primary" />
+              </div>
+            </div>
+          ))}
+        </div>
+        <button type="button" onClick={addFeature} className="mt-4 text-xs font-montserrat font-bold uppercase text-primary border border-primary px-4 py-2 hover:bg-primary/5 transition">
+          + Aggiungi Feature
+        </button>
+      </section>
+
+      {/* SEZIONE 6 E 7: SPECIFICHE & ACCESSORI */}
+      <section className="space-y-4 bg-white p-6 shadow-sm border border-outline-variant/10 border-l-4 border-l-secondary">
+        <h2 className="text-xs font-montserrat font-bold uppercase tracking-widest text-primary border-b border-outline-variant/20 pb-2">6. Specifiche Tabulari &amp; Accessori</h2>
         
         <div>
-          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-2 pt-2">Codice HTML Specifiche Tecniche (Sezione 4)</label>
+          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-2 pt-2">Codice HTML Specifiche Tecniche (Sezione 6)</label>
           <p className="text-[10px] text-on-surface-variant mb-2 opacity-80">Incolla qui direttamente il codice HTML delle specifiche tabella avanzata per la landing page.</p>
           <textarea value={landingSpecificheHtml} onChange={(e) => setLandingSpecificheHtml(e.target.value)} rows={6} className="w-full border-2 border-dashed border-outline-variant bg-surface px-4 py-3 text-sm font-mono focus:outline-none focus:border-primary" placeholder="<table>...</table>" />
         </div>
 
         <div className="pt-6 border-t border-outline-variant/10">
-          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-4">5. Accessori (&quot;Accessorize Your Car&quot;)</label>
+          <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-4">7. Accessori (&quot;Accessorize Your Car&quot;)</label>
           
           <div className="space-y-6">
             {accessori.map((acc, index) => (
@@ -365,6 +470,7 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
                   <SinglePhotoUploader onFileReady={(photo) => updateAccessory(acc.id, { localPhoto: photo })} label="Foto" />
                   {(acc.localPhoto?.preview || acc.foto) && (
                     <div className="mt-2 aspect-video relative bg-surface-container-high border border-outline-variant/20">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={acc.localPhoto?.preview || acc.foto} alt="Accessorio" className="absolute inset-0 w-full h-full object-cover" />
                       {acc.localPhoto?.compressing && <div className="absolute inset-0 bg-black/50 text-white text-[10px] flex items-center justify-center">Elab...</div>}
                     </div>

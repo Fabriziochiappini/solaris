@@ -202,10 +202,61 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </div>
       </div>
 
-      {/* ========== SEZIONE 2: CITAZIONE / FRASE D'EFFETTO ========== */}
       {/* ========== TAB: LANDING ========== */}
       {activeTab === 'landing' && (
         <>
+          {/* ===== SCHEDA TECNICA VISIVA (text left, image right) ===== */}
+          {(landing?.schedaTecnicaDettagli || landing?.schedaTecnicaFoto) && (
+            <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+              <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                  {/* Colonna sinistra: dettagli */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="space-y-1"
+                  >
+                    {(landing.schedaTecnicaDettagli || '').split('\n').map((line, i) => {
+                      const t = line.trim();
+                      if (!t) return <div key={i} className="h-3" />;
+                      if (t.startsWith('#')) return (
+                        <p key={i} className="font-montserrat font-bold text-primary text-base pt-4 pb-1 border-b border-outline-variant/20">
+                          {t.slice(1).trim()}
+                        </p>
+                      );
+                      if (t.startsWith('-') || t.startsWith('•')) return (
+                        <div key={i} className="flex items-start gap-3 py-1">
+                          <span className="material-symbols-outlined text-secondary text-base mt-0.5 flex-none">check_small</span>
+                          <span className="text-on-surface-variant text-sm leading-relaxed">{t.replace(/^[-•]\s*/, '')}</span>
+                        </div>
+                      );
+                      return <p key={i} className="text-on-surface-variant/70 text-sm pt-1">{t}</p>;
+                    })}
+                  </motion.div>
+
+                  {/* Colonna destra: immagine */}
+                  {landing.schedaTecnicaFoto && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
+                      <div className="absolute inset-0 -translate-x-4 translate-y-4 bg-secondary/10 -z-10" />
+                      <div className="aspect-[4/3] bg-white shadow-xl overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={landing.schedaTecnicaFoto} alt={veicolo.nome} className="w-full h-full object-contain" />
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ===== CITAZIONE / FRASE D'EFFETTO ===== */}
           {landing?.citazione && (
             <section className="py-24 md:py-32 bg-white">
               <motion.div
@@ -222,6 +273,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               </motion.div>
             </section>
           )}
+
 
           {foto.length > 0 && (
             <section className="py-20 md:py-28 bg-surface-container-lowest">
@@ -345,8 +397,56 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </section>
       )}
 
+      {/* ========== FEATURES CAROUSEL: "Discover NomeAuto" ========== */}
+      {activeTab === 'landing' && (landing?.features || []).length > 0 && (
+        <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Features That Stand Out</p>
+              <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
+                Discover {veicolo.nome}
+              </h2>
+              <div className="h-1.5 w-24 bg-secondary" />
+            </motion.div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {(landing?.features || []).map((feat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="group"
+                >
+                  {feat.url && (
+                    <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={feat.url}
+                        alt={feat.titolo || ''}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  {feat.titolo && (
+                    <h3 className="font-montserrat font-bold text-primary text-lg mb-2">{feat.titolo}</h3>
+                  )}
+                  {feat.sottotitolo && (
+                    <p className="text-on-surface-variant text-sm leading-relaxed">{feat.sottotitolo}</p>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ========== SEZIONE 5: ACCESSORIZE YOUR CAR (solo tab landing) ========== */}
       {activeTab === 'landing' && accessori.length > 0 && (
+
         <section className="py-20 md:py-28 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div

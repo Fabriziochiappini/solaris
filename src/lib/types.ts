@@ -18,7 +18,10 @@ export interface VeicoloLanding {
   citazione: string;
   specificheHtml: string;
   accessori: VeicoloAccessorio[];
-  galleriaFoto?: FotoGalleria[]; // metadati per galleria con titolo/sottotitolo
+  galleriaFoto?: FotoGalleria[];    // metadati galleria con titolo/sottotitolo
+  schedaTecnicaDettagli?: string;   // testo libero: # Titolo / - bullet
+  schedaTecnicaFoto?: string;       // immagine colonna destra scheda
+  features?: FotoGalleria[];        // carousel "Discover NomeAuto"
 }
 
 // Tipo Veicolo condiviso in tutto il progetto
