@@ -65,11 +65,11 @@ export default function ShowroomCarousel({ veicoli }: Props) {
   };
 
   return (
-    <div className="relative w-full select-none" style={{ minHeight: 470 }}>
+    <div className="relative w-full select-none" style={{ minHeight: 660 }}>
       {/* Stage prospettico */}
       <div
         className="relative overflow-hidden cursor-grab active:cursor-grabbing"
-        style={{ height: 420, perspective: '1200px', perspectiveOrigin: '50% 55%' }}
+        style={{ height: 600, perspective: '1400px', perspectiveOrigin: '50% 52%' }}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={() => setDragging(false)}
@@ -82,10 +82,10 @@ export default function ShowroomCarousel({ veicoli }: Props) {
           if (absOff > VISIBLE_SIDES + 0.5) return null;
 
           // Effetto coverflow
-          const scale   = Math.max(0.55, 1 - absOff * 0.18);
-          const rotY    = offset * -42;          // ruota verso centro
-          const transX  = offset * 310;          // spaziatura orizzontale
-          const transZ  = -absOff * 160;         // spinge in profondità
+          const scale   = Math.max(0.52, 1 - absOff * 0.18);
+          const rotY    = offset * -40;          // ruota verso centro
+          const transX  = offset * 460;          // spaziatura orizzontale
+          const transZ  = -absOff * 180;         // spinge in profondità
           const opacity = absOff > VISIBLE_SIDES ? 0 : Math.max(0.35, 1 - absOff * 0.3);
           const zIndex  = 100 - Math.round(absOff * 10);
 
@@ -99,10 +99,10 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: 340,
-                height: 340,
-                marginLeft: -170,
-                marginTop: -200,
+                width: 500,
+                height: 500,
+                marginLeft: -250,
+                marginTop: -280,
                 transform: `translateX(${transX}px) translateZ(${transZ}px) rotateY(${rotY}deg) scale(${scale})`,
                 opacity,
                 zIndex,
