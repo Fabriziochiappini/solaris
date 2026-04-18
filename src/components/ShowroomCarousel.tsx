@@ -138,29 +138,23 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                 {/* Gradiente + striscia info */}
                 <div className="absolute bottom-0 left-0 right-0">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="relative px-5 pb-5 pt-10">
-                    <p className="text-white font-montserrat font-bold text-lg leading-snug mb-0.5">
+                  <div className="relative px-5 pb-5 pt-10 flex items-end justify-between gap-3">
+                    <p className="text-white font-montserrat font-bold text-lg leading-snug">
                       {v.nome}
                     </p>
-                    {v.prezzo > 0 && (
-                      <p className="text-secondary font-bold text-sm">
-                        Da €{v.prezzo.toLocaleString('it-IT')}
-                      </p>
-                    )}
-
-                    {/* CTA solo sulla card centrale */}
                     {isCenter && (
                       <Link
                         href={`/veicoli/${v.id}`}
-                        className="mt-4 inline-flex items-center gap-2 bg-white text-primary text-[10px] font-montserrat font-bold uppercase tracking-[0.18em] px-5 py-2.5 hover:bg-secondary hover:text-primary transition-colors shadow-lg"
+                        className="flex-none inline-flex items-center gap-1.5 bg-white text-primary text-[10px] font-montserrat font-bold uppercase tracking-[0.18em] px-4 py-2 hover:bg-secondary transition-colors shadow-lg whitespace-nowrap"
                         onClick={e => e.stopPropagation()}
                       >
-                        Vedi Dettagli
+                        Scopri
                         <span className="material-symbols-outlined text-sm">north_east</span>
                       </Link>
                     )}
                   </div>
                 </div>
+
 
                 {/* Ring attivo */}
                 {isCenter && (
