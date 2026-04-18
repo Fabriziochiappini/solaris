@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { AuthProvider, useAuth } from '@/lib/auth-context';
+import { useAuth } from '@/lib/auth-context';
 
 function AdminShell({ children }: { children: React.ReactNode }) {
   const { user, loading, logout } = useAuth();
@@ -87,8 +87,6 @@ function AdminShell({ children }: { children: React.ReactNode }) {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthProvider>
-      <AdminShell>{children}</AdminShell>
-    </AuthProvider>
+    <AdminShell>{children}</AdminShell>
   );
 }
