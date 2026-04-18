@@ -35,8 +35,15 @@ const VEICOLI_FALLBACK: Veicolo[] = [
 async function getVeicoli(): Promise<Veicolo[]> {
   if (!isFirebaseConfigured) return VEICOLI_FALLBACK;
   try {
-    const q = query(collection(db, 'veicoli'), orderBy('ordine', 'asc'), limit(6));
-    const snap = await getDocs(q);
+    // Prova prima con updatedAt, poi senza order se manca l'indice
+    let snap;
+    try {
+      const q = query(collection(db, 'veicoli'), orderBy('updatedAt', 'desc'), limit(8));
+      snap = await getDocs(q);
+    } catch {
+      const q = query(collection(db, 'veicoli'), limit(8));
+      snap = await getDocs(q);
+    }
     if (snap.empty) return VEICOLI_FALLBACK;
     return snap.docs.map((d) => ({ id: d.id, ...d.data() } as Veicolo));
   } catch {
