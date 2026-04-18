@@ -8,7 +8,7 @@ export default function Navbar() {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/flotta', label: 'Flotta' },
+    { href: '/veicoli', label: 'Veicoli' },
     { href: '/servizi', label: 'Servizi' },
     { href: '/chi-siamo', label: 'Chi Siamo' },
     { href: '/contatti', label: 'Contatti' },

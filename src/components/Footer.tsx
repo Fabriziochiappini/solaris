@@ -19,7 +19,7 @@ export default function Footer() {
           <div>
             <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Esplora</h4>
             <ul className="space-y-4 font-lato text-sm">
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/chi-siamo">Chi Siamo</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a></li>
@@ -48,7 +48,7 @@ export default function Footer() {
         <p className="font-lato text-sm tracking-normal text-slate-600">© 2024 Sardinya golf car By Solaris. Tutti i diritti riservati.</p>
         <div className="flex gap-8">
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/">Home</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a>
+          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a>
         </div>

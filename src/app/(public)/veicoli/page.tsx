@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'La Nostra Flotta | Solaris Golf Car Sardegna',
+  title: 'I Nostri Veicoli | Solaris Golf Car Sardegna',
   description: 'Scopri la gamma completa di golf car e veicoli utility Solaris. Veicoli elettrici premium per la Sardegna.',
 };
 
@@ -42,7 +42,7 @@ export default async function FlottaPage() {
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           <p className="text-secondary font-bold text-xs uppercase tracking-[0.4em] mb-4">Sardynia Golf Car</p>
           <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-white tracking-tight mb-6">
-            La Nostra Flotta
+            I Nostri Veicoli
           </h1>
           <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             Ogni veicolo è selezionato per garantire il massimo del comfort, dell&apos;efficienza e dello stile nel territorio sardo.

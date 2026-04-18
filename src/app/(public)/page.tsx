@@ -77,8 +77,8 @@ export default async function Home() {
             Vivi la bellezza della Sardegna con la nostra flotta di veicoli ad alte prestazioni, pensati per il lavoro e il tempo libero.
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Link href="/flotta" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-lg text-lg font-bold hover:scale-105 transition-transform inline-block text-center shadow-lg">
-              Scopri la Flotta
+            <Link href="/veicoli" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-lg text-lg font-bold hover:scale-105 transition-transform inline-block text-center shadow-lg">
+              Scopri i Veicoli
             </Link>
             <Link href="/servizi" className="w-full sm:w-auto px-10 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg text-lg font-bold hover:bg-white/20 transition-all inline-block text-center shadow-lg">
               Richiedi Preventivo
