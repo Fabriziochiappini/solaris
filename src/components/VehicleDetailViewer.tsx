@@ -69,80 +69,101 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   return (
     <div className="min-h-screen bg-surface-container-lowest">
 
-      {/* ========== SEZIONE 1: HERO 2 COLONNE ========== */}
-      <section className="relative min-h-screen flex items-center">
-        {/* Background sfumato */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/80 z-0" />
+      {/* ========== SEZIONE 1: HERO 2 COLONNE (Elementor-style) ========== */}
+      <section className="pt-28 pb-20 md:pt-36 md:pb-28 bg-white border-b border-outline-variant/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8 py-32 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Colonna Sinistra: Testo */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <div>
-              <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-4">
-                {veicolo.categoria}
-              </p>
-              <h1 className="font-montserrat font-extrabold text-4xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[0.95] mb-6">
-                {landing?.heroTitolo || veicolo.nome}
-              </h1>
-              <div className="h-1.5 w-28 bg-secondary mb-8" />
-            </div>
-            <p className="text-white/85 text-lg md:text-xl font-light leading-relaxed max-w-xl">
-              {landing?.heroDescrizione || `Scopri le caratteristiche uniche di ${veicolo.nome}. Progettato per offrire prestazioni ed eleganza senza compromessi.`}
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href={whatsAppLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary text-primary px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-secondary/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
-              >
-                Richiedi Preventivo
-              </a>
-              <a
-                href="/contatti"
-                className="border-2 border-white/40 text-white px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all"
-              >
-                Contattaci
-              </a>
-            </div>
-            {veicolo.prezzo > 0 && (
-              <p className="text-white/50 text-sm pt-2">
-                A partire da <span className="text-white font-bold text-2xl">€{veicolo.prezzo.toLocaleString('it-IT')}</span>
-              </p>
-            )}
-          </motion.div>
+            {/* COLONNA SINISTRA: Testo */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="space-y-8 order-2 lg:order-1"
+            >
+              {/* Breadcrumb categoria */}
+              <div className="flex items-center gap-3">
+                <div className="h-px w-12 bg-secondary" />
+                <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em]">
+                  {veicolo.categoria}
+                </p>
+              </div>
 
-          {/* Colonna Destra: Immagine Hero */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="aspect-[4/3] overflow-hidden shadow-2xl bg-surface-container-low">
-              {(landing?.heroImmagine || foto[0]) ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={landing?.heroImmagine || foto[0]}
-                  alt={veicolo.nome}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-primary/20">
-                  <span className="material-symbols-outlined text-6xl text-white/40">directions_car</span>
+              {/* Titolo principale */}
+              <div>
+                <h1 className="font-montserrat font-extrabold text-4xl md:text-5xl lg:text-6xl text-primary tracking-tight leading-[1.0] mb-6">
+                  {landing?.heroTitolo || veicolo.nome}
+                </h1>
+                <div className="h-1.5 w-20 bg-secondary" />
+              </div>
+
+              {/* Descrizione */}
+              <p className="text-on-surface-variant text-lg leading-relaxed max-w-lg">
+                {landing?.heroDescrizione || `Scopri le caratteristiche uniche di ${veicolo.nome}. Progettato per offrire prestazioni ed eleganza senza compromessi in ogni percorso.`}
+              </p>
+
+              {/* Prezzo */}
+              {veicolo.prezzo > 0 && (
+                <div className="inline-block border-l-4 border-secondary pl-5 py-2">
+                  <p className="text-xs uppercase tracking-widest font-bold text-on-surface-variant/60 mb-1">A partire da</p>
+                  <p className="font-montserrat font-extrabold text-3xl text-primary">
+                    €{veicolo.prezzo.toLocaleString('it-IT')}
+                    <span className="text-sm font-normal text-on-surface-variant ml-2">IVA inclusa</span>
+                  </p>
                 </div>
               )}
-            </div>
-            {/* Badge decorativo */}
-            <div className="absolute -bottom-4 -left-4 bg-secondary text-primary px-6 py-3 font-montserrat font-bold text-xs uppercase tracking-widest shadow-lg">
-              {veicolo.categoria}
-            </div>
-          </motion.div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 pt-2">
+                <a
+                  href={whatsAppLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-white px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-primary-container transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3"
+                >
+                  <span className="material-symbols-outlined text-sm">chat</span>
+                  Richiedi Preventivo
+                </a>
+                <a
+                  href="#specifiche"
+                  className="border-2 border-primary/20 text-primary px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:border-primary hover:bg-surface-container-low transition-all"
+                >
+                  Vedi Specifiche
+                </a>
+              </div>
+            </motion.div>
+
+            {/* COLONNA DESTRA: Immagine */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="relative order-1 lg:order-2"
+            >
+              {/* Decorazione di sfondo */}
+              <div className="absolute inset-0 translate-x-4 translate-y-4 bg-secondary/15 -z-10" />
+
+              <div className="aspect-[4/3] overflow-hidden shadow-2xl bg-surface-container-low relative">
+                {(landing?.heroImmagine || foto[0]) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={landing?.heroImmagine || foto[0]}
+                    alt={veicolo.nome}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-surface-container">
+                    <span className="material-symbols-outlined text-6xl text-on-surface-variant/30">directions_car</span>
+                  </div>
+                )}
+                {/* Badge categoria sull'immagine */}
+                <div className="absolute top-5 left-5 bg-primary text-white px-4 py-2 font-montserrat font-bold text-[10px] uppercase tracking-widest shadow-lg">
+                  {veicolo.categoria}
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -230,7 +251,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       )}
 
       {/* ========== SEZIONE 4: SPECIFICHE TECNICHE ========== */}
-      <section className="py-20 md:py-28 bg-white">
+      <section id="specifiche" className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
