@@ -35,7 +35,8 @@ export default async function FlottaPage() {
 
       {/* ── HERO BANNER ── */}
       <header className="relative pt-40 pb-20 md:pt-52 md:pb-28 bg-primary overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
+        <div
+          className="absolute inset-0 opacity-10"
           style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,.05) 40px, rgba(255,255,255,.05) 41px)' }}
         />
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
@@ -50,32 +51,53 @@ export default async function FlottaPage() {
         </div>
       </header>
 
-      {/* ── SEZIONI VEICOLI (alternating text + image) ── */}
+      {/* ── SEZIONI VEICOLI ── */}
       {veicoli.length === 0 ? (
         <section className="py-40 text-center">
           <span className="material-symbols-outlined text-6xl text-on-surface-variant/20 mb-6 block">directions_car</span>
           <p className="text-on-surface-variant text-lg">Nessun veicolo disponibile al momento.</p>
-          <p className="text-on-surface-variant/60 text-sm mt-2">Torna presto o contattaci per informazioni.</p>
         </section>
       ) : (
         veicoli.map((v, i) => {
           const imageRight = i % 2 === 0;
           const foto = v.landing?.heroImmagine || v.foto?.[0] || null;
           const desc = v.landing?.heroDescrizione || '';
-          const prezzo = v.prezzo > 0;
 
           return (
             <section
               key={v.id}
-              className={`py-20 md:py-28 ${i % 2 === 0 ? 'bg-white' : 'bg-surface-container-lowest'} border-b border-outline-variant/10`}
+              className={`py-14 md:py-28 ${i % 2 === 0 ? 'bg-white' : 'bg-surface-container-lowest'} border-b border-outline-variant/10`}
             >
-              <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${!imageRight ? 'lg:grid-flow-dense' : ''}`}>
+              <div className="max-w-7xl mx-auto px-5 lg:px-8">
+                {/*
+                  MOBILE: immagine SEMPRE in cima (order-1), testo sotto (order-2)
+                  DESKTOP: alterna sinistra/destra con lg:order-*
+                */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
 
-                  {/* ── COLONNA TESTO ── */}
-                  <div className={!imageRight ? 'lg:col-start-2' : ''}>
-                    {/* Numero progressivo */}
-                    <div className="flex items-center gap-4 mb-6">
+                  {/* ── IMMAGINE: order-1 su mobile, alterna su lg ── */}
+                  <div className={`relative order-1 ${imageRight ? 'lg:order-2' : 'lg:order-1'}`}>
+                    <div className={`absolute inset-0 bg-secondary/8 -z-10 ${imageRight
+                      ? 'translate-x-3 translate-y-3 lg:translate-x-4 lg:translate-y-4'
+                      : '-translate-x-3 translate-y-3 lg:-translate-x-4 lg:translate-y-4'
+                    }`} />
+                    <div className="aspect-[16/10] md:aspect-[4/3] bg-white overflow-hidden shadow-xl">
+                      {foto ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={foto} alt={v.nome} className="w-full h-full object-contain" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-surface-container">
+                          <span className="material-symbols-outlined text-8xl text-on-surface-variant/15">directions_car</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* ── TESTO: order-2 su mobile, alterna su lg ── */}
+                  <div className={`order-2 ${imageRight ? 'lg:order-1' : 'lg:order-2'}`}>
+
+                    {/* Numero decorativo solo desktop */}
+                    <div className="hidden lg:flex items-center gap-4 mb-6">
                       <span className="font-montserrat font-black text-7xl text-primary/8 leading-none select-none">
                         {String(i + 1).padStart(2, '0')}
                       </span>
@@ -83,23 +105,23 @@ export default async function FlottaPage() {
                     </div>
 
                     {v.categoria && (
-                      <p className="text-secondary font-bold text-[10px] uppercase tracking-[0.35em] mb-3">
+                      <p className="text-secondary font-bold text-[10px] uppercase tracking-[0.35em] mb-2 lg:mb-3">
                         {v.categoria}
                       </p>
                     )}
-                    <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-primary tracking-tight leading-tight mb-5">
+                    <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl lg:text-5xl text-primary tracking-tight leading-tight mb-4 lg:mb-5">
                       {v.nome}
                     </h2>
 
                     {desc && (
-                      <p className="text-on-surface-variant text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+                      <p className="text-on-surface-variant text-sm md:text-base lg:text-lg leading-relaxed mb-5 lg:mb-8 max-w-lg">
                         {desc}
                       </p>
                     )}
 
-                    {/* Specs se disponibili */}
+                    {/* Specs */}
                     {Object.keys(v.specs || {}).length > 0 && (
-                      <div className="space-y-2 mb-8">
+                      <div className="space-y-2 mb-6 lg:mb-8">
                         {Object.entries(v.specs || {}).slice(0, 4).map(([k, val]) => (
                           <div key={k} className="flex items-center justify-between border-b border-outline-variant/15 pb-2">
                             <span className="text-on-surface-variant text-sm">{k}</span>
@@ -110,38 +132,18 @@ export default async function FlottaPage() {
                     )}
 
                     <div className="flex flex-wrap items-center gap-4">
-                      {prezzo && (
-                        <span className="font-montserrat font-black text-2xl text-secondary">
+                      {v.prezzo > 0 && (
+                        <span className="font-montserrat font-black text-xl md:text-2xl text-secondary">
                           Da €{v.prezzo.toLocaleString('it-IT')}
                         </span>
                       )}
                       <Link
                         href={`/veicoli/${v.id}`}
-                        className="inline-flex items-center gap-2 bg-primary text-white font-montserrat font-bold text-[11px] uppercase tracking-[0.2em] px-7 py-4 hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                        className="inline-flex items-center gap-2 bg-primary text-white font-montserrat font-bold text-[11px] uppercase tracking-[0.2em] px-6 py-3.5 lg:px-7 lg:py-4 hover:bg-primary/90 shadow-lg hover:-translate-y-0.5 transition-all"
                       >
                         Scopri di più
                         <span className="material-symbols-outlined text-sm">north_east</span>
                       </Link>
-                    </div>
-                  </div>
-
-                  {/* ── COLONNA IMMAGINE ── */}
-                  <div className={`relative ${!imageRight ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                    {/* Decorazione geometrica */}
-                    <div className={`absolute inset-0 bg-secondary/8 ${imageRight ? 'translate-x-4 translate-y-4' : '-translate-x-4 translate-y-4'} -z-10`} />
-                    <div className="aspect-[4/3] bg-white overflow-hidden shadow-2xl">
-                      {foto ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={foto}
-                          alt={v.nome}
-                          className="w-full h-full object-contain"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-surface-container">
-                          <span className="material-symbols-outlined text-8xl text-on-surface-variant/15">directions_car</span>
-                        </div>
-                      )}
                     </div>
                   </div>
 
