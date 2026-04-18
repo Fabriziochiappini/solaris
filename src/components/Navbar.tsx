@@ -9,7 +9,7 @@ export default function Navbar() {
   const links = [
     { href: '/', label: 'Home' },
     { href: '/flotta', label: 'Flotta' },
-    { href: '/noleggio', label: 'Noleggio' },
+    { href: '/servizi', label: 'Servizi' },
     { href: '/chi-siamo', label: 'Chi Siamo' },
     { href: '/contatti', label: 'Contatti' },
   ];

@@ -6,7 +6,7 @@ export default function Footer() {
           <div className="text-xl font-bold text-sky-900 uppercase">Sardinya golf car</div>
           <p className="font-lato text-sm tracking-normal text-slate-600 max-w-xs">
             By Solaris • Assistenza ufficiale club car<br />
-            Vendita, noleggio, assistenza<br />
+            Vendita, servizi, assistenza<br />
             Olbia - Aglientu
           </p>
           <div className="flex gap-4">
@@ -20,7 +20,7 @@ export default function Footer() {
             <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Esplora</h4>
             <ul className="space-y-4 font-lato text-sm">
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/noleggio">Noleggio</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/chi-siamo">Chi Siamo</a></li>
               <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a></li>
             </ul>
@@ -49,7 +49,7 @@ export default function Footer() {
         <div className="flex gap-8">
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/">Home</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/flotta">Flotta</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/noleggio">Noleggio</a>
+          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a>
           <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export default function NoleggioPage() {
+export default function ServiziPage() {
   const services = [
     { 
       title: 'Breve Termine', 
@@ -34,13 +34,12 @@ export default function NoleggioPage() {
           >
             <div>
               <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
-                Servizio Noleggio
-              </h1>
+                I Nostri Servizi
               <div className="h-1.5 w-32 bg-secondary"></div>
             </div>
             
             <p className="text-xl text-on-surface-variant font-medium leading-relaxed">
-              La libertà di muoversi in totale silenzio e stile. Solaris offre soluzioni di noleggio flessibili per ogni esigenza, garantendo veicoli sempre nuovi e perfettamente manutenuti.
+              La libertà di muoversi in totale silenzio e stile. Solaris offre soluzioni di mobilità e noleggio flessibili per ogni esigenza, garantendo veicoli sempre nuovi e perfettamente manutenuti.
             </p>
           </motion.div>
 
@@ -51,7 +50,7 @@ export default function NoleggioPage() {
             className="bg-primary p-12 text-on-primary shadow-2xl relative overflow-hidden group"
           >
             <div className="relative z-10 space-y-6">
-              <h3 className="font-montserrat font-extrabold text-2xl uppercase tracking-tight">Perché scegliere il noleggio?</h3>
+              <h3 className="font-montserrat font-extrabold text-2xl uppercase tracking-tight">Perché sceglierci?</h3>
               <ul className="space-y-4">
                 {[
                   'Nessun costo di manutenzione',

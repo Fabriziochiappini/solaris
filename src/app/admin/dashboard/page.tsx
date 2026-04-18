@@ -6,37 +6,42 @@ import { collection, getDocs, deleteDoc, doc, orderBy, query } from 'firebase/fi
 import { ref, deleteObject } from 'firebase/storage';
 import { db, storage } from '@/lib/firebase';
 
-interface Veicolo {
+interface VeicoloDash {
   id: string;
   nome: string;
   categoria: string;
   prezzo: number;
   foto: string[];
+  landing?: {
+    heroTitolo?: string;
+    heroImmagine?: string;
+    citazione?: string;
+    specificheHtml?: string;
+    accessori?: unknown[];
+  };
 }
 
 export default function DashboardPage() {
-  const [veicoli, setVeicoli] = useState<Veicolo[]>([]);
+  const [veicoli, setVeicoli] = useState<VeicoloDash[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const fetchVeicoli = async () => {
     const q = query(collection(db, 'veicoli'), orderBy('createdAt', 'desc'));
     const snap = await getDocs(q);
-    setVeicoli(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Veicolo)));
+    setVeicoli(snap.docs.map((d) => ({ id: d.id, ...d.data() } as VeicoloDash)));
     setLoading(false);
   };
 
   useEffect(() => { fetchVeicoli(); }, []);
 
-  const handleDelete = async (v: Veicolo) => {
+  const handleDelete = async (v: VeicoloDash) => {
     if (!confirm(`Eliminare "${v.nome}"? Questa azione non può essere annullata.`)) return;
     setDeleting(v.id);
     try {
-      // Elimina tutte le foto da Storage
       await Promise.allSettled(
         (v.foto || []).map((url) => deleteObject(ref(storage, url)))
       );
-      // Elimina il documento Firestore
       await deleteDoc(doc(db, 'veicoli', v.id));
       setVeicoli((prev) => prev.filter((x) => x.id !== v.id));
     } catch (err) {
@@ -45,6 +50,10 @@ export default function DashboardPage() {
     } finally {
       setDeleting(null);
     }
+  };
+
+  const hasLanding = (v: VeicoloDash) => {
+    return !!(v.landing?.heroTitolo || v.landing?.heroImmagine || v.landing?.citazione);
   };
 
   return (
@@ -85,8 +94,8 @@ export default function DashboardPage() {
                 <th className="text-left px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant">Foto</th>
                 <th className="text-left px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant">Nome</th>
                 <th className="text-left px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">Categoria</th>
+                <th className="text-center px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">Landing</th>
                 <th className="text-right px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant">Prezzo</th>
-                <th className="text-right px-6 py-4 text-xs font-montserrat font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">Foto</th>
                 <th className="px-6 py-4" />
               </tr>
             </thead>
@@ -96,6 +105,7 @@ export default function DashboardPage() {
                   <td className="px-6 py-4">
                     <div className="w-16 h-12 bg-surface-container overflow-hidden">
                       {v.foto?.[0] ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img src={v.foto[0]} alt={v.nome} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-on-surface-variant">
@@ -106,14 +116,33 @@ export default function DashboardPage() {
                   </td>
                   <td className="px-6 py-4 font-montserrat font-bold text-primary">{v.nome}</td>
                   <td className="px-6 py-4 text-on-surface-variant font-lato hidden md:table-cell">{v.categoria}</td>
-                  <td className="px-6 py-4 text-right font-montserrat font-bold text-primary">
-                    €{v.prezzo?.toLocaleString('it-IT')}
+                  <td className="px-6 py-4 text-center hidden md:table-cell">
+                    {hasLanding(v) ? (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-3 py-1">
+                        <span className="material-symbols-outlined text-xs">check_circle</span>
+                        Attiva
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/50 bg-surface-container px-3 py-1">
+                        <span className="material-symbols-outlined text-xs">pending</span>
+                        Da fare
+                      </span>
+                    )}
                   </td>
-                  <td className="px-6 py-4 text-right text-on-surface-variant font-lato hidden md:table-cell">
-                    {v.foto?.length || 0}
+                  <td className="px-6 py-4 text-right font-montserrat font-bold text-primary">
+                    {v.prezzo > 0 ? `€${v.prezzo.toLocaleString('it-IT')}` : '—'}
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center justify-end gap-1">
+                      <a
+                        href={`/veicoli/${v.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 flex items-center justify-center text-secondary hover:bg-secondary/10 transition-colors"
+                        title="Vedi sul sito"
+                      >
+                        <span className="material-symbols-outlined text-sm">visibility</span>
+                      </a>
                       <Link
                         href={`/admin/veicoli/${v.id}`}
                         className="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container transition-colors"

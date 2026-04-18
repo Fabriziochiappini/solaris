@@ -48,31 +48,34 @@ export default async function Home() {
   const veicoli = await getVeicoli();
   return (
     <main>
-      {/* Hero Section: The Grand Fairway — Full-screen cinematic */}
-      <header className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* Hero Section — Bottom-left aligned cinematic */}
+      <header className="relative h-screen w-full overflow-hidden flex flex-col justify-end pb-24 md:pb-32 px-6 lg:px-20">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
         <img
-          className="absolute inset-0 w-full h-full object-cover"
-          alt="high-end white luxury golf car parked on a perfectly manicured green fairway of a Sardinian golf resort at sunrise, soft golden light reflecting off polished surfaces"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEG4yCcX-Qja9CH_Q63o2XGahbG_96AdVoxsme_SXdM9R0AB5UGrTAGR_lJbuIJZ9iog2Np9tnIn_0JCL4K8wczO0fYjqLrlDSu8EUtCWwrOeDVRvL6ShWH0oLTutas5nUpJ5u1G3D3vBJI4kq3p8OuUyEGCEAWbi5Jtr7tyIajmwJJGfQFaYW0ssrPChDkh6IrLeHjG5cL3k5cgzAWE6Qq72glZOrfHiJa7iCt4zRWjISFK_DzE1anc1XtYyKURNzGybmUuBCzSU"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          alt="Premium electric golf cart on a lush green fairway of a world-class golf course"
+          src="/hero-bg.webp"
         />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-primary/20 bg-gradient-to-b from-primary/10 to-primary/40"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
-          <div className="max-w-3xl">
-            <h1 className="text-white font-montserrat text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 uppercase">
-              Il Grande <br /> Fairway.
-            </h1>
-            <p className="text-white/90 font-lato text-xl md:text-2xl max-w-xl mb-12 leading-relaxed">
-              Elevate il vostro stile con veicoli di trasporto personale su misura, progettati per l&apos;élite sarda. Silenziosi, sostenibili e puramente lussuosi.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-primary px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-primary-container transition-colors shadow-xl">
-                Scopri la Flotta
-              </button>
-              <button className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-white font-montserrat font-bold uppercase tracking-widest text-sm hover:bg-white/20 transition-colors">
-                Visita lo Showroom
-              </button>
-            </div>
+        <div className="relative z-20 text-left w-full max-w-4xl">
+          <div className="mb-6 inline-block">
+            <span className="bg-green-600 text-white font-bold tracking-widest uppercase text-sm md:text-base px-4 py-2 rounded-md shadow-sm">
+              SARDYNIA GOLF CAR
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-6">
+            Mobilità Elettrica<br />
+            <span className="text-white/80">Premium.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-white/80 font-light mb-10 max-w-2xl">
+            Vivi la bellezza della Sardegna con la nostra flotta di veicoli ad alte prestazioni, pensati per il lavoro e il tempo libero.
+          </p>
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <Link href="/flotta" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-lg text-lg font-bold hover:scale-105 transition-transform inline-block text-center shadow-lg">
+              Scopri la Flotta
+            </Link>
+            <Link href="/servizi" className="w-full sm:w-auto px-10 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg text-lg font-bold hover:bg-white/20 transition-all inline-block text-center shadow-lg">
+              Richiedi Preventivo
+            </Link>
           </div>
         </div>
       </header>
@@ -86,83 +89,84 @@ export default async function Home() {
         <ShowroomCarousel veicoli={veicoli} />
       </section>
 
-      {/* The Sardinia Connection */}
-      <section className="py-32 bg-surface-container-low">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5">
-              <h2 className="font-montserrat font-extrabold text-4xl text-primary mb-8 leading-tight">
-                Il Patrimonio della<br />
-                <span className="text-secondary italic">Costa Sarda</span>
+      {/* Sostenibilità & Design — Sezione con nave */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            className="w-full h-full object-cover opacity-20 grayscale"
+            alt="Scenic view of the Sardinian coast with crystal clear water and granite rocks"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI9zuZICZzaG-7tolc3-yX78SSBiP_6l5uaDA4xudLvsqFkmzLRs0Kb0vJni66y8pPHjLxFamOnjYKLd5b6PUelhGBBx11_zDt3gPlN0o3YLfAM0pYYh87jjtmtmJVhrPxzUIdewnD6HAKP3WwcQE9N7g9YgJTmVWNfWxBs4PJXRtyHYQuX7NvSxTyQ-tJxEmCLQnYZPO5p099SnLMnrBqr9rQ8LNZViXyGWkN_O-HdoHAVno5PzVRZcTAWjh2S8bH3s3H9ojBU0o"
+          />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <span className="text-primary font-bold tracking-widest uppercase text-xs">Il Nostro Impegno</span>
+              <h2 className="text-5xl font-bold mt-4 mb-8 leading-tight text-on-surface">
+                Sostenibilità &amp; Design Italiano.
               </h2>
-              <div className="space-y-6 text-on-surface-variant leading-relaxed">
-                <p>Nati nel cuore della Costa Smeralda, Solaris nasce con una missione semplice: attraversare i paesaggi più belli della terra senza turbarne la pace.</p>
-                <p>Il nostro linguaggio di design è ispirato dall&apos;architettura naturale della Sardegna — le scogliere granitiche frastagliate, le acque cristalline color zaffiro e la profumata macchia mediterranea.</p>
-              </div>
-              <div className="mt-12 flex items-center gap-8">
-                <div>
-                  <div className="text-3xl font-bold text-primary">25+</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Anni di Maestria</div>
+              <p className="text-xl text-on-surface-variant mb-10 leading-relaxed">
+                Crediamo che il futuro della Sardegna debba essere preservato. Ogni nostro veicolo è selezionato per garantire il minimo impatto ambientale senza rinunciare allo stile iconico del design italiano.
+              </p>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="flex flex-col gap-2">
+                  <span className="material-symbols-outlined text-primary text-4xl">eco</span>
+                  <h4 className="font-bold text-lg text-on-surface">Zero Emissioni</h4>
+                  <p className="text-sm text-on-surface-variant">Rispetto totale per la natura sarda.</p>
                 </div>
-                <div className="h-10 w-px bg-outline-variant"></div>
-                <div>
-                  <div className="text-3xl font-bold text-primary">100%</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mt-1">Rifinito a Mano</div>
+                <div className="flex flex-col gap-2">
+                  <span className="material-symbols-outlined text-primary text-4xl">verified</span>
+                  <h4 className="font-bold text-lg text-on-surface">Qualità Premium</h4>
+                  <p className="text-sm text-on-surface-variant">Solo i migliori brand internazionali.</p>
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-7 relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="h-64 bg-slate-300 overflow-hidden shadow-lg">
-                    <img 
-                      className="w-full h-full object-cover" 
-                      alt="scenic aerial view of turquoise mediterranean coastline with yachts and rocky outcrops" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXUaNv5zBzWjLfCqMcCGZ5MN6CNANU97e_IxZj7R8DgOMzhU752EfHPmYPZgNBfrVGHMo_sX25m1pkKckOerDT4-bFGv8MazDjzV7EX5WP4fBQ2Tl0covkr9CuIoroTQJkoAE5AIJzoe5K0_oFndf0wgua2vvtkWmMC8VcMGu254v_O2KBFReLxNLyX8mwCXMWYflB7oWTj_ZBobS64vQNQGX7rP3J901XNh5tC2QB2lD2_4VFtcWa7Gn5iIt7-KkWylmda6jeH24" 
-                    />
-                  </div>
-                  <div className="h-80 bg-slate-400 overflow-hidden shadow-lg">
-                    <img 
-                      className="w-full h-full object-cover" 
-                      alt="traditional Sardinian stone architecture with flowering bougainvillea under a bright blue sky" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT9S7lwGuHySZl0qwcK1FW_7LV7PmHI0YNJUS6an_gyhqe8_7_hQNZWmNCqrnMjml7-4y-Oys0nmAJGbzijHGv8P4Cj9-5kT10XlD4NLTVpPoDiltR2kSCISX9cmksVExWQFYu2mXD2P5aI_xgXJBfJTLPGwdPdyjBEot13xpnlhyk_6RH2USgtj9Pz-G-Mm7jOdAwr6FsdvswC5fQGiiSWNcmvqULwGyskhrKtLfIV5sYQvtxVXbwoMJjij3i7RxJWUCDp6GB2lo" 
-                    />
-                  </div>
-                </div>
-                <div className="pt-12 space-y-4">
-                  <div className="h-80 bg-slate-500 overflow-hidden shadow-lg">
-                    <img 
-                      className="w-full h-full object-cover" 
-                      alt="pristine white sand beach with gentle waves and clear blue water" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYpxMCAcURg99-da_cNLK0VGKv6gspR8b-sC5QNfMFEUCxky7Fkwlpt2FPjGNVXZh1O6vYv4FXB-pU0PzjX6tIiz_Rk-Hx-vOtGwYoO2WBQex0Tshj3i4E5jdIOooKigGXh8EV6kQVQagiffwqCA-WWMJPrpYpfCSyNbNHfrGmm6iHLhC9SKYQxHz4e2wtdJuYWwmITVI-t2ZA3Os5ChjDLf4t7RSXcCQXvK7iTXMSFyYN-Zr2xvs7yRFxSnElqATCN2QswagCBS8" 
-                    />
-                  </div>
-                  <div className="h-64 bg-slate-600 overflow-hidden shadow-lg">
-                    <img 
-                      className="w-full h-full object-cover" 
-                      alt="close up of premium leather upholstery work on a luxury vehicle seat" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUBFHSatZQI0EV3z93u_sYoQu4qgmYUL4L1EQHf_x_FpmEX3o7Ar8WPBDFt1WJaWaz_WeB1bA5h-vyPIIEFPpbJG5XYRiJd0ZV2HYHXDRckk97Cbdn9M3AJjIFsVE_Lcp_xvBfymyB-kRCFHzaEUXl9RXj2gcscjkEsDAfKbZQmzOnz_qWc2yjhJ_pekFtB7TX9aRIGxrtmZ2NCZRtZpJVgpmSnYGiNjW8pvZC2e-RcKrN721aDHlmlaAiq5Xy_1YkP2LQ0ZaLW3w" 
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -top-10 -right-10 w-48 h-48 border-[20px] border-secondary/10 -z-10"></div>
+            <div className="rounded-3xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+              <img
+                className="w-full h-auto"
+                alt="Luxury yacht and electric vehicles at a private port"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7hSkc425MGFAgWiIOUULsQGsE4wJuDa42jfVMP2YxU7gsSBF5lkrkEsn--IYjPVfM8FH-iGwBYwhfxZ-ZVMTXFJSIDbbWqCC0H_Y-tLqMRf7JHrNpK2tJ-45ep0oGR10sDnmhppb2roIlvNfB7pLmDX9JHhO_11NXBrbVqak3kaI9p3z55gqybXmiZ8kvABD-OUE44e9q9NkqDSpec9HIwuSUP-Q56zkqLrUex5btoEpaz3nddqMaH1645xVJc20pIQZ94LOFirk"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Asymmetric CTA Section */}
-      <section className="py-32 bg-primary">
-        <div className="max-w-7xl mx-auto px-8 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-on-primary mb-8 leading-tight">Pronto a Scegliere il Tuo Veicolo?</h2>
-            <p className="text-on-primary-container text-lg mb-12 font-light">Vivi la perfetta sintesi tra stile mediterraneo e prestazioni elettriche all&apos;avanguardia. I nostri consulenti sono pronti a costruire una flotta su misura per le tue esigenze.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link href="/flotta" className="bg-secondary text-on-secondary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-secondary-container hover:text-on-secondary-container transition-all inline-block">Scopri tutti i veicoli</Link>
-              <Link href="/contatti" className="bg-transparent border-2 border-on-primary text-on-primary px-10 py-5 font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all inline-block">Richiedi Informazioni</Link>
+      {/* Testimonials Slider */}
+      <section className="bg-surface-container-lowest py-24 border-y border-primary/5">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="material-symbols-outlined text-primary text-6xl mb-8">format_quote</span>
+          <div className="mb-12">
+            <p className="text-2xl md:text-3xl font-medium leading-relaxed italic mb-8 text-on-surface">
+              &quot;Solaris ha trasformato il modo in cui i nostri ospiti si muovono all&apos;interno del resort. Il servizio di assistenza è impeccabile e i veicoli sono all&apos;altezza dell&apos;esclusività che offriamo.&quot;
+            </p>
+            <div>
+              <h5 className="font-bold text-lg text-on-surface">Marco Rossi</h5>
+              <p className="text-on-surface-variant text-sm">Direttore Operations, Luxury Resort Costa Smeralda</p>
             </div>
+          </div>
+          <div className="flex justify-center gap-2">
+            <button className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-white transition-all text-primary hover:border-transparent">
+              <span className="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-white transition-all text-primary hover:border-transparent">
+              <span className="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="text-white">
+            <h2 className="text-4xl font-bold mb-4 font-montserrat">Pronto a Guidare il Futuro?</h2>
+            <p className="text-white/80 text-lg">Contattaci oggi per una prova gratuita o un preventivo personalizzato.</p>
+          </div>
+          <div className="flex gap-4">
+            <Link href="/contatti" className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-2xl transition-all shadow-lg inline-block text-center">
+              Parla con un Esperto
+            </Link>
           </div>
         </div>
       </section>

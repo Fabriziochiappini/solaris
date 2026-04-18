@@ -28,6 +28,7 @@ export default function ModificaVeicoloPage() {
             ? Object.entries(d.specs).map(([chiave, valore]) => ({ chiave, valore: valore as string }))
             : [],
           foto: d.foto || [],
+          landing: d.landing || undefined,
         });
       }
       setLoading(false);

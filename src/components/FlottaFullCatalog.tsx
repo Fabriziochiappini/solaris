@@ -20,18 +20,26 @@ export default function FlottaFullCatalog({ veicoli }: Props) {
   }, [veicoli, activeTab]);
 
   return (
-    <div className="min-h-screen bg-surface-container-lowest pt-32 pb-24">
-      {/* Header Pagina */}
-      <div className="max-w-7xl mx-auto px-8 mb-16">
-        <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
-          La Nostra Flotta
-        </h1>
-        <div className="h-1.5 w-32 bg-secondary mb-8"></div>
-        <p className="max-w-2xl text-on-surface-variant font-medium text-lg leading-relaxed">
-          Esplora la nostra selezione premium di golf car ed utility vehicle. 
-          Dal lusso di Porto Cervo alla robustezza della Maremma, abbiamo il veicolo perfetto per ogni esigenza.
-        </p>
-      </div>
+    <div className="min-h-screen bg-surface-container-lowest pb-24">
+      {/* Hero Section */}
+      <header className="relative w-full h-[85vh] md:h-[95vh] flex flex-col justify-end pb-16 px-6 lg:px-8 mb-16">
+        <div className="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-black/40 to-transparent z-10"></div>
+        <img
+          src="/flotta-bg.webp"
+          alt="La nostra flotta di veicoli elettrici"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        />
+        <div className="relative z-20 max-w-7xl mx-auto w-full">
+          <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-white tracking-tight uppercase mb-4">
+            La Nostra Flotta
+          </h1>
+          <div className="h-1.5 w-32 bg-secondary mb-6"></div>
+          <p className="max-w-2xl text-white/90 font-medium text-lg leading-relaxed shadow-sm">
+            Esplora la nostra selezione premium di golf car ed utility vehicle. 
+            Dal lusso di Porto Cervo alla robustezza per il lavoro, abbiamo il veicolo perfetto per ogni esigenza.
+          </p>
+        </div>
+      </header>
 
       {/* Filtri */}
       <div className="max-w-7xl mx-auto px-8 mb-12 flex flex-wrap gap-3">
