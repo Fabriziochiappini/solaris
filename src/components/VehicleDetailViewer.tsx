@@ -18,6 +18,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<'landing' | 'specs'>('landing');
 
   // Carousel state
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -167,138 +168,160 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </div>
       </section>
 
+      {/* ========== MACRO TAB BAR ========== */}
+      <div className="sticky top-16 z-30 bg-white border-b-2 border-outline-variant/20 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex">
+            <button
+              onClick={() => setActiveTab('landing')}
+              className={`relative px-8 py-5 font-montserrat font-bold text-sm uppercase tracking-widest transition-all ${
+                activeTab === 'landing'
+                  ? 'text-primary'
+                  : 'text-on-surface-variant/50 hover:text-primary'
+              }`}
+            >
+              {veicolo.nome}
+              {activeTab === 'landing' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+              )}
+            </button>
+            <button
+              onClick={() => setActiveTab('specs')}
+              className={`relative px-8 py-5 font-montserrat font-bold text-sm uppercase tracking-widest transition-all ${
+                activeTab === 'specs'
+                  ? 'text-primary'
+                  : 'text-on-surface-variant/50 hover:text-primary'
+              }`}
+            >
+              Specifiche Tecniche
+              {activeTab === 'specs' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* ========== SEZIONE 2: CITAZIONE / FRASE D'EFFETTO ========== */}
-      {landing?.citazione && (
-        <section className="py-24 md:py-32 bg-white">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto px-8 text-center"
-          >
-            <span className="material-symbols-outlined text-secondary text-5xl mb-8 block opacity-40">format_quote</span>
-            <blockquote className="font-montserrat font-bold text-3xl md:text-5xl text-primary tracking-tight leading-tight italic">
-              {landing.citazione}
-            </blockquote>
-            <div className="h-1 w-20 bg-secondary mx-auto mt-10" />
-          </motion.div>
-        </section>
+      {/* ========== TAB: LANDING ========== */}
+      {activeTab === 'landing' && (
+        <>
+          {landing?.citazione && (
+            <section className="py-24 md:py-32 bg-white">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="max-w-4xl mx-auto px-8 text-center"
+              >
+                <span className="material-symbols-outlined text-secondary text-5xl mb-8 block opacity-40">format_quote</span>
+                <blockquote className="font-montserrat font-bold text-3xl md:text-5xl text-primary tracking-tight leading-tight italic">
+                  {landing.citazione}
+                </blockquote>
+                <div className="h-1 w-20 bg-secondary mx-auto mt-10" />
+              </motion.div>
+            </section>
+          )}
+
+          {foto.length > 0 && (
+            <section className="py-20 md:py-28 bg-surface-container-lowest">
+              <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
+                    Galleria
+                  </h2>
+                  <div className="h-1.5 w-24 bg-secondary" />
+                </motion.div>
+              </div>
+
+              <div className="relative group">
+                {canScrollLeft && (
+                  <button
+                    onClick={() => scrollCarousel('left')}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+                  >
+                    <span className="material-symbols-outlined text-2xl">chevron_left</span>
+                  </button>
+                )}
+                {canScrollRight && (
+                  <button
+                    onClick={() => scrollCarousel('right')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+                  >
+                    <span className="material-symbols-outlined text-2xl">chevron_right</span>
+                  </button>
+                )}
+                <div
+                  ref={carouselRef}
+                  onScroll={updateScrollState}
+                  className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {foto.map((f, i) => (
+                    <div
+                      key={i}
+                      onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
+                      className="flex-none w-[85vw] md:w-[calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img snap-start relative shadow-lg"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={f} alt={`${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
+                      <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md">Ingrandisci</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
 
-      {/* ========== SEZIONE 3: GALLERIA CAROSELLO ========== */}
-      {foto.length > 0 && (
-        <section className="py-20 md:py-28 bg-surface-container-lowest">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+      {/* ========== TAB: SPECIFICHE TECNICHE ========== */}
+      {activeTab === 'specs' && (
+        <section className="py-20 md:py-28 bg-white min-h-[60vh]">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-12"
             >
               <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
-                Galleria
+                Specifiche Tecniche
               </h2>
               <div className="h-1.5 w-24 bg-secondary" />
             </motion.div>
-          </div>
 
-          <div className="relative group">
-            {/* Frecce navigazione */}
-            {canScrollLeft && (
-              <button
-                onClick={() => scrollCarousel('left')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+            {landing?.specificheHtml ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="specs-html-container max-w-none"
+                dangerouslySetInnerHTML={{ __html: landing.specificheHtml }}
+              />
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
               >
-                <span className="material-symbols-outlined text-2xl">chevron_left</span>
-              </button>
-            )}
-            {canScrollRight && (
-              <button
-                onClick={() => scrollCarousel('right')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_right</span>
-              </button>
-            )}
-
-            {/* Contenitore scorrevole */}
-            <div
-              ref={carouselRef}
-              onScroll={updateScrollState}
-              className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              {foto.map((f, i) => (
-                <div
-                  key={i}
-                  onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
-                  className="flex-none w-[85vw] md:w-[calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img snap-start relative shadow-lg"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={f}
-                    alt={`${veicolo.nome} - foto ${i + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md">
-                    Ingrandisci
+                {Object.entries(veicolo.specs || {}).map(([key, val]) => (
+                  <div key={key} className="flex flex-col border-l-4 border-secondary/30 pl-6 py-4 bg-surface-container-lowest">
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant/60 mb-2">{key}</span>
+                    <span className="font-montserrat font-bold text-primary text-2xl">{val}</span>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </motion.div>
+            )}
           </div>
         </section>
       )}
 
-      {/* ========== SEZIONE 4: SPECIFICHE TECNICHE ========== */}
-      <section id="specifiche" className="py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
-              Specifiche Tecniche
-            </h2>
-            <div className="h-1.5 w-24 bg-secondary" />
-          </motion.div>
-
-          {/* Se c'è l'HTML avanzato delle specifiche, mostralo */}
-          {landing?.specificheHtml ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="specs-html-container prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: landing.specificheHtml }}
-            />
-          ) : (
-            /* Altrimenti fallback sulle specs base chiave/valore */
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {Object.entries(veicolo.specs || {}).map(([key, val]) => (
-                <div key={key} className="flex flex-col border-l-4 border-secondary/30 pl-6 py-4 bg-surface-container-lowest">
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant/60 mb-2">
-                    {key}
-                  </span>
-                  <span className="font-montserrat font-bold text-primary text-2xl">
-                    {val}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </div>
-      </section>
-
-      {/* ========== SEZIONE 5: ACCESSORIZE YOUR CAR ========== */}
-      {accessori.length > 0 && (
+      {/* ========== SEZIONE 5: ACCESSORIZE YOUR CAR (solo tab landing) ========== */}
+      {activeTab === 'landing' && accessori.length > 0 && (
         <section className="py-20 md:py-28 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div
@@ -367,7 +390,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </section>
       )}
 
-      {/* ========== SEZIONE 6: CONTATTI E MAPPA ========== */}
+      {/* ========== SEZIONE 6: CONTATTI E MAPPA (sempre visibile) ========== */}
       <section className="py-20 md:py-28 bg-primary">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
