@@ -35,6 +35,7 @@ export default function ServiziPage() {
             <div>
               <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
                 I Nostri Servizi
+              </h1>
               <div className="h-1.5 w-32 bg-secondary"></div>
             </div>
             
