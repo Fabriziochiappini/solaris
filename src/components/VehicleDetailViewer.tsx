@@ -144,13 +144,13 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               {/* Decorazione di sfondo */}
               <div className="absolute inset-0 translate-x-4 translate-y-4 bg-secondary/15 -z-10" />
 
-              <div className="aspect-[4/3] overflow-hidden shadow-2xl bg-surface-container-low relative">
+              <div className="aspect-[4/3] shadow-2xl bg-white relative overflow-hidden">
                 {(landing?.heroImmagine || foto[0]) ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={landing?.heroImmagine || foto[0]}
                     alt={veicolo.nome}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    className="w-full h-full object-contain"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-surface-container">
