@@ -65,11 +65,11 @@ export default function ShowroomCarousel({ veicoli }: Props) {
   };
 
   return (
-    <div className="relative w-full select-none" style={{ minHeight: 560 }}>
+    <div className="relative w-full select-none" style={{ minHeight: 470 }}>
       {/* Stage prospettico */}
       <div
         className="relative overflow-hidden cursor-grab active:cursor-grabbing"
-        style={{ height: 520, perspective: '1200px', perspectiveOrigin: '50% 55%' }}
+        style={{ height: 420, perspective: '1200px', perspectiveOrigin: '50% 55%' }}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={() => setDragging(false)}
@@ -100,8 +100,9 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                 top: '50%',
                 left: '50%',
                 width: 340,
+                height: 340,
                 marginLeft: -170,
-                marginTop: -240,
+                marginTop: -200,
                 transform: `translateX(${transX}px) translateZ(${transZ}px) rotateY(${rotY}deg) scale(${scale})`,
                 opacity,
                 zIndex,
@@ -112,72 +113,61 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                 willChange: 'transform',
               }}
             >
-              <div
-                className={`h-full flex flex-col bg-white shadow-2xl overflow-hidden ${
-                  isCenter ? 'ring-2 ring-secondary/60 shadow-secondary/10' : ''
-                }`}
-                style={{ height: 480, borderRadius: 0 }}
-              >
-                {/* Immagine */}
-                <div className="relative flex-none bg-surface-container-low" style={{ height: 260 }}>
-                  {getPhoto(v) ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={getPhoto(v)!}
-                      alt={v.nome}
-                      className="w-full h-full object-contain bg-white"
-                      draggable={false}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="material-symbols-outlined text-7xl text-on-surface-variant/20">directions_car</span>
-                    </div>
-                  )}
-                  {/* Categoria */}
-                  <div className="absolute top-4 left-4 bg-primary text-white text-[9px] font-montserrat font-bold uppercase tracking-widest px-3 py-1.5 shadow">
-                    {v.categoria}
+              {/* Card quadrata: foto piena + striscia info in basso */}
+              <div className="relative w-full h-full overflow-hidden shadow-2xl bg-primary/10">
+                {/* Foto piena */}
+                {getPhoto(v) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={getPhoto(v)!}
+                    alt={v.nome}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-surface-container">
+                    <span className="material-symbols-outlined text-7xl text-on-surface-variant/20">directions_car</span>
                   </div>
-                  {/* Riflesso luce */}
-                  {isCenter && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/8 to-transparent pointer-events-none" />
-                  )}
+                )}
+
+                {/* Categoria badge */}
+                <div className="absolute top-4 left-4 bg-primary text-white text-[9px] font-montserrat font-bold uppercase tracking-widest px-3 py-1.5 shadow-lg">
+                  {v.categoria}
                 </div>
 
-                {/* Testo */}
-                <div className="flex flex-col flex-1 p-6">
-                  <h3 className="font-montserrat font-extrabold text-primary text-xl leading-tight mb-1">
-                    {v.nome}
-                  </h3>
-                  {v.prezzo > 0 && (
-                    <p className="text-secondary font-bold text-sm mb-3">
-                      Da €{v.prezzo.toLocaleString('it-IT')}
+                {/* Gradiente + striscia info */}
+                <div className="absolute bottom-0 left-0 right-0">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="relative px-5 pb-5 pt-10">
+                    <p className="text-white font-montserrat font-bold text-lg leading-snug mb-0.5">
+                      {v.nome}
                     </p>
-                  )}
+                    {v.prezzo > 0 && (
+                      <p className="text-secondary font-bold text-sm">
+                        Da €{v.prezzo.toLocaleString('it-IT')}
+                      </p>
+                    )}
 
-                  {/* Specs pillole */}
-                  {Object.keys(v.specs || {}).length > 0 && (
-                    <div className="flex-1 space-y-1.5 mb-4">
-                      {Object.entries(v.specs || {}).slice(0, 3).map(([k, val]) => (
-                        <div key={k} className="flex justify-between items-center text-xs border-b border-outline-variant/15 pb-1">
-                          <span className="text-on-surface-variant">{k}</span>
-                          <span className="font-bold text-on-surface text-right">{val}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* CTA */}
-                  {isCenter && (
-                    <Link
-                      href={`/veicoli/${v.id}`}
-                      className="block w-full bg-primary text-white text-center text-[11px] font-montserrat font-bold uppercase tracking-[0.18em] py-4 hover:bg-primary/90 transition-colors mt-auto"
-                      onClick={e => e.stopPropagation()}
-                    >
-                      Vedi Dettagli
-                    </Link>
-                  )}
+                    {/* CTA solo sulla card centrale */}
+                    {isCenter && (
+                      <Link
+                        href={`/veicoli/${v.id}`}
+                        className="mt-4 inline-flex items-center gap-2 bg-white text-primary text-[10px] font-montserrat font-bold uppercase tracking-[0.18em] px-5 py-2.5 hover:bg-secondary hover:text-primary transition-colors shadow-lg"
+                        onClick={e => e.stopPropagation()}
+                      >
+                        Vedi Dettagli
+                        <span className="material-symbols-outlined text-sm">north_east</span>
+                      </Link>
+                    )}
+                  </div>
                 </div>
+
+                {/* Ring attivo */}
+                {isCenter && (
+                  <div className="absolute inset-0 ring-2 ring-secondary/70 pointer-events-none" />
+                )}
               </div>
+
             </div>
           );
         })}
