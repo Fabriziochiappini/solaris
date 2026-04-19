@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import { Veicolo } from '@/lib/types';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
@@ -20,146 +21,14 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'landing' | 'specs'>('landing');
-
-  // Carousel state
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  // Accessory carousel state
-  const accCarouselRef = useRef<HTMLDivElement>(null);
-  const [accCanLeft, setAccCanLeft] = useState(false);
-  const [accCanRight, setAccCanRight] = useState(true);
-
-  // Features carousel state
-  const featCarouselRef = useRef<HTMLDivElement>(null);
-  const [featCanLeft, setFeatCanLeft] = useState(false);
-  const [featCanRight, setFeatCanRight] = useState(true);
+  // Embla Carousels configured for seamless infinite loops
+  const [galRef, galApi] = useEmblaCarousel({ loop: true, align: 'start' });
+  const [featRef, featApi] = useEmblaCarousel({ loop: true, align: 'start' });
+  const [accRef, accApi] = useEmblaCarousel({ loop: true, align: 'start' });
 
   // Perché Sardynia: sezione statica (no carousel)
 
   const whatsAppLink = `https://wa.me/393331234567?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
-
-  // Gall e Perché: stato normale (finiscono agli estremi)
-  const updateScrollState = () => {
-    const el = carouselRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 10);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
-
-  // Accessori e Features: infinite loop manuale → frecce sempre visibili
-  const updateAccScrollState = () => {
-    setAccCanLeft(true);
-    setAccCanRight(true);
-  };
-
-  const updateFeatScrollState = () => {
-    setFeatCanLeft(true);
-    setFeatCanRight(true);
-  };
-
-  useEffect(() => {
-    updateScrollState();
-    // feat e acc mostrano sempre entrambe le frecce
-    setAccCanLeft(true);  setAccCanRight(true);
-    setFeatCanLeft(true); setFeatCanRight(true);
-  }, []);
-
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.85;
-    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
-    setTimeout(updateScrollState, 400);
-  };
-
-  // Loop circolare manuale per Accessori
-  const scrollAccCarousel = (direction: 'left' | 'right') => {
-    const el = accCarouselRef.current;
-    if (!el) return;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const scrollAmount = el.clientWidth * 0.85;
-    if (direction === 'right') {
-      if (el.scrollLeft >= maxScroll - 10) {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    } else {
-      if (el.scrollLeft <= 10) {
-        el.scrollTo({ left: maxScroll, behavior: 'smooth' });
-      } else {
-        el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
-    }
-  };
-
-  // Loop circolare manuale per Features
-  const scrollFeatCarousel = (direction: 'left' | 'right') => {
-    const el = featCarouselRef.current;
-    if (!el) return;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const scrollAmount = el.clientWidth * 0.85;
-    if (direction === 'right') {
-      if (el.scrollLeft >= maxScroll - 10) {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    } else {
-      if (el.scrollLeft <= 10) {
-        el.scrollTo({ left: maxScroll, behavior: 'smooth' });
-      } else {
-        el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
-    }
-  };
-
-  // ── DRAG / SWIPE condiviso (senza useState per evitare re-render) ──
-  const dragRef = useRef<{ active: boolean; startX: number; scrollLeft: number; el: HTMLDivElement | null }>({
-    active: false, startX: 0, scrollLeft: 0, el: null,
-  });
-
-  const onDragStart = (e: React.PointerEvent, elRef: React.RefObject<HTMLDivElement | null>) => {
-    const el = elRef.current;
-    if (!el) return;
-    dragRef.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, el };
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  };
-  const onDragMove = (e: React.PointerEvent) => {
-    const d = dragRef.current;
-    if (!d.active || !d.el) return;
-    d.el.scrollLeft = d.scrollLeft - (e.clientX - d.startX);
-  };
-  // Dopo drag su infinite carousels → wrap se oltre i bordi
-  const onDragEnd = () => {
-    const drag = dragRef.current;
-    drag.active = false;
-    const el = drag.el;
-    if (!el) return;
-    const infiniteEls = [featCarouselRef.current, accCarouselRef.current];
-    if (infiniteEls.includes(el)) {
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      if (el.scrollLeft >= maxScroll - 10) {
-        setTimeout(() => el.scrollTo({ left: 0, behavior: 'smooth' }), 50);
-      } else if (el.scrollLeft <= 10) {
-        setTimeout(() => el.scrollTo({ left: maxScroll, behavior: 'smooth' }), 50);
-      }
-    }
-  };
-
-  // ── AUTO-ADVANCE solo per Galleria e Perché ──
-  const autoAdvance = (elRef: React.RefObject<HTMLDivElement | null>, onScroll: () => void) => {
-    const el = elRef.current;
-    if (!el) return;
-    if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
-      el.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      el.scrollBy({ left: el.clientWidth * 0.85, behavior: 'smooth' });
-    }
-    setTimeout(onScroll, 400);
-  };
 
 
   return (
@@ -386,40 +255,29 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               </div>
 
               <div className="relative group">
-                {canScrollLeft && (
-                  <button
-                    onClick={() => scrollCarousel('left')}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-                  >
-                    <span className="material-symbols-outlined text-2xl">chevron_left</span>
-                  </button>
-                )}
-                {canScrollRight && (
-                  <button
-                    onClick={() => scrollCarousel('right')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-                  >
-                    <span className="material-symbols-outlined text-2xl">chevron_right</span>
-                  </button>
-                )}
-                <div
-                  ref={carouselRef}
-                  onScroll={updateScrollState}
-                  onPointerDown={(e) => onDragStart(e, carouselRef)}
-                  onPointerMove={onDragMove}
-                  onPointerUp={onDragEnd}
-                  onPointerCancel={onDragEnd}
-                  className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
-                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                {/* Il loop è infinito quindi le frecce sono sempre attive */}
+                <button
+                  onClick={() => galApi?.scrollPrev()}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
                 >
-                  {foto.map((f, i) => {
+                  <span className="material-symbols-outlined text-2xl">chevron_left</span>
+                </button>
+                <button
+                  onClick={() => galApi?.scrollNext()}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
+                >
+                  <span className="material-symbols-outlined text-2xl">chevron_right</span>
+                </button>
+
+                <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-4" ref={galRef}>
+                  <div className="flex gap-6 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>                  {foto.map((f, i) => {
                     const meta = landing?.galleriaFoto?.[i];
                     const hasMeta = meta?.titolo || meta?.sottotitolo;
                     return (
                       <div
                         key={i}
                         onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
-                        className="flex-none w-[85vw] md:w-[calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img snap-start relative shadow-lg"
+                        className="flex-[0_0_85vw] md:flex-[0_0_calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img relative shadow-lg min-w-0"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={f} alt={meta?.titolo || `${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
@@ -448,7 +306,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                       </div>
                     );
                   })}
-
+                  </div>
                 </div>
               </div>
             </section>
@@ -510,42 +368,30 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           </div>
 
           <div className="relative group">
-            {featCanLeft && (
-              <button
-                onClick={() => scrollFeatCarousel('left')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_left</span>
-              </button>
-            )}
-            {featCanRight && (
-              <button
-                onClick={() => scrollFeatCarousel('right')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_right</span>
-              </button>
-            )}
-
-            <div
-              ref={featCarouselRef}
-              onScroll={updateFeatScrollState}
-              onPointerDown={(e) => onDragStart(e, featCarouselRef)}
-              onPointerMove={onDragMove}
-              onPointerUp={onDragEnd}
-              onPointerCancel={onDragEnd}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            <button
+              onClick={() => featApi?.scrollPrev()}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
+              <span className="material-symbols-outlined text-2xl">chevron_left</span>
+            </button>
+            <button
+              onClick={() => featApi?.scrollNext()}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-2xl">chevron_right</span>
+            </button>
+
+            <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={featRef}>
+              <div className="flex gap-8 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>
               {(landing?.features || []).map((feat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="group flex-none w-[80vw] md:w-[380px] snap-start"
-                >
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="group flex-[0_0_80vw] md:flex-[0_0_380px] min-w-0"
+                  >
                   {feat.url && (
                     <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low shadow-md">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -564,6 +410,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   )}
                 </motion.div>
               ))}
+              </div>
             </div>
           </div>
         </section>
@@ -588,35 +435,23 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           </div>
 
           <div className="relative group">
-            {accCanLeft && (
-              <button
-                onClick={() => scrollAccCarousel('left')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_left</span>
-              </button>
-            )}
-            {accCanRight && (
-              <button
-                onClick={() => scrollAccCarousel('right')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_right</span>
-              </button>
-            )}
-
-            <div
-              ref={accCarouselRef}
-              onScroll={updateAccScrollState}
-              onPointerDown={(e) => onDragStart(e, accCarouselRef)}
-              onPointerMove={onDragMove}
-              onPointerUp={onDragEnd}
-              onPointerCancel={onDragEnd}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            <button
+              onClick={() => accApi?.scrollPrev()}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
+              <span className="material-symbols-outlined text-2xl">chevron_left</span>
+            </button>
+            <button
+              onClick={() => accApi?.scrollNext()}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-2xl">chevron_right</span>
+            </button>
+
+            <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={accRef}>
+              <div className="flex gap-8 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>
               {accessori.map((acc) => (
-                <div key={acc.id} className="flex-none w-[80vw] md:w-[350px] snap-start bg-white shadow-lg overflow-hidden group/acc hover:shadow-2xl transition-shadow">
+                <div key={acc.id} className="flex-[0_0_80vw] md:flex-[0_0_350px] min-w-0 bg-white shadow-lg overflow-hidden group/acc hover:shadow-2xl transition-shadow">
                   {acc.foto && (
                     <div className="aspect-[4/3] overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -639,6 +474,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </section>

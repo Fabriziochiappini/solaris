@@ -53,7 +53,7 @@ export default function ShowroomCarousel({ veicoli }: Props) {
   if (!count) return null;
 
   const getPhoto = (v: Veicolo) =>
-    v.landing?.heroImmagine || v.foto?.[0] || null;
+    v.foto?.[0] || v.landing?.heroImmagine || null;
 
   // Calcola offset relativo normalizzato (-VISIBLE_SIDES ... 0 ... +VISIBLE_SIDES)
   const getOffset = (i: number): number => {
