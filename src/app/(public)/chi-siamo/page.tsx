@@ -62,8 +62,8 @@ export default function ChiSiamoPage() {
       <header className="relative min-h-[85vh] flex items-end overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={IMG.villasimius}
-          alt="Villasimius, Sardegna"
+          src={IMG.maddalena}
+          alt="Arcipelago della Maddalena, Sardegna"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
@@ -231,7 +231,7 @@ export default function ChiSiamoPage() {
             <motion.div {...fadeUp(0.15)} className="grid grid-cols-2 gap-3">
               <div className="aspect-[4/3] col-span-2 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={IMG.maddalena} alt="Arcipelago della Maddalena" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={IMG.villasimius} alt="Villasimius, Sardegna" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="aspect-square overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
