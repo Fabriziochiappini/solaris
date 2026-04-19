@@ -36,26 +36,16 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const [featCanLeft, setFeatCanLeft] = useState(false);
   const [featCanRight, setFeatCanRight] = useState(true);
 
-  // Perché carousel state
-  const perchéCarouselRef = useRef<HTMLDivElement>(null);
-  const [perchéCanLeft, setPerchéCanLeft] = useState(false);
-  const [perchéCanRight, setPerchéCanRight] = useState(true);
+  // Perché Sardynia: sezione statica (no carousel)
 
   const whatsAppLink = `https://wa.me/393331234567?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
 
-  // Galleria e Perché: stato normale (finiscono agli estremi)
+  // Gall e Perché: stato normale (finiscono agli estremi)
   const updateScrollState = () => {
     const el = carouselRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
-
-  const updatePerchéScrollState = () => {
-    const el = perchéCarouselRef.current;
-    if (!el) return;
-    setPerchéCanLeft(el.scrollLeft > 10);
-    setPerchéCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
   };
 
   // Accessori e Features: infinite loop manuale → frecce sempre visibili
@@ -71,13 +61,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
   useEffect(() => {
     updateScrollState();
-    updatePerchéScrollState();
     // feat e acc mostrano sempre entrambe le frecce
     setAccCanLeft(true);  setAccCanRight(true);
     setFeatCanLeft(true); setFeatCanRight(true);
   }, []);
-
-  // ── SCROLL FUNCTIONS ──
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     const el = carouselRef.current;
@@ -85,14 +72,6 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     const scrollAmount = el.clientWidth * 0.85;
     el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     setTimeout(updateScrollState, 400);
-  };
-
-  const scrollPerchéCarousel = (direction: 'left' | 'right') => {
-    const el = perchéCarouselRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.85;
-    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
-    setTimeout(updatePerchéScrollState, 400);
   };
 
   // Loop circolare manuale per Accessori
@@ -183,17 +162,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   };
 
   useEffect(() => {
-    const t = setInterval(() => autoAdvance(perchéCarouselRef, updatePerchéScrollState), 5000);
-    return () => clearInterval(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     const t = setInterval(() => autoAdvance(carouselRef, updateScrollState), 4000);
     return () => clearInterval(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
 
   return (
@@ -678,46 +650,21 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </section>
       )}
 
-      {/* ========== SEZIONE: PERCHÉ SARDYNIA GOLF CARS (CAROSELLO) ========== */}
+      {/* ========== SEZIONE: PERCHÉ SARDYNIA GOLF CARS (STATICA CENTRATA) ========== */}
       {activeTab === 'landing' && (
         <section className="py-20 md:py-32 bg-white border-b border-outline-variant/10">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-14">
+          <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center mb-16">
             <h2 className="font-montserrat font-extrabold text-3xl md:text-5xl text-primary tracking-tight mb-4">
               Perché Sardynia <span className="text-secondary">Golf Cars</span>
             </h2>
-            <div className="h-1.5 w-24 bg-secondary" />
+            <div className="h-1.5 w-24 bg-secondary mx-auto" />
           </div>
 
-          <div className="relative group">
-            {perchéCanLeft && (
-              <button
-                onClick={() => scrollPerchéCarousel('left')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_left</span>
-              </button>
-            )}
-            {perchéCanRight && (
-              <button
-                onClick={() => scrollPerchéCarousel('right')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
-              >
-                <span className="material-symbols-outlined text-2xl">chevron_right</span>
-              </button>
-            )}
+          <div className="max-w-5xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <div
-              ref={perchéCarouselRef}
-              onScroll={updatePerchéScrollState}
-              onPointerDown={(e) => onDragStart(e, perchéCarouselRef)}
-              onPointerMove={onDragMove}
-              onPointerUp={onDragEnd}
-              onPointerCancel={onDragEnd}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
               {/* Qualità */}
-              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
                 <span className="material-symbols-outlined text-6xl mb-8 text-secondary">verified_user</span>
                 <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Qualità Ineguagliabile</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -726,7 +673,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               </div>
 
               {/* Prestazioni */}
-              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
                 <span className="material-symbols-outlined text-6xl mb-8 text-secondary">battery_charging_full</span>
                 <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Prestazioni Inarrestabili</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -735,17 +682,18 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               </div>
 
               {/* Comfort */}
-              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
                 <span className="material-symbols-outlined text-6xl mb-8 text-secondary">event_seat</span>
                 <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Comfort Senza Pari</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">
-                  Sospensioni testate per affrontare con sicurezza anche i terreni più difficili, con sedili premium progettati per ore di utilizzo. L'ergonomia raffinata garantisce una posizione di guida sempre perfetta.
+                  Sospensioni testate per affrontare con sicurezza anche i terreni più difficili, con sedili premium progettati per ore di utilizzo. L&apos;ergonomia raffinata garantisce una posizione di guida sempre perfetta.
                 </p>
               </div>
+
             </div>
           </div>
 
-          <div className="text-center mt-12 px-6">
+          <div className="text-center mt-14 px-6">
             <a
               href="/chi-siamo"
               className="inline-block bg-primary text-secondary px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
