@@ -367,9 +367,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         <section className="py-10 md:py-14 bg-white border-b border-outline-variant/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Features That Stand Out</p>
+              <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Le caratteristiche che fanno la differenza</p>
               <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
-                Discover {veicolo.nome}
+                Scopri {veicolo.nome}
               </h2>
               <div className="h-1.5 w-24 bg-secondary" />
             </motion.div>
@@ -437,7 +437,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             >
               <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Personalizza</p>
               <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
-                Accessorize Your Car
+                Personalizza la tua {veicolo.nome}
               </h2>
               <div className="h-1.5 w-24 bg-secondary" />
             </motion.div>

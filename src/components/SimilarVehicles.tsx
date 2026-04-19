@@ -115,7 +115,7 @@ export default function SimilarVehicles({ currentId }: Props) {
         >
           <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Scopri di più</p>
           <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary tracking-tight">
-            There&apos;s More to Discover
+            C&apos;è molto da scoprire ancora...
           </h2>
           <div className="h-1 w-20 bg-secondary mx-auto mt-5" />
         </motion.div>
