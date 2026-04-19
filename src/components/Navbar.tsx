@@ -17,7 +17,14 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-[0px_20px_40px_rgba(21,28,38,0.06)]">
       <div className="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
-        <Link href="/" className="text-2xl font-bold tracking-tighter text-primary uppercase">SOLARIS</Link>
+        <Link href="/" className="flex flex-col leading-tight group">
+          <span className="font-montserrat font-extrabold text-xl tracking-tight text-primary uppercase group-hover:text-primary/80 transition-colors">
+            Sardinya Golf Car
+          </span>
+          <span className="font-serif italic text-[11px] text-secondary tracking-wide">
+            by Solaris
+          </span>
+        </Link>
         <div className="hidden md:flex items-center space-x-10">
           {links.map((link) => {
             const isActive = pathname === link.href;
