@@ -43,25 +43,12 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
   const whatsAppLink = `https://wa.me/393331234567?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
 
+  // Galleria e Perché: stato normale (finiscono agli estremi)
   const updateScrollState = () => {
     const el = carouselRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
-
-  const updateAccScrollState = () => {
-    const el = accCarouselRef.current;
-    if (!el) return;
-    setAccCanLeft(el.scrollLeft > 10);
-    setAccCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-  };
-
-  const updateFeatScrollState = () => {
-    const el = featCarouselRef.current;
-    if (!el) return;
-    setFeatCanLeft(el.scrollLeft > 10);
-    setFeatCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
   };
 
   const updatePerchéScrollState = () => {
@@ -71,12 +58,26 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     setPerchéCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
   };
 
+  // Accessori e Features: infinite loop manuale → frecce sempre visibili
+  const updateAccScrollState = () => {
+    setAccCanLeft(true);
+    setAccCanRight(true);
+  };
+
+  const updateFeatScrollState = () => {
+    setFeatCanLeft(true);
+    setFeatCanRight(true);
+  };
+
   useEffect(() => {
     updateScrollState();
-    updateAccScrollState();
-    updateFeatScrollState();
     updatePerchéScrollState();
+    // feat e acc mostrano sempre entrambe le frecce
+    setAccCanLeft(true);  setAccCanRight(true);
+    setFeatCanLeft(true); setFeatCanRight(true);
   }, []);
+
+  // ── SCROLL FUNCTIONS ──
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     const el = carouselRef.current;
@@ -86,28 +87,54 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     setTimeout(updateScrollState, 400);
   };
 
-  const scrollAccCarousel = (direction: 'left' | 'right') => {
-    const el = accCarouselRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.85;
-    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
-    setTimeout(updateAccScrollState, 400);
-  };
-
-  const scrollFeatCarousel = (direction: 'left' | 'right') => {
-    const el = featCarouselRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.85;
-    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
-    setTimeout(updateFeatScrollState, 400);
-  };
-
   const scrollPerchéCarousel = (direction: 'left' | 'right') => {
     const el = perchéCarouselRef.current;
     if (!el) return;
     const scrollAmount = el.clientWidth * 0.85;
     el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     setTimeout(updatePerchéScrollState, 400);
+  };
+
+  // Loop circolare manuale per Accessori
+  const scrollAccCarousel = (direction: 'left' | 'right') => {
+    const el = accCarouselRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const scrollAmount = el.clientWidth * 0.85;
+    if (direction === 'right') {
+      if (el.scrollLeft >= maxScroll - 10) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    } else {
+      if (el.scrollLeft <= 10) {
+        el.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
+    }
+  };
+
+  // Loop circolare manuale per Features
+  const scrollFeatCarousel = (direction: 'left' | 'right') => {
+    const el = featCarouselRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const scrollAmount = el.clientWidth * 0.85;
+    if (direction === 'right') {
+      if (el.scrollLeft >= maxScroll - 10) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    } else {
+      if (el.scrollLeft <= 10) {
+        el.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
+    }
   };
 
   // ── DRAG / SWIPE condiviso (senza useState per evitare re-render) ──
@@ -126,9 +153,24 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     if (!d.active || !d.el) return;
     d.el.scrollLeft = d.scrollLeft - (e.clientX - d.startX);
   };
-  const onDragEnd = () => { dragRef.current.active = false; };
+  // Dopo drag su infinite carousels → wrap se oltre i bordi
+  const onDragEnd = () => {
+    const drag = dragRef.current;
+    drag.active = false;
+    const el = drag.el;
+    if (!el) return;
+    const infiniteEls = [featCarouselRef.current, accCarouselRef.current];
+    if (infiniteEls.includes(el)) {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (el.scrollLeft >= maxScroll - 10) {
+        setTimeout(() => el.scrollTo({ left: 0, behavior: 'smooth' }), 50);
+      } else if (el.scrollLeft <= 10) {
+        setTimeout(() => el.scrollTo({ left: maxScroll, behavior: 'smooth' }), 50);
+      }
+    }
+  };
 
-  // ── AUTO-ADVANCE con loop infinito (ogni 4 s) ──
+  // ── AUTO-ADVANCE solo per Galleria e Perché ──
   const autoAdvance = (elRef: React.RefObject<HTMLDivElement | null>, onScroll: () => void) => {
     const el = elRef.current;
     if (!el) return;
@@ -141,18 +183,6 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   };
 
   useEffect(() => {
-    const t = setInterval(() => autoAdvance(featCarouselRef, updateFeatScrollState), 4000);
-    return () => clearInterval(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const t = setInterval(() => autoAdvance(accCarouselRef, updateAccScrollState), 4500);
-    return () => clearInterval(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     const t = setInterval(() => autoAdvance(perchéCarouselRef, updatePerchéScrollState), 5000);
     return () => clearInterval(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -163,6 +193,8 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     return () => clearInterval(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
 
   return (
     <div className="min-h-screen bg-surface-container-lowest">
