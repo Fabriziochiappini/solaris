@@ -270,42 +270,47 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 </button>
 
                 <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-4" ref={galRef}>
-                  <div className="flex gap-6 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>                  {foto.map((f, i) => {
-                    const meta = landing?.galleriaFoto?.[i];
-                    const hasMeta = meta?.titolo || meta?.sottotitolo;
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
-                        className="flex-[0_0_85vw] md:flex-[0_0_calc(50%-12px)] aspect-[16/10] overflow-hidden cursor-zoom-in group/img relative shadow-lg min-w-0"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={f} alt={meta?.titolo || `${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
+                  <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
+                    {foto.map((f, i) => {
+                      const meta = landing?.galleriaFoto?.[i];
+                      const hasMeta = meta?.titolo || meta?.sottotitolo;
+                      return (
+                        <div
+                          key={i}
+                          className="flex-[0_0_85vw] md:flex-[0_0_50%] min-w-0 pl-6"
+                        >
+                          <div
+                            onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
+                            className="w-full aspect-[16/10] overflow-hidden cursor-zoom-in group/img relative shadow-lg"
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={f} alt={meta?.titolo || `${veicolo.nome} - foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
 
-                        {/* Gradiente sempre visibile se c'è testo, altrimenti solo su hover */}
-                        <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity ${hasMeta ? 'opacity-100' : 'opacity-0 group-hover/img:opacity-60'}`} />
+                            {/* Gradiente sempre visibile se c'è testo, altrimenti solo su hover */}
+                            <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity ${hasMeta ? 'opacity-100' : 'opacity-0 group-hover/img:opacity-60'}`} />
 
-                        {/* Overlay titolo/sottotitolo — stile Club Car, bottom-left */}
-                        {hasMeta && (
-                          <div className="absolute bottom-0 left-0 p-6 z-10">
-                            {meta.titolo && (
-                              <p className="font-montserrat font-bold text-white text-lg leading-tight drop-shadow-sm">
-                                {meta.titolo}
-                              </p>
+                            {/* Overlay titolo/sottotitolo — stile Club Car, bottom-left */}
+                            {hasMeta && (
+                              <div className="absolute bottom-0 left-0 p-6 z-10">
+                                {meta.titolo && (
+                                  <p className="font-montserrat font-bold text-white text-lg leading-tight drop-shadow-sm">
+                                    {meta.titolo}
+                                  </p>
+                                )}
+                                {meta.sottotitolo && (
+                                  <p className="text-white/85 text-sm leading-snug mt-1 max-w-xs drop-shadow-sm">
+                                    {meta.sottotitolo}
+                                  </p>
+                                )}
+                              </div>
                             )}
-                            {meta.sottotitolo && (
-                              <p className="text-white/85 text-sm leading-snug mt-1 max-w-xs drop-shadow-sm">
-                                {meta.sottotitolo}
-                              </p>
-                            )}
+
+                            {/* Badge ingrandisci */}
+                            <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md z-10">Ingrandisci</div>
                           </div>
-                        )}
-
-                        {/* Badge ingrandisci */}
-                        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 text-[9px] font-bold tracking-widest uppercase text-primary opacity-0 group-hover/img:opacity-100 transition-opacity shadow-md z-10">Ingrandisci</div>
-                      </div>
-                    );
-                  })}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -382,33 +387,34 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             </button>
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={featRef}>
-              <div className="flex gap-8 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>
+              <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
               {(landing?.features || []).map((feat, i) => (
+                <div key={i} className="flex-[0_0_80vw] md:flex-[0_0_380px] min-w-0 pl-6">
                   <motion.div
-                    key={i}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="group flex-[0_0_80vw] md:flex-[0_0_380px] min-w-0"
+                    className="group h-full"
                   >
-                  {feat.url && (
-                    <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low shadow-md">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={feat.url}
-                        alt={feat.titolo || ''}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  )}
-                  {feat.titolo && (
-                    <h3 className="font-montserrat font-bold text-primary text-xl mb-3 pr-4">{feat.titolo}</h3>
-                  )}
-                  {feat.sottotitolo && (
-                    <p className="text-on-surface-variant text-sm leading-relaxed pr-4">{feat.sottotitolo}</p>
-                  )}
-                </motion.div>
+                    {feat.url && (
+                      <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low shadow-md">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={feat.url}
+                          alt={feat.titolo || ''}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    {feat.titolo && (
+                      <h3 className="font-montserrat font-bold text-primary text-xl mb-3 pr-4">{feat.titolo}</h3>
+                    )}
+                    {feat.sottotitolo && (
+                      <p className="text-on-surface-variant text-sm leading-relaxed pr-4">{feat.sottotitolo}</p>
+                    )}
+                  </motion.div>
+                </div>
               ))}
               </div>
             </div>
@@ -449,28 +455,30 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             </button>
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={accRef}>
-              <div className="flex gap-8 ml-6 lg:ml-8 mr-6 lg:mr-8" style={{ backfaceVisibility: 'hidden' }}>
+              <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
               {accessori.map((acc) => (
-                <div key={acc.id} className="flex-[0_0_80vw] md:flex-[0_0_350px] min-w-0 bg-white shadow-lg overflow-hidden group/acc hover:shadow-2xl transition-shadow">
-                  {acc.foto && (
-                    <div className="aspect-[4/3] overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={acc.foto}
-                        alt={acc.titolo}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover/acc:scale-105"
-                      />
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="font-montserrat font-bold text-primary text-lg uppercase tracking-tight mb-2">
-                      {acc.titolo}
-                    </h3>
-                    {acc.descrizione && (
-                      <p className="text-on-surface-variant text-sm leading-relaxed">
-                        {acc.descrizione}
-                      </p>
+                <div key={acc.id} className="flex-[0_0_80vw] md:flex-[0_0_350px] min-w-0 pl-6">
+                  <div className="bg-white shadow-lg overflow-hidden group/acc hover:shadow-2xl transition-shadow h-full flex flex-col">
+                    {acc.foto && (
+                      <div className="aspect-[4/3] overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={acc.foto}
+                          alt={acc.titolo}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover/acc:scale-105"
+                        />
+                      </div>
                     )}
+                    <div className="p-6 flex-1">
+                      <h3 className="font-montserrat font-bold text-primary text-lg uppercase tracking-tight mb-2">
+                        {acc.titolo}
+                      </h3>
+                      {acc.descrizione && (
+                        <p className="text-on-surface-variant text-sm leading-relaxed">
+                          {acc.descrizione}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
