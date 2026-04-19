@@ -71,9 +71,22 @@
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; 
 }
 
-/* Stili per HTML specifiche tecniche incollato nella landing veicoli */
+.specs-html-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Garantisce che qualsiasi contenitore principale delle tab abbia spazio per non mandare a capo i bottoni */
+.specs-html-container > div,
+.specs-html-container > section,
+.specs-html-container > article {
+  min-width: 600px;
+}
+
 .specs-html-container table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-family: var(--font-lato);
 }
@@ -108,5 +121,22 @@
   letter-spacing: -0.01em;
   color: var(--color-primary);
   margin: 2rem 0 1rem;
+}
+
+.specs-html-container label,
+.specs-html-container button {
+  white-space: nowrap !important;
+  width: auto !important;
+  flex: 0 0 auto !important;
+  display: inline-block;
+}
+
+/* Nasconde i radio buttons del sistema a tab puro CSS importato dall'HTML esterno */
+.specs-html-container input[type="radio"] {
+  display: none !important;
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
