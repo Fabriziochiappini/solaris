@@ -110,6 +110,60 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     setTimeout(updatePerchéScrollState, 400);
   };
 
+  // ── DRAG / SWIPE condiviso (senza useState per evitare re-render) ──
+  const dragRef = useRef<{ active: boolean; startX: number; scrollLeft: number; el: HTMLDivElement | null }>({
+    active: false, startX: 0, scrollLeft: 0, el: null,
+  });
+
+  const onDragStart = (e: React.PointerEvent, elRef: React.RefObject<HTMLDivElement | null>) => {
+    const el = elRef.current;
+    if (!el) return;
+    dragRef.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, el };
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+  const onDragMove = (e: React.PointerEvent) => {
+    const d = dragRef.current;
+    if (!d.active || !d.el) return;
+    d.el.scrollLeft = d.scrollLeft - (e.clientX - d.startX);
+  };
+  const onDragEnd = () => { dragRef.current.active = false; };
+
+  // ── AUTO-ADVANCE con loop infinito (ogni 4 s) ──
+  const autoAdvance = (elRef: React.RefObject<HTMLDivElement | null>, onScroll: () => void) => {
+    const el = elRef.current;
+    if (!el) return;
+    if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      el.scrollBy({ left: el.clientWidth * 0.85, behavior: 'smooth' });
+    }
+    setTimeout(onScroll, 400);
+  };
+
+  useEffect(() => {
+    const t = setInterval(() => autoAdvance(featCarouselRef, updateFeatScrollState), 4000);
+    return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => autoAdvance(accCarouselRef, updateAccScrollState), 4500);
+    return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => autoAdvance(perchéCarouselRef, updatePerchéScrollState), 5000);
+    return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => autoAdvance(carouselRef, updateScrollState), 4000);
+    return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="min-h-screen bg-surface-container-lowest">
 
@@ -353,7 +407,11 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 <div
                   ref={carouselRef}
                   onScroll={updateScrollState}
-                  className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory"
+                  onPointerDown={(e) => onDragStart(e, carouselRef)}
+                  onPointerMove={onDragMove}
+                  onPointerUp={onDragEnd}
+                  onPointerCancel={onDragEnd}
+                  className="flex gap-6 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                   {foto.map((f, i) => {
@@ -474,7 +532,11 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             <div
               ref={featCarouselRef}
               onScroll={updateFeatScrollState}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory"
+              onPointerDown={(e) => onDragStart(e, featCarouselRef)}
+              onPointerMove={onDragMove}
+              onPointerUp={onDragEnd}
+              onPointerCancel={onDragEnd}
+              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {(landing?.features || []).map((feat, i) => (
@@ -548,7 +610,11 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             <div
               ref={accCarouselRef}
               onScroll={updateAccScrollState}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory"
+              onPointerDown={(e) => onDragStart(e, accCarouselRef)}
+              onPointerMove={onDragMove}
+              onPointerUp={onDragEnd}
+              onPointerCancel={onDragEnd}
+              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {accessori.map((acc) => (
@@ -611,7 +677,11 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             <div
               ref={perchéCarouselRef}
               onScroll={updatePerchéScrollState}
-              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory"
+              onPointerDown={(e) => onDragStart(e, perchéCarouselRef)}
+              onPointerMove={onDragMove}
+              onPointerUp={onDragEnd}
+              onPointerCancel={onDragEnd}
+              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {/* Qualità */}
