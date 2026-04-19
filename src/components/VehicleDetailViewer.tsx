@@ -17,6 +17,12 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const landing = veicolo.landing;
   const foto = veicolo.foto || [];
   const accessori = landing?.accessori || [];
+  const featuresSource = landing?.features || [];
+
+  // Duplichiamo gli elementi se sono pochi per garantire che il carosello Embla faccia il loop
+  const displayFoto = foto.length > 0 && foto.length < 6 ? [...foto, ...foto, ...foto, ...foto].slice(0, 12) : foto;
+  const displayFeatures = featuresSource.length > 0 && featuresSource.length < 6 ? [...featuresSource, ...featuresSource, ...featuresSource, ...featuresSource].slice(0, 12) : featuresSource;
+  const displayAccessori = accessori.length > 0 && accessori.length < 6 ? [...accessori, ...accessori, ...accessori, ...accessori].slice(0, 12) : accessori;
 
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
@@ -271,8 +277,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
                 <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-4" ref={galRef}>
                   <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
-                    {foto.map((f, i) => {
-                      const meta = landing?.galleriaFoto?.[i];
+                    {displayFoto.map((f, i) => {
+                      const originalIndex = i % foto.length;
+                      const meta = landing?.galleriaFoto?.[originalIndex];
                       const hasMeta = meta?.titolo || meta?.sottotitolo;
                       return (
                         <div
@@ -280,7 +287,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                           className="flex-[0_0_85vw] md:flex-[0_0_50%] min-w-0 pl-6"
                         >
                           <div
-                            onClick={() => { setViewerIndex(i); setIsViewerOpen(true); }}
+                            onClick={() => { setViewerIndex(originalIndex); setIsViewerOpen(true); }}
                             className="w-full aspect-[16/10] overflow-hidden cursor-zoom-in group/img relative shadow-lg"
                           >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -360,7 +367,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       )}
 
       {/* ========== FEATURES CAROUSEL: "Discover NomeAuto" ========== */}
-      {activeTab === 'landing' && (landing?.features || []).length > 0 && (
+      {activeTab === 'landing' && featuresSource.length > 0 && (
         <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -388,7 +395,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={featRef}>
               <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
-              {(landing?.features || []).map((feat, i) => (
+              {displayFeatures.map((feat, i) => (
                 <div key={i} className="flex-[0_0_80vw] md:flex-[0_0_380px] min-w-0 pl-6">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -456,8 +463,8 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={accRef}>
               <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
-              {accessori.map((acc) => (
-                <div key={acc.id} className="flex-[0_0_80vw] md:flex-[0_0_350px] min-w-0 pl-6">
+              {displayAccessori.map((acc, i) => (
+                <div key={`${acc.id}-${i}`} className="flex-[0_0_80vw] md:flex-[0_0_350px] min-w-0 pl-6">
                   <div className="bg-white shadow-lg overflow-hidden group/acc hover:shadow-2xl transition-shadow h-full flex flex-col">
                     {acc.foto && (
                       <div className="aspect-[4/3] overflow-hidden">
