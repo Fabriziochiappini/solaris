@@ -19,6 +19,7 @@ const CATEGORIE = [
 
 export interface VehicleData {
   id?: string;
+  slug?: string;
   nome: string;
   categoria: string;
   prezzo: number;
@@ -251,6 +252,9 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
       const specsObj: Record<string, string> = {};
       specs.forEach((s) => { if (s.chiave) specsObj[s.chiave] = s.valore; });
 
+      const generateSlug = (str: string) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      const finalSlug = initialData?.slug || generateSlug(nome);
+
       // Costruiamo galleriaFoto finale con URL aggiornati
       const finalGalleriaFoto: FotoGalleria[] = finalFotoUrls.map((url, i) => ({
         url,
@@ -260,6 +264,7 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
 
       const payload = {
         nome,
+        slug: finalSlug,
         categoria,
         prezzo,
         specs: specsObj,

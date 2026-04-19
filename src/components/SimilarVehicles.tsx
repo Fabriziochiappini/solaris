@@ -61,7 +61,7 @@ export default function SimilarVehicles({ currentId }: Props) {
       transition={{ delay: i * 0.08 }}
       className={useCarousel ? 'flex-none w-72 md:w-80' : ''}
     >
-      <Link href={`/veicoli/${v.id}`} className="group block">
+      <Link href={`/veicoli/${v.slug || v.id}`} className="group block">
         {/* Immagine */}
         <div className="aspect-[4/3] overflow-hidden bg-surface-container-low relative mb-4">
           {getPhoto(v) ? (

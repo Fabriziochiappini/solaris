@@ -12,6 +12,7 @@ interface VeicoloDash {
   categoria: string;
   prezzo: number;
   foto: string[];
+  slug?: string;
   landing?: {
     heroTitolo?: string;
     heroImmagine?: string;
@@ -135,7 +136,7 @@ export default function DashboardPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-1">
                       <a
-                        href={`/veicoli/${v.id}`}
+                        href={`/veicoli/${v.slug || v.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-8 h-8 flex items-center justify-center text-secondary hover:bg-secondary/10 transition-colors"

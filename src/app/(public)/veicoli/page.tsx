@@ -140,7 +140,7 @@ export default async function FlottaPage() {
                         </span>
                       )}
                       <Link
-                        href={`/veicoli/${v.id}`}
+                        href={`/veicoli/${v.slug || v.id}`}
                         className="inline-flex items-center gap-2 bg-primary text-white font-montserrat font-bold text-[11px] uppercase tracking-[0.2em] px-6 py-3.5 lg:px-7 lg:py-4 hover:bg-primary/90 shadow-lg hover:-translate-y-0.5 transition-all"
                       >
                         Scopri di più

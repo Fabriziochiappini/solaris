@@ -27,6 +27,7 @@ export interface VeicoloLanding {
 // Tipo Veicolo condiviso in tutto il progetto
 export interface Veicolo {
   id: string;
+  slug?: string;
   nome: string;
   categoria: string;
   prezzo: number;

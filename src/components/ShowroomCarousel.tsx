@@ -144,7 +144,7 @@ export default function ShowroomCarousel({ veicoli }: Props) {
                     </p>
                     {isCenter && (
                       <Link
-                        href={`/veicoli/${v.id}`}
+                        href={`/veicoli/${v.slug || v.id}`}
                         className="flex-none inline-flex items-center gap-1.5 bg-white text-primary text-[10px] font-montserrat font-bold uppercase tracking-[0.18em] px-4 py-2 hover:bg-secondary transition-colors shadow-lg whitespace-nowrap"
                         onClick={e => e.stopPropagation()}
                       >

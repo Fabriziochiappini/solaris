@@ -20,7 +20,7 @@ export default function VehicleGridCard({ veicolo, index }: Props) {
       transition={{ delay: index * 0.1 }}
       className="group bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-outline-variant/10"
     >
-      <Link href={`/veicoli/${veicolo.id}`} className="block relative aspect-[4/3] overflow-hidden">
+      <Link href={`/veicoli/${veicolo.slug || veicolo.id}`} className="block relative aspect-[4/3] overflow-hidden">
         {foto ? (
           <img
             src={foto}
@@ -60,7 +60,7 @@ export default function VehicleGridCard({ veicolo, index }: Props) {
         </div>
 
         <Link
-          href={`/veicoli/${veicolo.id}`}
+          href={`/veicoli/${veicolo.slug || veicolo.id}`}
           className="block w-full py-3 text-center text-[10px] font-montserrat font-bold uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-all"
         >
           Dettagli Completi

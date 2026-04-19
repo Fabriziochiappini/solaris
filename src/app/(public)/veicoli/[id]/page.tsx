@@ -1,4 +1,4 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db, isFirebaseConfigured } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
 import VehicleDetailViewer from '@/components/VehicleDetailViewer';
@@ -56,11 +56,22 @@ const VEICOLI_FALLBACK: Record<string, Veicolo> = {
   }
 };
 
-async function getVeicolo(id: string): Promise<Veicolo | null> {
-  if (!isFirebaseConfigured) return VEICOLI_FALLBACK[id] || null;
+async function getVeicolo(slugOrId: string): Promise<Veicolo | null> {
+  if (!isFirebaseConfigured) return VEICOLI_FALLBACK[slugOrId] || null;
   
   try {
-    const docRef = doc(db, 'veicoli', id);
+    // Prima proviamo a cercare per slug
+    const veicoliRef = collection(db, 'veicoli');
+    const q = query(veicoliRef, where('slug', '==', slugOrId));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      return { id: doc.id, ...doc.data() } as Veicolo;
+    }
+
+    // Se non trovato per slug, proviamo per ID (retrocompatibilità)
+    const docRef = doc(db, 'veicoli', slugOrId);
     const snap = await getDoc(docRef);
     
     if (snap.exists()) {
@@ -68,10 +79,10 @@ async function getVeicolo(id: string): Promise<Veicolo | null> {
     }
     
     // Prova il fallback se non trovato in Firestore
-    return VEICOLI_FALLBACK[id] || null;
+    return VEICOLI_FALLBACK[slugOrId] || null;
   } catch (err) {
     console.error('Errore fetch veicolo:', err);
-    return VEICOLI_FALLBACK[id] || null;
+    return VEICOLI_FALLBACK[slugOrId] || null;
   }
 }
 
