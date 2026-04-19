@@ -4,12 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Veicolo } from '@/lib/types';
 
-type Filtro = 'TUTTI' | 'GOLF' | 'LAVORO';
+type Filtro = 'TUTTI' | 'GOLF' | 'PERSONAL USE' | 'LAVORO';
 
 const FILTRI: { key: Filtro; label: string }[] = [
-  { key: 'TUTTI',  label: 'Tutti' },
-  { key: 'GOLF',   label: 'Golf Car' },
-  { key: 'LAVORO', label: 'Lavoro' },
+  { key: 'TUTTI',        label: 'Tutti' },
+  { key: 'GOLF',         label: 'Golf Car' },
+  { key: 'PERSONAL USE', label: 'Personal Use' },
+  { key: 'LAVORO',       label: 'Lavoro' },
 ];
 
 export default function VeicoliGrid({ veicoli }: { veicoli: Veicolo[] }) {

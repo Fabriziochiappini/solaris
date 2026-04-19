@@ -13,7 +13,7 @@ import { VeicoloLanding, VeicoloAccessorio, FotoGalleria } from '@/lib/types';
 
 const CATEGORIE = [
   'GOLF',
-  'TEMPO LIBERO',
+  'PERSONAL USE',
   'LAVORO',
 ];
 
