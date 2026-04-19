@@ -33,7 +33,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
   // Perché Sardynia: sezione statica (no carousel)
 
-  const whatsAppLink = `https://wa.me/393331234567?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
+  const whatsAppLink = `https://wa.me/393421073857?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
 
 
   return (
@@ -572,7 +572,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-secondary">phone</span>
-                  <a href="tel:+393331234567" className="font-medium hover:text-white transition-colors">+39 333 123 4567</a>
+                  <a href="tel:+393421073857" className="font-medium hover:text-white transition-colors">+39 342 107 3857</a>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-secondary">mail</span>

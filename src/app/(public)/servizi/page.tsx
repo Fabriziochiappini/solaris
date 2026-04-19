@@ -305,7 +305,7 @@ export default function ServiziPage() {
                 Richiedi Preventivo
               </Link>
               <a
-                href="https://wa.me/393401234567"
+                href="https://wa.me/393421073857"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border-2 border-primary/20 text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-primary/5 transition-all"

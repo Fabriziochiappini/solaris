@@ -75,7 +75,7 @@ export default async function FlottaPage() {
               Richiedi Preventivo
             </a>
             <a
-              href="https://wa.me/393401234567"
+              href="https://wa.me/393421073857"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-white/10 transition-all"
