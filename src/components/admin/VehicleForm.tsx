@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { collection, addDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, serverTimestamp, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { db, storage } from '@/lib/firebase';
 import SpecEditor from './SpecEditor';
@@ -57,7 +57,27 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
     { chiave: 'Sistema di Guida', valore: '' },
   ]);
 
-  // Gallery Photos
+  const [accessoriRegistry, setAccessoriRegistry] = useState<VeicoloAccessorio[]>([]);
+  
+  // Load registry once on mount
+  useEffect(() => {
+    const fetchRegistry = async () => {
+      try {
+        const snap = await getDocs(collection(db, 'accessori'));
+        const reg = snap.docs.map(d => ({ id: d.id, ...d.data() } as VeicoloAccessorio));
+        setAccessoriRegistry(reg);
+      } catch (err) {
+        console.error("Failed to fetch accessori registry", err);
+      }
+    };
+    fetchRegistry();
+  }, []);
+
+  // Copertina Homepage (foto[0]) — separata dalla hero landing
+  const [copertinaSavedUrl] = useState<string>(initialData?.foto?.[0] || '');
+  const [copertinaLocalPhoto, setCopertinaLocalPhoto] = useState<LocalPhoto | null>(null);
+
+  // Gallery Photos (foto[1..] — esclusa la copertina)
   const [savedPhotos, setSavedPhotos] = useState<GalleryPhoto[]>(
     (initialData?.foto || []).map((url) => ({ id: url, url }))
   );
@@ -175,7 +195,15 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
         return p.url;
       });
 
-      // 2. CARICA HERO IMMAGINE (Se C'è Nuova)
+      // 0. CARICA FOTO COPERTINA HOMEPAGE
+      let finalCopertinaUrl = copertinaSavedUrl;
+      if (copertinaLocalPhoto && !copertinaLocalPhoto.compressing) {
+        const path = `veicoli/${vehicleId}/copertina-${copertinaLocalPhoto.id}.webp`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, copertinaLocalPhoto.file);
+        finalCopertinaUrl = await getDownloadURL(storageRef);
+      }
+
       let finalHeroUrl = heroSavedUrl;
       if (heroLocalPhoto && !heroLocalPhoto.compressing) {
         const path = `veicoli/${vehicleId}/hero-${heroLocalPhoto.id}.webp`;
@@ -235,7 +263,10 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
         categoria,
         prezzo,
         specs: specsObj,
-        foto: finalFotoUrls,
+        // foto[0] = copertina homepage, poi tutte le foto galleria
+        foto: finalCopertinaUrl
+          ? [finalCopertinaUrl, ...finalFotoUrls.filter(u => u !== finalCopertinaUrl)]
+          : finalFotoUrls,
         landing: {
           heroTitolo: landingHeroTitolo,
           heroDescrizione: landingHeroDescrizione,
@@ -250,6 +281,23 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
         },
         updatedAt: serverTimestamp(),
       };
+
+      // 6. UPDATE GLOBAL ACCESSORI REGISTRY
+      for (const acc of finalAccessori) {
+        if (!acc.titolo.trim()) continue;
+        const exists = accessoriRegistry.some(r => r.titolo.toLowerCase() === acc.titolo.toLowerCase());
+        if (!exists) {
+          try {
+            await addDoc(collection(db, 'accessori'), {
+              titolo: acc.titolo,
+              descrizione: acc.descrizione || '',
+              foto: acc.foto || ''
+            });
+          } catch (e) {
+            console.error("Failed to add new accessory to registry", e);
+          }
+        }
+      }
 
       if (isEdit) {
         await updateDoc(doc(db, 'veicoli', vehicleId), payload);
@@ -291,6 +339,35 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
       {/* INFO BASE (Usato per listing/cards) */}
       <section className="space-y-4 bg-white p-6 shadow-sm border border-outline-variant/10">
         <h2 className="text-xs font-montserrat font-bold uppercase tracking-widest text-primary border-b border-outline-variant/20 pb-2">1. Dati Catalogo Base</h2>
+
+        {/* Foto Copertina Homepage */}
+        <div className="bg-secondary/5 border-2 border-secondary/30 p-4 space-y-3">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="material-symbols-outlined text-secondary text-base">home</span>
+            <label className="text-xs font-montserrat font-bold uppercase text-secondary tracking-widest">Foto Copertina Homepage (Showroom)</label>
+          </div>
+          <p className="text-[10px] text-on-surface-variant/70 leading-relaxed">
+            Questa è la foto che appare nel carosello della homepage. È la foto principale del veicolo.
+          </p>
+          <SinglePhotoUploader onFileReady={setCopertinaLocalPhoto} label="Cambia Foto Copertina" />
+          {(copertinaLocalPhoto?.preview || copertinaSavedUrl) && (
+            <div className="aspect-video max-w-xs relative bg-surface-container border border-secondary/20 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={copertinaLocalPhoto?.preview || copertinaSavedUrl}
+                alt="Copertina Homepage"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute top-2 left-2 bg-secondary text-primary text-[9px] font-bold uppercase tracking-widest px-2 py-1">
+                Homepage
+              </div>
+              {copertinaLocalPhoto?.compressing && (
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs font-bold">Compressione...</div>
+              )}
+            </div>
+          )}
+        </div>
+
         <div>
           <label className="block text-xs font-montserrat font-bold uppercase text-on-surface-variant mb-1">Nome Veicolo *</label>
           <input value={nome} onChange={(e) => setNome(e.target.value)} required className="w-full border border-outline-variant bg-surface px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary rounded-none" placeholder="es. Sardinia Luxury Edition" />
@@ -484,9 +561,32 @@ export default function VehicleForm({ initialData }: VehicleFormProps) {
             ))}
           </div>
           
-          <button type="button" onClick={addAccessory} className="mt-4 text-xs font-montserrat font-bold uppercase text-primary border border-primary px-4 py-2 hover:bg-primary/5 transition">
-            + Aggiungi Accessorio
-          </button>
+          <div className="mt-4 flex flex-col md:flex-row gap-4 items-start md:items-center bg-surface-container-low p-4 border border-outline-variant/30">
+            <button type="button" onClick={addAccessory} className="text-xs font-montserrat font-bold uppercase text-primary border border-primary px-4 py-2 hover:bg-primary/5 transition whitespace-nowrap">
+              + Nuovo Accessorio
+            </button>
+            <div className="text-on-surface-variant font-bold text-xs uppercase px-2">OPPURE</div>
+            <select
+              className="w-full md:w-auto border border-outline-variant bg-white px-4 py-2 text-sm focus:outline-none focus:border-primary"
+              onChange={(e) => {
+                const selected = accessoriRegistry.find(a => a.id === e.target.value);
+                if (selected) {
+                  setAccessori(prev => [...prev, {
+                    id: crypto.randomUUID(), // Gengenerate a unique ID for this form
+                    titolo: selected.titolo,
+                    descrizione: selected.descrizione,
+                    foto: selected.foto
+                  }]);
+                }
+                e.target.value = ""; // Reset selection
+              }}
+            >
+              <option value="">-- Seleziona dal database --</option>
+              {accessoriRegistry.map(r => (
+                <option key={r.id} value={r.id}>{r.titolo}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </section>
 

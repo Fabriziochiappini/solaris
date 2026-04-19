@@ -4,6 +4,8 @@ import { Veicolo } from '@/lib/types';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'I Nostri Veicoli | Solaris Golf Car Sardegna',
   description: 'Scopri la gamma completa di golf car e veicoli utility Solaris. Veicoli elettrici premium per la Sardegna.',

@@ -4,6 +4,8 @@ import { Veicolo } from '@/lib/types';
 import VehicleDetailViewer from '@/components/VehicleDetailViewer';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 0;
+
 // Dati di fallback se Firestore non è configurato o il veicolo non è trovato
 const VEICOLI_FALLBACK: Record<string, Veicolo> = {
   '1': {

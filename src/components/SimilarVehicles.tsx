@@ -47,8 +47,8 @@ export default function SimilarVehicles({ currentId }: Props) {
 
   if (loading || vehicles.length === 0) return null;
 
-  // ≤4 auto → grid statico, >4 → carosello scrollabile
-  const useCarousel = vehicles.length > 4;
+  // Modifica: Sempre a carosello come richiesto
+  const useCarousel = true;
 
   const getPhoto = (v: Veicolo) =>
     v.landing?.heroImmagine || v.foto?.[0] || null;

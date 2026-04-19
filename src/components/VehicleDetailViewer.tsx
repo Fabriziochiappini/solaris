@@ -31,6 +31,16 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const [accCanLeft, setAccCanLeft] = useState(false);
   const [accCanRight, setAccCanRight] = useState(true);
 
+  // Features carousel state
+  const featCarouselRef = useRef<HTMLDivElement>(null);
+  const [featCanLeft, setFeatCanLeft] = useState(false);
+  const [featCanRight, setFeatCanRight] = useState(true);
+
+  // Perché carousel state
+  const perchéCarouselRef = useRef<HTMLDivElement>(null);
+  const [perchéCanLeft, setPerchéCanLeft] = useState(false);
+  const [perchéCanRight, setPerchéCanRight] = useState(true);
+
   const whatsAppLink = `https://wa.me/393331234567?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
 
   const updateScrollState = () => {
@@ -47,9 +57,25 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     setAccCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
   };
 
+  const updateFeatScrollState = () => {
+    const el = featCarouselRef.current;
+    if (!el) return;
+    setFeatCanLeft(el.scrollLeft > 10);
+    setFeatCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
+  const updatePerchéScrollState = () => {
+    const el = perchéCarouselRef.current;
+    if (!el) return;
+    setPerchéCanLeft(el.scrollLeft > 10);
+    setPerchéCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
   useEffect(() => {
     updateScrollState();
     updateAccScrollState();
+    updateFeatScrollState();
+    updatePerchéScrollState();
   }, []);
 
   const scrollCarousel = (direction: 'left' | 'right') => {
@@ -63,9 +89,25 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const scrollAccCarousel = (direction: 'left' | 'right') => {
     const el = accCarouselRef.current;
     if (!el) return;
-    const scrollAmount = el.clientWidth * 0.7;
+    const scrollAmount = el.clientWidth * 0.85;
     el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     setTimeout(updateAccScrollState, 400);
+  };
+
+  const scrollFeatCarousel = (direction: 'left' | 'right') => {
+    const el = featCarouselRef.current;
+    if (!el) return;
+    const scrollAmount = el.clientWidth * 0.85;
+    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+    setTimeout(updateFeatScrollState, 400);
+  };
+
+  const scrollPerchéCarousel = (direction: 'left' | 'right') => {
+    const el = perchéCarouselRef.current;
+    if (!el) return;
+    const scrollAmount = el.clientWidth * 0.85;
+    el.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+    setTimeout(updatePerchéScrollState, 400);
   };
 
   return (
@@ -411,8 +453,30 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             </motion.div>
           </div>
 
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative group">
+            {featCanLeft && (
+              <button
+                onClick={() => scrollFeatCarousel('left')}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+              >
+                <span className="material-symbols-outlined text-2xl">chevron_left</span>
+              </button>
+            )}
+            {featCanRight && (
+              <button
+                onClick={() => scrollFeatCarousel('right')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+              >
+                <span className="material-symbols-outlined text-2xl">chevron_right</span>
+              </button>
+            )}
+
+            <div
+              ref={featCarouselRef}
+              onScroll={updateFeatScrollState}
+              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
               {(landing?.features || []).map((feat, i) => (
                 <motion.div
                   key={i}
@@ -420,10 +484,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  className="group"
+                  className="group flex-none w-[80vw] md:w-[380px] snap-start"
                 >
                   {feat.url && (
-                    <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low">
+                    <div className="aspect-[4/3] overflow-hidden mb-5 bg-surface-container-low shadow-md">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={feat.url}
@@ -433,10 +497,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                     </div>
                   )}
                   {feat.titolo && (
-                    <h3 className="font-montserrat font-bold text-primary text-lg mb-2">{feat.titolo}</h3>
+                    <h3 className="font-montserrat font-bold text-primary text-xl mb-3 pr-4">{feat.titolo}</h3>
                   )}
                   {feat.sottotitolo && (
-                    <p className="text-on-surface-variant text-sm leading-relaxed">{feat.sottotitolo}</p>
+                    <p className="text-on-surface-variant text-sm leading-relaxed pr-4">{feat.sottotitolo}</p>
                   )}
                 </motion.div>
               ))}
@@ -516,7 +580,81 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         </section>
       )}
 
-      {/* ========== SEZIONE 6: CONTATTI E MAPPA (sempre visibile) ========== */}
+      {/* ========== SEZIONE: PERCHÉ SARDYNIA GOLF CARS (CAROSELLO) ========== */}
+      {activeTab === 'landing' && (
+        <section className="py-20 md:py-32 bg-white border-b border-outline-variant/10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-14">
+            <h2 className="font-montserrat font-extrabold text-3xl md:text-5xl text-primary tracking-tight mb-4">
+              Perché Sardynia <span className="text-secondary">Golf Cars</span>
+            </h2>
+            <div className="h-1.5 w-24 bg-secondary" />
+          </div>
+
+          <div className="relative group">
+            {perchéCanLeft && (
+              <button
+                onClick={() => scrollPerchéCarousel('left')}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+              >
+                <span className="material-symbols-outlined text-2xl">chevron_left</span>
+              </button>
+            )}
+            {perchéCanRight && (
+              <button
+                onClick={() => scrollPerchéCarousel('right')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all"
+              >
+                <span className="material-symbols-outlined text-2xl">chevron_right</span>
+              </button>
+            )}
+
+            <div
+              ref={perchéCarouselRef}
+              onScroll={updatePerchéScrollState}
+              className="flex gap-8 overflow-x-auto scroll-smooth px-6 lg:px-8 pb-8 snap-x snap-mandatory"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {/* Qualità */}
+              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="material-symbols-outlined text-6xl mb-8 text-secondary">verified_user</span>
+                <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Qualità Ineguagliabile</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                  Costruiti con telaio in alluminio inossidabile, finiture resistenti e componenti di sicurezza testati. Progettati per durare nel tempo, garantendo affidabilità e divertimento senza pensieri in Costa Smeralda.
+                </p>
+              </div>
+
+              {/* Prestazioni */}
+              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="material-symbols-outlined text-6xl mb-8 text-secondary">battery_charging_full</span>
+                <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Prestazioni Inarrestabili</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                  Potenza al litio di lunga durata, accelerazione fluida, frenata rigenerativa e precisione anche a pieno carico. Ogni guida offre controllo, sicurezza e autonomia per nuove avventure.
+                </p>
+              </div>
+
+              {/* Comfort */}
+              <div className="flex-none w-[80vw] md:w-[420px] snap-start bg-surface-container-lowest p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="material-symbols-outlined text-6xl mb-8 text-secondary">event_seat</span>
+                <h3 className="font-montserrat font-bold text-xl text-primary mb-4">Comfort Senza Pari</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                  Sospensioni testate per affrontare con sicurezza anche i terreni più difficili, con sedili premium progettati per ore di utilizzo. L'ergonomia raffinata garantisce una posizione di guida sempre perfetta.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12 px-6">
+            <a
+              href="/chi-siamo"
+              className="inline-block bg-primary text-secondary px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
+            >
+              Scopri la differenza Sardynia Golf Cars
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* ========== SEZIONE 7: CONTATTI E MAPPA (sempre visibile) ========== */}
       <section className="py-20 md:py-28 bg-primary">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

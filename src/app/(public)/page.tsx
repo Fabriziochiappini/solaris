@@ -4,6 +4,8 @@ import { Veicolo } from '@/lib/types';
 import ShowroomCarousel from '@/components/ShowroomCarousel';
 import Link from 'next/link';
 
+export const revalidate = 0;
+
 // Dati di fallback (mostrati se Firestore è vuoto o non raggiungibile)
 const VEICOLI_FALLBACK: Veicolo[] = [
   {
