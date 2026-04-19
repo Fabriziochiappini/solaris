@@ -150,7 +150,7 @@ function ContactForm() {
 export default function ContattiPage() {
   const contactInfo = [
     { icon: 'location_on',    label: 'Sede Principale', value: 'Olbia / Aglientu, Sardegna', link: 'https://maps.google.com' },
-    { icon: 'phone',          label: 'Telefono',        value: '+39 333 123 4567',           link: 'tel:+393331234567' },
+    { icon: 'phone',          label: 'Telefono',        value: '+39 342 107 3857',           link: 'tel:+393421073857' },
     { icon: 'mail',           label: 'Email',           value: 'info@solarisgolfcar.it',     link: 'mailto:info@solarisgolfcar.it' },
     { icon: 'schedule',       label: 'Orari',           value: 'Lun - Sab: 09:00 - 19:00',  link: null },
     { icon: 'business_center',label: 'Dati Aziendali',  value: 'Sardinya Golf Car By Solaris • P.IVA 02659430900 • REA SS 193996', link: null },
@@ -161,6 +161,21 @@ export default function ContattiPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
 
         {/* Header */}
+        {/* WhatsApp CTA — solo in questa pagina, niente pulsante floating */}
+        <a
+          href="https://wa.me/393421073857"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3.5 shadow-2xl hover:bg-[#1ebe5b] transition-all active:scale-95 font-montserrat font-bold text-sm uppercase tracking-wider"
+          aria-label="Contattaci su WhatsApp"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.57a.5.5 0 00.614.614l5.823-1.516A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.026-1.383l-.36-.214-3.733.972.999-3.647-.234-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/>
+          </svg>
+          Scrivici su WhatsApp
+        </a>
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
           <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Siamo qui per te</p>
           <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
