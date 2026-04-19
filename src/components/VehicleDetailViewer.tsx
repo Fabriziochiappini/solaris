@@ -19,7 +19,8 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const accessori = landing?.accessori || [];
   const featuresSource = landing?.features || [];
 
-  const displayFoto = foto;
+  // foto[0] is the homepage card cover — exclude it from the gallery
+  const galleryFoto = foto.slice(1);
   const displayFeatures = featuresSource;
   const displayAccessori = accessori;
 
@@ -237,7 +238,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           )}
 
 
-          {foto.length > 0 && (
+          {galleryFoto.length > 0 && (
             <section className="py-10 md:py-14 bg-surface-container-lowest">
               <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
                 <motion.div
@@ -272,8 +273,8 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
                 <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-4" ref={galRef}>
                   <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
-                    {displayFoto.map((f, i) => {
-                      const originalIndex = i % foto.length;
+                    {galleryFoto.map((f, i) => {
+                      const originalIndex = i % galleryFoto.length;
                       const meta = landing?.galleriaFoto?.[originalIndex];
                       const hasMeta = meta?.titolo || meta?.sottotitolo;
                       return (
@@ -635,9 +636,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       <SimilarVehicles currentId={veicolo.id} />
 
       {/* Lightbox */}
-      {isViewerOpen && foto.length > 0 && (
+      {isViewerOpen && galleryFoto.length > 0 && (
         <PhotoViewer
-          photos={foto}
+          photos={galleryFoto}
           initialIndex={viewerIndex}
           open={isViewerOpen}
           onClose={() => setIsViewerOpen(false)}
