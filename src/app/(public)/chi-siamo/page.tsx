@@ -208,7 +208,7 @@ export default function ChiSiamoPage() {
               <div>
                 <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">La nostra casa</p>
                 <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl tracking-tight mb-4">
-                  La Sardegna merita il meglio
+                  Il meglio per i nostri clienti
                 </h2>
                 <div className="h-1.5 w-24 bg-secondary mb-6" />
               </div>
