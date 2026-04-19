@@ -2,6 +2,7 @@ import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
 import { db, isFirebaseConfigured } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
 import ShowroomCarousel from '@/components/ShowroomCarousel';
+import UseCasesSection from '@/components/UseCasesSection';
 import Link from 'next/link';
 
 export const revalidate = 0;
@@ -97,6 +98,9 @@ export default async function Home() {
         </div>
         <ShowroomCarousel veicoli={veicoli} />
       </section>
+
+      {/* Per ogni stile di vita */}
+      <UseCasesSection />
 
       {/* Sostenibilità & Design — Sezione con nave */}
       <section className="relative py-20 overflow-hidden">
