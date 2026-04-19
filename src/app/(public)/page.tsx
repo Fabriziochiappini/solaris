@@ -90,8 +90,8 @@ export default async function Home() {
       </header>
 
       {/* Lo Showroom — carosello 3D coverflow */}
-      <section className="py-32 bg-surface overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 mb-16">
+      <section className="py-20 bg-surface overflow-hidden">
+        <div className="max-w-7xl mx-auto px-8 mb-12">
           <h2 className="font-montserrat font-extrabold text-4xl text-primary tracking-tight uppercase mb-4">Lo Showroom</h2>
           <div className="h-1 w-24 bg-secondary"></div>
         </div>
@@ -99,7 +99,7 @@ export default async function Home() {
       </section>
 
       {/* Sostenibilità & Design — Sezione con nave */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-20 grayscale"
@@ -142,7 +142,7 @@ export default async function Home() {
       </section>
 
       {/* Testimonials Slider */}
-      <section className="bg-surface-container-lowest py-24 border-y border-primary/5">
+      <section className="bg-surface-container-lowest py-16 border-y border-primary/5">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="material-symbols-outlined text-primary text-6xl mb-8">format_quote</span>
           <div className="mb-12">
@@ -166,7 +166,7 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary">
+      <section className="py-12 bg-primary">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="text-white">
             <h2 className="text-4xl font-bold mb-4 font-montserrat">Pronto a Guidare il Futuro?</h2>

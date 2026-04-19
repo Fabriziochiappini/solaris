@@ -176,7 +176,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         <>
           {/* ===== SCHEDA TECNICA VISIVA (text left, image right) ===== */}
           {(landing?.schedaTecnicaDettagli || landing?.schedaTecnicaFoto) && (
-            <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+            <section className="py-16 md:py-20 bg-white border-b border-outline-variant/10">
               <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -245,7 +245,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
 
           {foto.length > 0 && (
-            <section className="py-20 md:py-28 bg-surface-container-lowest">
+            <section className="py-16 md:py-20 bg-surface-container-lowest">
               <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -327,7 +327,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
       {/* ========== TAB: SPECIFICHE TECNICHE ========== */}
       {activeTab === 'specs' && (
-        <section className="py-20 md:py-28 bg-white min-h-[60vh]">
+        <section className="py-16 md:py-20 bg-white min-h-[60vh]">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -367,7 +367,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
       {/* ========== FEATURES CAROUSEL: "Discover NomeAuto" ========== */}
       {activeTab === 'landing' && featuresSource.length > 0 && (
-        <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+        <section className="py-16 md:py-20 bg-white border-b border-outline-variant/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <p className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-3">Features That Stand Out</p>
@@ -431,7 +431,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       {/* ========== SEZIONE 5: ACCESSORIZE YOUR CAR (solo tab landing) ========== */}
       {activeTab === 'landing' && accessori.length > 0 && (
 
-        <section className="py-20 md:py-28 bg-surface-container-lowest">
+        <section className="py-16 md:py-20 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -496,7 +496,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
 
       {/* ========== SEZIONE: PERCHÉ SARDYNIA GOLF CARS (STATICA CENTRATA) ========== */}
       {activeTab === 'landing' && (
-        <section className="py-20 md:py-32 bg-white border-b border-outline-variant/10">
+        <section className="py-16 md:py-20 bg-white border-b border-outline-variant/10">
           <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center mb-16">
             <h2 className="font-montserrat font-extrabold text-3xl md:text-5xl text-primary tracking-tight mb-4">
               Perché Sardynia <span className="text-secondary">Golf Cars</span>
@@ -549,7 +549,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
       )}
 
       {/* ========== SEZIONE 7: CONTATTI E MAPPA (sempre visibile) ========== */}
-      <section className="py-20 md:py-28 bg-primary">
+      <section className="py-16 md:py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
