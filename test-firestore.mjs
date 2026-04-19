@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, limit } from 'firebase/firestore';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
@@ -13,12 +13,13 @@ const db = getFirestore(app);
 
 async function run() {
   try {
-    const querySnapshot = await getDocs(collection(db, "veicoli"));
+    const q = query(collection(db, "veicoli"), limit(5));
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const data = doc.data();
       if (data.landing && data.landing.specificheHtml) {
         console.log("=== VEHICLE:", data.nome, "===");
-        console.log(data.landing.specificheHtml.substring(0, 800));
+        console.log(data.landing.specificheHtml.substring(0, 1500));
         console.log("\n");
       }
     });

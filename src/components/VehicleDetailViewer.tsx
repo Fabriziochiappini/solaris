@@ -26,10 +26,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'landing' | 'specs'>('landing');
-  // Embla Carousels configured for seamless infinite loops
-  const [galRef, galApi] = useEmblaCarousel({ loop: true, align: 'start' });
-  const [featRef, featApi] = useEmblaCarousel({ loop: true, align: 'start' });
-  const [accRef, accApi] = useEmblaCarousel({ loop: true, align: 'start' });
+  const [galRef, galApi] = useEmblaCarousel({ loop: true, align: 'center' });
+  const [featRef, featApi] = useEmblaCarousel({ loop: true, align: 'center' });
+  const [accRef, accApi] = useEmblaCarousel({ loop: true, align: 'center' });
 
   // Perché Sardynia: sezione statica (no carousel)
 
@@ -93,12 +92,6 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 >
                   <span className="material-symbols-outlined text-sm">chat</span>
                   Richiedi Preventivo
-                </a>
-                <a
-                  href="#specifiche"
-                  className="border-2 border-primary/20 text-primary px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:border-primary hover:bg-surface-container-low transition-all"
-                >
-                  Vedi Specifiche
                 </a>
               </div>
             </motion.div>
@@ -255,7 +248,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   <h2 className="font-montserrat font-extrabold text-3xl md:text-4xl text-primary uppercase tracking-tight mb-3">
                     Galleria
                   </h2>
-                  <div className="h-1.5 w-24 bg-secondary" />
+                  <div className="h-1.5 w-24 bg-secondary mb-4" />
+                  <p className="text-sm md:text-base text-on-surface-variant/80 italic">
+                    Clicca per guardare le foto
+                  </p>
                 </motion.div>
               </div>
 
@@ -263,15 +259,15 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 {/* Il loop è infinito quindi le frecce sono sempre attive */}
                 <button
                   onClick={() => galApi?.scrollPrev()}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl">chevron_left</span>
+                  <span className="material-symbols-outlined text-xl md:text-2xl">chevron_left</span>
                 </button>
                 <button
                   onClick={() => galApi?.scrollNext()}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl">chevron_right</span>
+                  <span className="material-symbols-outlined text-xl md:text-2xl">chevron_right</span>
                 </button>
 
                 <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-4" ref={galRef}>
@@ -381,15 +377,15 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           <div className="relative group">
             <button
               onClick={() => featApi?.scrollPrev()}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
-              <span className="material-symbols-outlined text-2xl">chevron_left</span>
+              <span className="material-symbols-outlined text-xl md:text-2xl">chevron_left</span>
             </button>
             <button
               onClick={() => featApi?.scrollNext()}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
-              <span className="material-symbols-outlined text-2xl">chevron_right</span>
+              <span className="material-symbols-outlined text-xl md:text-2xl">chevron_right</span>
             </button>
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={featRef}>
@@ -449,15 +445,15 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           <div className="relative group">
             <button
               onClick={() => accApi?.scrollPrev()}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
-              <span className="material-symbols-outlined text-2xl">chevron_left</span>
+              <span className="material-symbols-outlined text-xl md:text-2xl">chevron_left</span>
             </button>
             <button
               onClick={() => accApi?.scrollNext()}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-14 md:h-14 bg-white/90 backdrop-blur-sm shadow-xl flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-all rounded-sm cursor-pointer"
             >
-              <span className="material-symbols-outlined text-2xl">chevron_right</span>
+              <span className="material-symbols-outlined text-xl md:text-2xl">chevron_right</span>
             </button>
 
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={accRef}>
