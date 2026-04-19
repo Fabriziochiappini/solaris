@@ -161,12 +161,6 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
     setTimeout(onScroll, 400);
   };
 
-  useEffect(() => {
-    const t = setInterval(() => autoAdvance(carouselRef, updateScrollState), 4000);
-    return () => clearInterval(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 
   return (
     <div className="min-h-screen bg-surface-container-lowest">
