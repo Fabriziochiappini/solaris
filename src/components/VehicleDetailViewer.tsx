@@ -392,7 +392,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing pb-8 pt-4" ref={featRef}>
               <div className="flex -ml-6" style={{ backfaceVisibility: 'hidden' }}>
               {displayFeatures.map((feat, i) => (
-                <div key={i} className="flex-[0_0_80vw] md:flex-[0_0_380px] min-w-0 pl-6">
+                <div key={i} className="flex-[0_0_80vw] md:flex-[0_0_475px] min-w-0 pl-6">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
