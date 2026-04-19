@@ -19,10 +19,9 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const accessori = landing?.accessori || [];
   const featuresSource = landing?.features || [];
 
-  // Duplichiamo gli elementi se sono pochi per garantire che il carosello Embla faccia il loop
-  const displayFoto = foto.length > 0 && foto.length < 6 ? [...foto, ...foto, ...foto, ...foto].slice(0, 12) : foto;
-  const displayFeatures = featuresSource.length > 0 && featuresSource.length < 6 ? [...featuresSource, ...featuresSource, ...featuresSource, ...featuresSource].slice(0, 12) : featuresSource;
-  const displayAccessori = accessori.length > 0 && accessori.length < 6 ? [...accessori, ...accessori, ...accessori, ...accessori].slice(0, 12) : accessori;
+  const displayFoto = foto;
+  const displayFeatures = featuresSource;
+  const displayAccessori = accessori;
 
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
