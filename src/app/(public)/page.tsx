@@ -116,10 +116,10 @@ export default async function Home() {
             <div>
               <span className="text-primary font-bold tracking-widest uppercase text-xs">Il Nostro Impegno</span>
               <h2 className="text-5xl font-bold mt-4 mb-8 leading-tight text-on-surface">
-                Sostenibilità &amp; Design Italiano.
+                Sostenibilità &amp; Stile.
               </h2>
               <p className="text-xl text-on-surface-variant mb-10 leading-relaxed">
-                Crediamo che il futuro della Sardegna debba essere preservato. Ogni nostro veicolo è selezionato per garantire il minimo impatto ambientale senza rinunciare allo stile iconico del design italiano.
+                Crediamo che il futuro della Sardegna debba essere preservato. Ogni nostro veicolo è selezionato per garantire il minimo impatto ambientale senza rinunciare a uno stile iconico e all&apos;avanguardia.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">
