@@ -3,8 +3,39 @@ import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
-  title: 'SOLARIS | Veicoli Elettrici di Lusso',
-  description: 'Veicoli di trasporto personale premium ispirati alla Costa Smeralda. Silenziosi, sostenibili e puramente lussuosi.',
+  metadataBase: new URL('https://sardinyagolfcar.com'),
+  title: {
+    default: 'Sardinya Golf Car | Vendita e Noleggio Golf Car in Sardegna',
+    template: '%s | Sardinya Golf Car'
+  },
+  description: 'Concessionario ufficiale e assistenza Club Car in Sardegna. Offriamo vendita, noleggio a lungo e breve termine, e assistenza specializzata per golf car a Olbia e in Costa Smeralda.',
+  keywords: ['vendita golf car', 'noleggio golf car sardegna', 'golf car sardegna', 'club car sardegna', 'assistenza golf car sardegna', 'noleggio golf car lungo termine', 'noleggio golf car breve termine', 'olbia', 'costa smeralda', 'veicoli elettrici'],
+  authors: [{ name: 'Solaris' }],
+  openGraph: {
+    type: 'website',
+    locale: 'it_IT',
+    url: 'https://sardinyagolfcar.com',
+    siteName: 'Sardinya Golf Car',
+    title: 'Sardinya Golf Car | Vendita, Noleggio e Assistenza in Sardegna',
+    description: 'Scopri i nostri veicoli premium. Concessionario ufficiale Club Car: vendita, noleggio a lungo/breve termine e assistenza tecnica in tutta la Sardegna.',
+    images: [
+      {
+        url: '/hero-bg.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Sardinya Golf Car - Veicoli Premium',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sardinya Golf Car | Vendita e Noleggio Golf Car Sardegna',
+    description: 'Concessionario ufficiale Club Car: vendita, noleggio a lungo/breve termine e assistenza tecnica in tutta la Sardegna.',
+    images: ['/hero-bg.webp'],
+  },
+  alternates: {
+    canonical: 'https://sardinyagolfcar.com',
+  }
 };
 
 export default function RootLayout({

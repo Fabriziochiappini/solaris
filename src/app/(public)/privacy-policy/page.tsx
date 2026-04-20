@@ -1,3 +1,13 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Sardinya Golf Car',
+  description: 'Leggi la nostra Privacy Policy per scoprire come Sardinya Golf Car gestisce e protegge i tuoi dati personali.',
+  alternates: {
+    canonical: 'https://sardinyagolfcar.com/privacy-policy',
+  }
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen pt-32 pb-24 bg-surface-container-lowest">

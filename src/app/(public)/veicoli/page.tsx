@@ -7,8 +7,12 @@ import VeicoliGrid from '@/components/VeicoliGrid';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'I Nostri Veicoli | Solaris Golf Car Sardegna',
-  description: 'Scopri la gamma completa di golf car e veicoli utility Solaris. Veicoli elettrici premium per la Sardegna.',
+  title: 'Veicoli Club Car | Noleggio e Vendita Golf Car Sardegna',
+  description: 'Scopri la flotta Sardinya Golf Car. Vendita e noleggio di veicoli elettrici Club Car, golf car premium per resort, privati e strutture in Costa Smeralda.',
+  keywords: ['club car sardegna', 'vendita club car', 'flotta golf car', 'veicoli elettrici resort', 'noleggio golf car privati', 'comprare golf car sardegna', 'golf car litio'],
+  alternates: {
+    canonical: 'https://sardinyagolfcar.com/veicoli',
+  }
 };
 
 async function getVeicoli(): Promise<Veicolo[]> {

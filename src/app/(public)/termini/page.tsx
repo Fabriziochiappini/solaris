@@ -1,3 +1,13 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Termini e Condizioni | Sardinya Golf Car',
+  description: 'Leggi i Termini e Condizioni di utilizzo dei servizi di Sardinya Golf Car, inclusi noleggio, vendita e assistenza dei veicoli elettrici.',
+  alternates: {
+    canonical: 'https://sardinyagolfcar.com/termini',
+  }
+};
+
 export default function TerminiPage() {
   return (
     <main className="min-h-screen pt-32 pb-24 bg-surface-container-lowest">

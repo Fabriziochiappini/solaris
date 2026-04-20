@@ -21,24 +21,24 @@ export default function Footer() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-8">
-          <div>
-            <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Esplora</h4>
+          <nav aria-label="Navigazione Principale">
+            <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Esplora Sardinya Golf Car</h4>
             <ul className="space-y-4 font-lato text-sm">
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/chi-siamo">Chi Siamo</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a></li>
+              <li><a title="Scopri la nostra flotta di golf car in vendita e noleggio in Sardegna" className="text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli e Flotta</a></li>
+              <li><a title="Servizi di noleggio e assistenza Club Car" className="text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Noleggio e Assistenza</a></li>
+              <li><a title="Scopri chi siamo, il rivenditore ufficiale Club Car" className="text-slate-600 hover:text-sky-600 transition-colors" href="/chi-siamo">L'Azienda</a></li>
+              <li><a title="Contattaci per preventivi e assistenza golf car" className="text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a></li>
             </ul>
-          </div>
-          <div>
-            <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Legale</h4>
+          </nav>
+          <nav aria-label="Link Legali">
+            <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Info Legali</h4>
             <ul className="space-y-4 font-lato text-sm">
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/privacy-policy">Privacy Policy</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors" href="/termini">Termini di Servizio</a></li>
-              <li><a className="text-slate-600 hover:text-sky-600 transition-colors italic" href="/admin">Area Riservata</a></li>
+              <li><a title="Leggi la Privacy Policy per la gestione dei dati" className="text-slate-600 hover:text-sky-600 transition-colors" href="/privacy-policy">Privacy Policy</a></li>
+              <li><a title="Consulta i Condizioni d'uso e Termini di servizio" className="text-slate-600 hover:text-sky-600 transition-colors" href="/termini">Termini di Servizio</a></li>
+              <li><a className="text-slate-600 hover:text-sky-600 transition-colors italic" href="/admin" rel="nofollow">Area Riservata</a></li>
               <li className="text-slate-500 mt-2">P.IVA: 02659430900<br/>REA: SS 193996</li>
             </ul>
-          </div>
+          </nav>
         </div>
         <div>
           <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">La Newsletter della Costa</h4>
@@ -50,13 +50,13 @@ export default function Footer() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-8 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="font-lato text-sm tracking-normal text-slate-600">© 2024 Sardinya golf car By Solaris. Tutti i diritti riservati.</p>
-        <div className="flex gap-8">
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/">Home</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a>
-          <a className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a>
-        </div>
+        <p className="font-lato text-sm tracking-normal text-slate-600">© {new Date().getFullYear()} Sardinya Golf Car by Solaris. Noleggio e Vendita in Sardegna. Tutti i diritti riservati.</p>
+        <nav aria-label="Navigazione Footer Estesa" className="flex gap-4 md:gap-8 flex-wrap justify-center">
+          <a title="Home Sardinya Golf Car" className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/">Home</a>
+          <a title="Flotta golf car e veicoli utility" className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/veicoli">Veicoli</a>
+          <a title="Soluzioni di assistenza e noleggio a lungo/breve termine" className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/servizi">Servizi</a>
+          <a title="Mettiti in contatto con noi a Olbia" className="font-lato text-sm text-slate-600 hover:text-sky-600 transition-colors" href="/contatti">Contatti</a>
+        </nav>
       </div>
     </footer>
   );
