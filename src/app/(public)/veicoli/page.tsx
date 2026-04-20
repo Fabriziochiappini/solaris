@@ -3,6 +3,7 @@ import { db, isFirebaseConfigured } from '@/lib/firebase';
 import { Veicolo } from '@/lib/types';
 import { Metadata } from 'next';
 import VeicoliGrid from '@/components/VeicoliGrid';
+import CtaButtons from '@/components/CtaButtons';
 
 export const revalidate = 0;
 
@@ -70,23 +71,7 @@ export default async function FlottaPage() {
           <p className="text-white/70 text-lg mb-10">
             Contattaci per una consulenza personalizzata, un preventivo o per organizzare una prova.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contatti"
-              className="inline-flex items-center justify-center gap-2 bg-secondary text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-1"
-            >
-              <span className="material-symbols-outlined text-base">chat</span>
-              Richiedi Preventivo
-            </a>
-            <a
-              href="https://wa.me/393421073857"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-white/10 transition-all"
-            >
-              WhatsApp
-            </a>
-          </div>
+          <CtaButtons location="pagina_veicoli_bottom" />
         </div>
       </section>
 

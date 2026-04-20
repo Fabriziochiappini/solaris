@@ -1,7 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/gtag';
 import { useState } from 'react';
+import { trackFormSubmit } from '@/lib/gtag';
 
 // ── Componente form ───────────────────────────────────────────────────────────
 function ContactForm() {
@@ -21,6 +23,7 @@ function ContactForm() {
     await new Promise(r => setTimeout(r, 1400));
     setSending(false);
     setSent(true);
+    trackFormSubmit();
   };
 
   const inputCls =
@@ -166,6 +169,7 @@ export default function ContattiPage() {
           href="https://wa.me/393421073857"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackWhatsAppClick('contatti_floating')}
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3.5 shadow-2xl hover:bg-[#1ebe5b] transition-all active:scale-95 font-montserrat font-bold text-sm uppercase tracking-wider"
           aria-label="Contattaci su WhatsApp"
         >
@@ -197,7 +201,14 @@ export default function ContattiPage() {
                     <span className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant/60">{info.label}</span>
                   </div>
                   {info.link ? (
-                    <a href={info.link} className="font-montserrat font-bold text-primary hover:text-secondary transition-colors underline decoration-outline-variant decoration-1 underline-offset-4 text-sm">
+                    <a 
+                      href={info.link} 
+                      className="font-montserrat font-bold text-primary hover:text-secondary transition-colors underline decoration-outline-variant decoration-1 underline-offset-4 text-sm"
+                      onClick={() => {
+                        if (info.link?.startsWith('tel:')) trackPhoneClick('contatti_info');
+                        if (info.link?.startsWith('mailto:')) trackEmailClick('contatti_info');
+                      }}
+                    >
                       {info.value}
                     </a>
                   ) : (

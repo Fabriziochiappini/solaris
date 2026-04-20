@@ -4,6 +4,7 @@ import { Veicolo } from '@/lib/types';
 import ShowroomCarousel from '@/components/ShowroomCarousel';
 import UseCasesSection from '@/components/UseCasesSection';
 import Link from 'next/link';
+import CtaButtons from '@/components/CtaButtons';
 
 export const revalidate = 0;
 
@@ -176,10 +177,8 @@ export default async function Home() {
             <h2 className="text-4xl font-bold mb-4 font-montserrat">Pronto a Guidare il Futuro?</h2>
             <p className="text-white/80 text-lg">Contattaci oggi per una prova gratuita o un preventivo personalizzato.</p>
           </div>
-          <div className="flex gap-4">
-            <Link href="/contatti" className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-2xl transition-all shadow-lg inline-block text-center">
-              Parla con un Esperto
-            </Link>
+          <div className="flex justify-center md:justify-end w-full md:w-auto">
+            <CtaButtons location="homepage_bottom" preventivoText="Parla con un Esperto" />
           </div>
         </div>
       </section>

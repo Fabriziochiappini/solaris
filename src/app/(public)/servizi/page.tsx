@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import CtaButtons from '@/components/CtaButtons';
 
 // ── Immagini reali dal progetto Solaris ──────────────────────────────────────
 const IMG = {
@@ -297,21 +298,7 @@ export default function ServiziPage() {
               Che tu voglia acquistare, noleggiare o personalizzare un veicolo, il team Solaris è a tua disposizione per una consulenza senza impegno.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contatti"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-white font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-primary/90 transition-all shadow-xl hover:-translate-y-1"
-              >
-                <span className="material-symbols-outlined text-base">chat</span>
-                Richiedi Preventivo
-              </Link>
-              <a
-                href="https://wa.me/393421073857"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 border-2 border-primary/20 text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-primary/5 transition-all"
-              >
-                WhatsApp
-              </a>
+              <CtaButtons location="pagina_servizi_bottom" />
             </div>
           </motion.div>
         </div>

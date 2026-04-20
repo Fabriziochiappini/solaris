@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Veicolo } from '@/lib/types';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import SimilarVehicles from '@/components/SimilarVehicles';
+import { trackVehicleView, trackWhatsAppClick } from '@/lib/gtag';
 
 const PhotoViewer = dynamic(() => import('@/components/PhotoViewer'), { ssr: false });
 
@@ -34,6 +35,10 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   // Perché Sardynia: sezione statica (no carousel)
 
   const whatsAppLink = `https://wa.me/393421073857?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
+
+  useEffect(() => {
+    trackVehicleView(veicolo.nome);
+  }, [veicolo.nome]);
 
 
   return (
@@ -83,12 +88,12 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 </div>
               )}
 
-              {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4 pt-2">
                 <a
                   href={whatsAppLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick(`dettaglio_veicolo_${veicolo.nome}`)}
                   className="bg-primary text-white px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-primary-container transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3"
                 >
                   <span className="material-symbols-outlined text-sm">chat</span>
