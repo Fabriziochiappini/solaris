@@ -61,12 +61,15 @@ export default function Footer() {
           </nav>
         </div>
         <div>
-          <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">La Newsletter della Costa</h4>
-          <p className="font-lato text-xs text-slate-600 mb-4">Iscriviti per ricevere aggiornamenti sulle nuove edizioni della flotta e notizie dal mondo del lusso costiero.</p>
-          <div className="flex">
-            <input className="bg-white border-none text-xs w-full focus:ring-1 focus:ring-sky-900 py-3 px-4" placeholder="Il tuo indirizzo email" type="email" />
-            <button className="bg-sky-900 text-white px-4 py-3"><span className="material-symbols-outlined text-sm">mail</span></button>
-          </div>
+          <h4 className="font-montserrat text-xs font-bold uppercase tracking-widest text-sky-900 mb-6">Contattaci</h4>
+          <p className="font-lato text-xs text-slate-600 mb-6">Hai domande su vendita, noleggio o assistenza? Il nostro team è a tua disposizione per una consulenza senza impegno.</p>
+          <a
+            href="/contatti"
+            className="inline-flex items-center gap-2 bg-sky-900 text-white font-montserrat font-bold text-xs uppercase tracking-widest px-6 py-3 hover:bg-sky-800 transition-colors shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all"
+          >
+            <span className="material-symbols-outlined text-sm">chat</span>
+            Parla con noi
+          </a>
         </div>
       </div>
 
