@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-[0px_20px_40px_rgba(21,28,38,0.06)]">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-4">
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-3">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
@@ -35,7 +35,7 @@ export default function Navbar() {
             <img
               src="https://res.cloudinary.com/dn96krsq7/image/upload/v1776759247/WhatsApp_Image_2026-04-21_at_10.13.27-removebg-preview_n3mjcf.png"
               alt="Sardinya Golf Car by Solaris"
-              className="h-14 w-auto object-contain group-hover:opacity-80 transition-opacity"
+              className="h-28 w-auto object-contain group-hover:opacity-80 transition-opacity"
             />
           </Link>
 
