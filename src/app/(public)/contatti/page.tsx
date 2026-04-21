@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/gtag';
 import { useState } from 'react';
 import { trackFormSubmit } from '@/lib/gtag';
+import FaqSection from '@/components/FaqSection';
 
 // ── Componente form ───────────────────────────────────────────────────────────
 function ContactForm() {
@@ -248,6 +249,9 @@ export default function ContattiPage() {
 
         </div>
       </div>
+
+      {/* ── FAQ ─────────────────────────────────────────────────────────── */}
+      <FaqSection />
     </main>
   );
 }
