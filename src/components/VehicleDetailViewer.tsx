@@ -549,7 +549,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
           <div className="text-center mt-10 px-6">
             <a
               href="/chi-siamo"
-              className="inline-block bg-primary text-secondary px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
+              className="inline-block bg-primary text-white px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
             >
               Scopri la differenza Sardynia Golf Cars
             </a>

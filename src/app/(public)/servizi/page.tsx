@@ -269,7 +269,7 @@ export default function ServiziPage() {
             <img src={IMG.lifestyle2} alt="Noleggio golf car Sardegna" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/20 flex items-center">
               <div className="px-10 md:px-16 max-w-lg">
-                <p className="text-secondary font-bold text-xs uppercase tracking-widest mb-3">Pronto a partire?</p>
+                <p className="text-white font-bold text-xs uppercase tracking-widest mb-3">Pronto a partire?</p>
                 <h3 className="font-montserrat font-extrabold text-3xl md:text-4xl text-white mb-6 leading-tight">
                   Richiedi un preventivo di noleggio personalizzato
                 </h3>
