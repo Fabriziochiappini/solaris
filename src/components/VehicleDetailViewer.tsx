@@ -539,7 +539,14 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
             </div>
           </div>
 
-          <div className="text-center mt-14 px-6">
+          {/* Frase finale motorizzazioni */}
+          <p className="text-center text-on-surface-variant text-base mt-12 px-6 max-w-2xl mx-auto leading-relaxed">
+            Tutti i nostri veicoli sono disponibili in diverse motorizzazioni,{' '}
+            <span className="font-semibold text-primary">elettriche e termiche</span> —{' '}
+            contattaci per avere tutti i dettagli.
+          </p>
+
+          <div className="text-center mt-10 px-6">
             <a
               href="/chi-siamo"
               className="inline-block bg-primary text-secondary px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
