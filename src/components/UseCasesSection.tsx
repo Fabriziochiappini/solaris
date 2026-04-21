@@ -34,8 +34,8 @@ const FOTO = [
     aspect: 'aspect-[4/3]',
   },
   {
-    src: 'https://res.cloudinary.com/dn96krsq7/image/upload/v1776628607/Street20Legal20CRU20out20on20town_biuweq.webp',
-    caption: 'Omologato su strada — Guida in totale legalità',
+    src: 'https://res.cloudinary.com/dn96krsq7/image/upload/v1776758536/RB-20220526-0540-Edit_vell0j.jpg',
+    caption: 'Golf Car di Eccellenza — Massimo Comfort sul Green',
     span: 'lg:col-span-1',
     aspect: 'aspect-[4/3]',
   },

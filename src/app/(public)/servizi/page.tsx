@@ -16,7 +16,7 @@ const IMG = {
   acc2:      'https://firebasestorage.googleapis.com/v0/b/solarisgolfcar.firebasestorage.app/o/veicoli%2F8vJFXVSQjL7Pq3HrZPil%2Ffeat-b6183649-9ffc-46dd-a72f-f1fa96df010f.webp?alt=media&token=84d54c25-3516-4e18-ae25-28f34ecf8f0a',
   lifestyle1:'https://res.cloudinary.com/dn96krsq7/image/upload/v1776628608/20260113_ClubCar-Lifestyle_StrongShotStudio-35_1_fhyooa.webp',
   lifestyle2:'https://res.cloudinary.com/dn96krsq7/image/upload/v1776628607/Errands_j0jtfp.webp',
-  lifestyle3:'https://res.cloudinary.com/dn96krsq7/image/upload/v1776628607/Street20Legal20CRU20out20on20town_biuweq.webp',
+  lifestyle3:'https://res.cloudinary.com/dn96krsq7/image/upload/v1776758536/RB-20220526-0540-Edit_vell0j.jpg',
 };
 
 const NOLEGGIO = [
