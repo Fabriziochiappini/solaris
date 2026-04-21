@@ -286,7 +286,115 @@ export default function ServiziPage() {
         </div>
       </section>
 
+      {/* ── ASSISTENZA & RICAMBI ──────────────────────────── */}
+      <section className="py-20 md:py-28 bg-primary text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+          {/* Header */}
+          <motion.div {...fadeUp()} className="mb-16 max-w-2xl">
+            <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Sempre al tuo fianco</p>
+            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl tracking-tight mb-4">
+              Assistenza &amp;<br />Ricambi Originali
+            </h2>
+            <div className="h-1.5 w-24 bg-secondary mb-6" />
+            <p className="text-white/70 text-lg leading-relaxed">
+              Il nostro team tecnico certificato Club Car garantisce assistenza rapida, ricambi originali
+              e manutenzione programmata su tutta la Sardegna. Il tuo veicolo è sempre in perfetta forma.
+            </p>
+          </motion.div>
+
+          {/* Grid layout: 3 cards + immagine grande */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
+
+            {/* Colonna sx: 3 service cards */}
+            <div className="space-y-5">
+              {[
+                {
+                  icon: 'build',
+                  titolo: 'Manutenzione Programmata',
+                  desc: 'Tagliandi periodici, controllo batterie, freni, pneumatici e sistemi elettronici. Teniamo il tuo veicolo sempre ai massimi livelli di efficienza.',
+                },
+                {
+                  icon: 'construction',
+                  titolo: 'Ricambi Originali Club Car',
+                  desc: 'Forniamo esclusivamente ricambi originali e certificati Club Car. Batterie, motori, schede di controllo, carrozzeria e molto altro, sempre disponibili.',
+                },
+                {
+                  icon: 'electric_bolt',
+                  titolo: 'Interventi Rapidi in Loco',
+                  desc: 'Il nostro team si sposta direttamente da te — hotel, villa, porto o campo da golf. Interveniamo entro 24/48 ore in tutta la Sardegna.',
+                },
+                {
+                  icon: 'battery_charging_full',
+                  titolo: 'Sostituzione e Upgrade Batterie',
+                  desc: 'Passa da piombo a litio oppure aumenta la capacità con le nostre soluzioni di upgrade batteria. Più autonomia, meno costi nel tempo.',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.titolo}
+                  {...fadeUp(i * 0.08)}
+                  className="flex gap-5 p-6 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                >
+                  <span className="material-symbols-outlined text-secondary text-3xl flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </span>
+                  <div>
+                    <h3 className="font-montserrat font-bold text-base uppercase tracking-tight mb-2">{item.titolo}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Colonna dx: foto impilate */}
+            <motion.div {...fadeUp(0.15)} className="grid grid-cols-2 gap-3 h-full">
+              <div className="aspect-[3/4] overflow-hidden col-span-1">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={IMG.feat2} alt="Tecnico Club Car in assistenza" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex-1 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={IMG.gallery2} alt="Ricambi originali Club Car" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                </div>
+                <div className="flex-1 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={IMG.gallery3} alt="Golf car in manutenzione" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Banner numeri / CTA */}
+          <motion.div {...fadeUp(0.2)} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+            {[
+              { numero: '24/48h', label: 'Tempo medio d\'intervento' },
+              { numero: '100%', label: 'Ricambi originali Club Car' },
+              { numero: 'Tutta la Sardegna', label: 'Area di copertura assistenza' },
+            ].map((s) => (
+              <div key={s.label} className="bg-primary px-8 py-8 text-center">
+                <p className="font-montserrat font-extrabold text-3xl text-secondary mb-2">{s.numero}</p>
+                <p className="text-white/60 text-sm uppercase tracking-widest">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div {...fadeUp(0.25)} className="mt-10 text-center">
+            <Link
+              href="/contatti"
+              className="inline-flex items-center gap-2 bg-secondary text-primary font-montserrat font-bold text-xs uppercase tracking-widest px-10 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-sm">handyman</span>
+              Richiedi Assistenza
+            </Link>
+          </motion.div>
+
+        </div>
+      </section>
+
       {/* ── CTA FINALE ───────────────────────────────────── */}
+
       <section className="py-24 bg-surface-container-lowest text-center">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div {...fadeUp()}>

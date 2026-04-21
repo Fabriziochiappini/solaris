@@ -170,7 +170,78 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Assistenza & Ricambi — mini teaser */}
+      <section className="py-20 bg-white border-y border-primary/8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+            {/* Testo sx */}
+            <div>
+              <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Assistenza &amp; Ricambi</p>
+              <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-primary tracking-tight mb-4 leading-tight">
+                Il tuo golf car<br />sempre in forma.
+              </h2>
+              <div className="h-1.5 w-24 bg-secondary mb-6" />
+              <p className="text-on-surface-variant text-lg leading-relaxed mb-8">
+                Interventi rapidi, ricambi originali Club Car certificati e manutenzione programmata.
+                Il nostro team tecnico copre tutta la Sardegna — direttamente a domicilio.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { icon: 'build', label: 'Manutenzione Programmata' },
+                  { icon: 'construction', label: 'Ricambi Originali' },
+                  { icon: 'electric_bolt', label: 'Interventi in Loco' },
+                  { icon: 'battery_charging_full', label: 'Upgrade Batterie' },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center gap-3 py-3 border-b border-outline-variant/15">
+                    <span className="material-symbols-outlined text-secondary text-xl flex-shrink-0">{item.icon}</span>
+                    <span className="text-sm font-montserrat font-semibold text-primary">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/servizi#assistenza"
+                className="inline-flex items-center gap-2 bg-primary text-white font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-primary/90 transition-all shadow-lg hover:-translate-y-0.5"
+              >
+                <span className="material-symbols-outlined text-sm">handyman</span>
+                Scopri il servizio
+              </Link>
+            </div>
+
+            {/* Foto collage dx */}
+            <div className="grid grid-cols-12 grid-rows-2 gap-3 h-[420px]">
+              <div className="col-span-7 row-span-2 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/solarisgolfcar.firebasestorage.app/o/veicoli%2F8vJFXVSQjL7Pq3HrZPil%2Ffeat-cd430286-0b6e-4d17-8e74-bdf12fdad576.webp?alt=media&token=4d4c95a5-2d97-42d2-917d-048fb872545a"
+                  alt="Assistenza golf car"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="col-span-5 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/solarisgolfcar.firebasestorage.app/o/veicoli%2FA10BfuaSW7cTn6ipSmrR%2Fgallery-26ec963e-17b9-4240-9cc4-416428cd4864.webp?alt=media&token=2b7c7470-0657-442e-ad75-6d7a2d267c6e"
+                  alt="Ricambi Club Car"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="col-span-5 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/solarisgolfcar.firebasestorage.app/o/veicoli%2FA10BfuaSW7cTn6ipSmrR%2Fgallery-502891a2-338d-4191-9dd8-3faa80bd768d.webp?alt=media&token=7b2fcbbe-d789-4d2b-85a2-4d786b4cb913"
+                  alt="Golf car manutenzione"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
+
       <section className="py-12 bg-primary">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="text-white">
