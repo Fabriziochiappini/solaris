@@ -70,7 +70,7 @@ export default function ServiziPage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/contatti"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 bg-secondary text-white font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
                 >
                   <span className="material-symbols-outlined text-sm">chat</span>
                   Richiedi Info
@@ -275,7 +275,7 @@ export default function ServiziPage() {
                 </h3>
                 <Link
                   href="/contatti"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 bg-secondary text-white font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
                 >
                   Contattaci ora
                   <span className="material-symbols-outlined text-sm">north_east</span>
@@ -373,7 +373,7 @@ export default function ServiziPage() {
               { numero: 'Tutta la Sardegna', label: 'Area di copertura assistenza' },
             ].map((s) => (
               <div key={s.label} className="bg-primary px-8 py-8 text-center">
-                <p className="font-montserrat font-extrabold text-3xl text-secondary mb-2">{s.numero}</p>
+                <p className="font-montserrat font-extrabold text-3xl text-white mb-2">{s.numero}</p>
                 <p className="text-white/60 text-sm uppercase tracking-widest">{s.label}</p>
               </div>
             ))}
@@ -383,7 +383,7 @@ export default function ServiziPage() {
           <motion.div {...fadeUp(0.25)} className="mt-10 text-center">
             <Link
               href="/contatti"
-              className="inline-flex items-center gap-2 bg-secondary text-primary font-montserrat font-bold text-xs uppercase tracking-widest px-10 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-secondary text-white font-montserrat font-bold text-xs uppercase tracking-widest px-10 py-4 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-0.5"
             >
               <span className="material-symbols-outlined text-sm">handyman</span>
               Richiedi Assistenza

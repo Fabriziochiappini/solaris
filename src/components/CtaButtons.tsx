@@ -20,7 +20,7 @@ export default function CtaButtons({
       <a
         href="/contatti"
         onClick={() => trackPreventivoClick(location)}
-        className="inline-flex items-center justify-center gap-2 bg-secondary text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-1"
+        className="inline-flex items-center justify-center gap-2 bg-secondary text-white font-montserrat font-bold text-sm uppercase tracking-widest px-10 py-5 hover:bg-secondary/90 transition-all shadow-xl hover:-translate-y-1"
       >
         <span className="material-symbols-outlined text-base">chat</span>
         {preventivoText}

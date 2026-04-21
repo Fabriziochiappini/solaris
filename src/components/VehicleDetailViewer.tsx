@@ -601,7 +601,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                   href={whatsAppLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-secondary text-primary px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-secondary/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-3"
+                  className="bg-secondary text-white px-10 py-5 text-xs font-montserrat font-bold uppercase tracking-[0.2em] hover:bg-secondary/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-3"
                 >
                   <span className="material-symbols-outlined text-sm">chat</span>
                   Scrivici su WhatsApp
