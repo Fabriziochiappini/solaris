@@ -30,13 +30,13 @@ export default function Navbar() {
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-4">
 
           {/* Logo */}
-          <Link href="/" className="flex flex-col leading-tight group">
-            <span className="font-montserrat font-extrabold text-xl tracking-tight text-primary uppercase group-hover:text-primary/80 transition-colors">
-              Sardinya Golf Car
-            </span>
-            <span className="font-serif italic text-[11px] text-secondary tracking-wide">
-              by Solaris
-            </span>
+          <Link href="/" className="flex items-center gap-3 group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://res.cloudinary.com/dn96krsq7/image/upload/v1776759247/WhatsApp_Image_2026-04-21_at_10.13.27-removebg-preview_n3mjcf.png"
+              alt="Sardinya Golf Car by Solaris"
+              className="h-14 w-auto object-contain group-hover:opacity-80 transition-opacity"
+            />
           </Link>
 
           {/* Link desktop */}

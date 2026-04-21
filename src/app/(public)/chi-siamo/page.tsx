@@ -69,6 +69,12 @@ export default function ChiSiamoPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pb-20 w-full">
           <motion.div {...fadeUp()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://res.cloudinary.com/dn96krsq7/image/upload/v1776759247/WhatsApp_Image_2026-04-21_at_10.13.27-removebg-preview_n3mjcf.png"
+              alt="Sardinya Golf Car by Solaris"
+              className="h-24 w-auto object-contain mb-8 brightness-0 invert"
+            />
             <p className="text-secondary font-bold text-xs uppercase tracking-[0.4em] mb-4">Sardinya Golf Car — by Solaris</p>
             <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-white tracking-tight leading-tight mb-6">
               Chi Siamo

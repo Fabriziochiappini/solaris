@@ -8,7 +8,12 @@ export default function Footer() {
     <footer className="w-full mt-20 pt-16 pb-8 bg-slate-100">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8">
         <div className="space-y-6">
-          <div className="text-xl font-bold text-sky-900 uppercase">Sardinya Golf Car</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://res.cloudinary.com/dn96krsq7/image/upload/v1776759247/WhatsApp_Image_2026-04-21_at_10.13.27-removebg-preview_n3mjcf.png"
+            alt="Sardinya Golf Car by Solaris"
+            className="h-20 w-auto object-contain"
+          />
           <p className="font-lato text-sm tracking-normal text-slate-600 max-w-xs">
             by Solaris • Assistenza ufficiale Club Car<br />
             Vendita, Noleggio, Assistenza<br />

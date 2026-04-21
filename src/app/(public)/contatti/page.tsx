@@ -182,6 +182,12 @@ export default function ContattiPage() {
         </a>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://res.cloudinary.com/dn96krsq7/image/upload/v1776759247/WhatsApp_Image_2026-04-21_at_10.13.27-removebg-preview_n3mjcf.png"
+            alt="Sardinya Golf Car by Solaris"
+            className="h-24 w-auto object-contain mb-8"
+          />
           <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Siamo qui per te</p>
           <h1 className="font-montserrat font-extrabold text-5xl text-primary tracking-tight uppercase mb-4">
             Contatti
