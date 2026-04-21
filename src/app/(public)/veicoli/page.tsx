@@ -47,7 +47,7 @@ export default async function FlottaPage() {
           style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,.05) 40px, rgba(255,255,255,.05) 41px)' }}
         />
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <p className="text-secondary font-bold text-xs uppercase tracking-[0.4em] mb-4">Sardynia Golf Car</p>
+          <p className="text-secondary font-bold text-xs uppercase tracking-[0.4em] mb-4">Sardinya Golf Car</p>
           <h1 className="font-montserrat font-extrabold text-5xl md:text-7xl text-white tracking-tight mb-6">
             I Nostri Veicoli
           </h1>

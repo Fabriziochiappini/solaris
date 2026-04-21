@@ -32,7 +32,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
   const [featRef, featApi] = useEmblaCarousel({ loop: true, align: 'center' });
   const [accRef, accApi] = useEmblaCarousel({ loop: true, align: 'center' });
 
-  // Perché Sardynia: sezione statica (no carousel)
+  // Perché Sardinya: sezione statica (no carousel)
 
   const whatsAppLink = `https://wa.me/393421073857?text=Ciao,%20vorrei%20informazioni%20sul%20veicolo%20${encodeURIComponent(veicolo.nome)}`;
 
@@ -501,7 +501,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
         <section className="py-10 md:py-14 bg-white border-b border-outline-variant/10">
           <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center mb-16">
             <h2 className="font-montserrat font-extrabold text-3xl md:text-5xl text-primary tracking-tight mb-4">
-              Perché Sardynia <span className="text-secondary">Golf Cars</span>
+              Perché Sardinya <span className="text-secondary">Golf Cars</span>
             </h2>
             <div className="h-1.5 w-24 bg-secondary mx-auto" />
           </div>
@@ -551,7 +551,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
               href="/chi-siamo"
               className="inline-block bg-primary text-white px-8 py-4 font-montserrat font-bold text-sm uppercase tracking-widest hover:bg-primary/90 shadow-xl hover:-translate-y-1 transition-all"
             >
-              Scopri la differenza Sardynia Golf Cars
+              Scopri la differenza Sardinya Golf Cars
             </a>
           </div>
         </section>
