@@ -13,6 +13,7 @@ function ContactForm() {
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent]       = useState(false);
+  const [error, setError]     = useState<string | null>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(f => ({ ...f, [k]: e.target.value }));
@@ -20,11 +21,25 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // Simulazione invio (da collegare al proprio backend/email)
-    await new Promise(r => setTimeout(r, 1400));
-    setSending(false);
-    setSent(true);
-    trackFormSubmit();
+    setError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Errore invio');
+      }
+      setSent(true);
+      trackFormSubmit();
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      setError('Si è verificato un errore nell\'invio. Riprova o contattaci su WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputCls =
@@ -123,6 +138,13 @@ function ContactForm() {
         />
       </div>
 
+      {/* Errore */}
+      {error && (
+        <p className="text-xs text-red-700 bg-red-50 border border-red-200 px-4 py-3">
+          {error}
+        </p>
+      )}
+
       {/* Privacy */}
       <p className="text-[10px] text-on-surface-variant/50 leading-relaxed">
         Inviando questo modulo accetti il trattamento dei tuoi dati personali in conformità alla nostra Privacy Policy.
@@ -155,7 +177,7 @@ export default function ContattiPage() {
   const contactInfo = [
     { icon: 'location_on',    label: 'Sede Principale', value: 'Olbia / Aglientu, Sardegna', link: 'https://maps.google.com' },
     { icon: 'phone',          label: 'Telefono',        value: '+39 342 107 3857',           link: 'tel:+393421073857' },
-    { icon: 'mail',           label: 'Email',           value: 'info@solarisgolfcar.it',     link: 'mailto:info@solarisgolfcar.it' },
+    { icon: 'mail',           label: 'Email',           value: 'info@sardinyagolfcar.com',     link: 'mailto:info@sardinyagolfcar.com' },
     { icon: 'schedule',       label: 'Orari',           value: 'Lun - Sab: 09:00 - 19:00',  link: null },
     { icon: 'business_center',label: 'Dati Aziendali',  value: 'Sardinya Golf Car By Solaris • P.IVA 02659430900 • REA SS 193996', link: null },
   ];

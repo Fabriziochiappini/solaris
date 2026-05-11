@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
             Il Titolare del trattamento è <strong>Sardinya golf car By Solaris</strong>, con sedi in Olbia e Aglientu.<br />
             P.IVA: 02659430900<br />
             Num REA: SS 193996<br />
-            Email di contatto: <a href="mailto:info@solarisgolfcar.it" className="text-secondary font-bold underline">info@solarisgolfcar.it</a>
+            Email di contatto: <a href="mailto:info@sardinyagolfcar.com" className="text-secondary font-bold underline">info@sardinyagolfcar.com</a>
           </p>
 
           <h2 className="font-montserrat text-2xl font-bold text-primary uppercase tracking-tight mt-10 mb-4">

@@ -588,7 +588,7 @@ export default function VehicleDetailViewer({ veicolo }: Props) {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-secondary">mail</span>
-                  <a href="mailto:info@solarisgolfcar.it" className="font-medium hover:text-white transition-colors">info@solarisgolfcar.it</a>
+                  <a href="mailto:info@sardinyagolfcar.com" className="font-medium hover:text-white transition-colors">info@sardinyagolfcar.com</a>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-secondary">schedule</span>
