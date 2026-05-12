@@ -95,7 +95,7 @@ export default function ServiziPage() {
       </header>
 
       {/* ── VENDITA VEICOLI ──────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+      <section id="vendita" className="scroll-mt-24 py-20 md:py-28 bg-white border-b border-outline-variant/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-14">
             <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">La nostra gamma</p>
@@ -230,7 +230,7 @@ export default function ServiziPage() {
       </section>
 
       {/* ── NOLEGGIO ─────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-white border-b border-outline-variant/10">
+      <section id="noleggio" className="scroll-mt-24 py-20 md:py-28 bg-white border-b border-outline-variant/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-14">
             <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Flessibilità massima</p>
@@ -287,7 +287,7 @@ export default function ServiziPage() {
       </section>
 
       {/* ── ASSISTENZA & RICAMBI ──────────────────────────── */}
-      <section className="py-20 md:py-28 bg-primary text-white overflow-hidden">
+      <section id="assistenza" className="scroll-mt-24 py-20 md:py-28 bg-primary text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
           {/* Header */}

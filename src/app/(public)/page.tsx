@@ -68,17 +68,30 @@ export default async function Home() {
           src="/hero-bg.webp"
         />
         <div className="relative z-20 text-left w-full max-w-4xl">
-          <div className="mb-6 inline-block">
+          <div className="mb-4 inline-block">
             <span className="bg-green-600 text-white font-bold tracking-widest uppercase text-sm md:text-base px-4 py-2 rounded-md shadow-sm">
               SARDYNIA GOLF CAR
             </span>
+          </div>
+          <div className="mb-6 flex flex-wrap items-center gap-2">
+            <Link href="/servizi#vendita" className="bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold tracking-widest uppercase text-xs px-3 py-1.5 rounded-md hover:bg-white/25 transition-all">
+              Vendita
+            </Link>
+            <span className="text-white/60 select-none">·</span>
+            <Link href="/servizi#noleggio" className="bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold tracking-widest uppercase text-xs px-3 py-1.5 rounded-md hover:bg-white/25 transition-all">
+              Noleggio
+            </Link>
+            <span className="text-white/60 select-none">·</span>
+            <Link href="/servizi#assistenza" className="bg-white/15 backdrop-blur-md border border-white/30 text-white font-semibold tracking-widest uppercase text-xs px-3 py-1.5 rounded-md hover:bg-white/25 transition-all">
+              Assistenza
+            </Link>
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-6">
             Mobilità Elettrica<br />
             <span className="text-white/80">Premium.</span>
           </h1>
           <p className="text-lg md:text-xl text-white/80 font-light mb-10 max-w-2xl">
-            Vivi la bellezza della Sardegna con la nostra flotta di veicoli ad alte prestazioni, pensati per il lavoro e il tempo libero.
+            Vendita, noleggio e assistenza di golf car e veicoli elettrici premium in tutta la Sardegna. Per il lavoro, il tempo libero e le strutture ricettive.
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <Link href="/veicoli" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-lg text-lg font-bold hover:scale-105 transition-transform inline-block text-center shadow-lg">
@@ -90,6 +103,86 @@ export default async function Home() {
           </div>
         </div>
       </header>
+
+      {/* I nostri servizi — 3 card affiancate (vendita / noleggio / assistenza) */}
+      <section className="py-20 md:py-24 bg-white border-b border-outline-variant/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <p className="text-secondary font-bold text-xs uppercase tracking-[0.35em] mb-3">Cosa Facciamo</p>
+            <h2 className="font-montserrat font-extrabold text-4xl md:text-5xl text-primary tracking-tight">
+              Tre servizi, un&apos;unica realtà
+            </h2>
+            <div className="h-1.5 w-24 bg-secondary mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {/* Card Vendita */}
+            <Link
+              href="/servizi#vendita"
+              className="group relative flex flex-col bg-white border border-outline-variant/20 hover:border-primary/40 hover:shadow-2xl transition-all duration-300 p-8 lg:p-10 overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 h-1 w-full bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+              <span className="material-symbols-outlined text-secondary text-5xl mb-6">storefront</span>
+              <h3 className="font-montserrat font-extrabold text-2xl text-primary tracking-tight mb-2 uppercase">
+                Vendita
+              </h3>
+              <p className="text-xs text-secondary font-semibold tracking-widest uppercase mb-4">Nuovo &middot; Usato &middot; Personalizzato</p>
+              <p className="text-on-surface-variant leading-relaxed mb-6 flex-1">
+                Golf car Club Car e veicoli elettrici premium per privati, hotel, resort e aziende.
+                Modelli nuovi, selezione di usato garantito e configurazioni su misura.
+              </p>
+              <span className="inline-flex items-center gap-2 text-primary font-montserrat font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                Scopri la vendita
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </Link>
+
+            {/* Card Noleggio */}
+            <Link
+              href="/servizi#noleggio"
+              className="group relative flex flex-col bg-primary text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 p-8 lg:p-10 overflow-hidden"
+            >
+              <div className="absolute top-3 right-3 bg-secondary text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-sm">
+                Più richiesto
+              </div>
+              <span className="material-symbols-outlined text-secondary text-5xl mb-6">key</span>
+              <h3 className="font-montserrat font-extrabold text-2xl tracking-tight mb-2 uppercase">
+                Noleggio
+              </h3>
+              <p className="text-xs text-secondary font-semibold tracking-widest uppercase mb-4">Eventi &middot; Stagionale &middot; Long-term</p>
+              <p className="text-white/80 leading-relaxed mb-6 flex-1">
+                Soluzioni mensili e stagionali su misura per hotel, resort, agriturismi e ville private.
+                Manutenzione e assistenza incluse nel canone.
+              </p>
+              <span className="inline-flex items-center gap-2 text-white font-montserrat font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                Richiedi un preventivo
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </Link>
+
+            {/* Card Assistenza */}
+            <Link
+              href="/servizi#assistenza"
+              className="group relative flex flex-col bg-white border border-outline-variant/20 hover:border-primary/40 hover:shadow-2xl transition-all duration-300 p-8 lg:p-10 overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 h-1 w-full bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+              <span className="material-symbols-outlined text-secondary text-5xl mb-6">build</span>
+              <h3 className="font-montserrat font-extrabold text-2xl text-primary tracking-tight mb-2 uppercase">
+                Assistenza
+              </h3>
+              <p className="text-xs text-secondary font-semibold tracking-widest uppercase mb-4">Manutenzione &middot; Ricambi &middot; In loco</p>
+              <p className="text-on-surface-variant leading-relaxed mb-6 flex-1">
+                Tecnici certificati Club Car, ricambi originali e interventi a domicilio in tutta la Sardegna.
+                Manutenzione programmata e upgrade batterie.
+              </p>
+              <span className="inline-flex items-center gap-2 text-primary font-montserrat font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                Prenota un intervento
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Lo Showroom — carosello 3D coverflow */}
       <section className="py-20 bg-surface overflow-hidden">
@@ -242,14 +335,39 @@ export default async function Home() {
 
       {/* CTA Section */}
 
-      <section className="py-12 bg-primary">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="text-white">
-            <h2 className="text-4xl font-bold mb-4 font-montserrat">Pronto a Guidare il Futuro?</h2>
-            <p className="text-white/80 text-lg">Contattaci oggi per una prova gratuita o un preventivo personalizzato.</p>
+      <section className="py-16 bg-primary">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-montserrat">Pronto a Guidare il Futuro?</h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              Scegli il servizio che ti interessa — ti rispondiamo entro 24 ore con un preventivo personalizzato.
+            </p>
           </div>
-          <div className="flex justify-center md:justify-end w-full md:w-auto">
-            <CtaButtons location="homepage_bottom" preventivoText="Parla con un Esperto" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <Link
+              href="/servizi#vendita"
+              className="group flex items-center justify-center gap-3 bg-white text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-6 py-5 hover:bg-secondary hover:text-white transition-all shadow-lg hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-base">storefront</span>
+              Voglio Comprare
+            </Link>
+            <Link
+              href="/servizi#noleggio"
+              className="group flex items-center justify-center gap-3 bg-secondary text-white font-montserrat font-bold text-sm uppercase tracking-widest px-6 py-5 hover:bg-secondary/90 transition-all shadow-lg hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-base">key</span>
+              Voglio Noleggiare
+            </Link>
+            <Link
+              href="/servizi#assistenza"
+              className="group flex items-center justify-center gap-3 bg-white text-primary font-montserrat font-bold text-sm uppercase tracking-widest px-6 py-5 hover:bg-secondary hover:text-white transition-all shadow-lg hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-base">build</span>
+              Mi Serve Assistenza
+            </Link>
+          </div>
+          <div className="text-center mt-8">
+            <CtaButtons location="homepage_bottom" preventivoText="Oppure parla con un esperto" />
           </div>
         </div>
       </section>
